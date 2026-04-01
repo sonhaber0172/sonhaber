@@ -25,7 +25,7 @@ export default async function HomePage({ searchParams }) {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <header className="bg-red-700 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div className="max-w-full mx-auto px-3 py-3 flex items-center justify-between">
           <div>
             <h1 className="text-xl md:text-3xl font-bold tracking-tight">SONHABER</h1>
             <p className="text-red-200 text-xs md:text-sm">Turkiyenin Haber Merkezi</p>
@@ -41,14 +41,14 @@ export default async function HomePage({ searchParams }) {
       </header>
 
       <div className="bg-gray-900 text-white py-2 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-3 flex items-center gap-3">
+        <div className="max-w-full mx-auto px-3 flex items-center gap-3">
           <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shrink-0">SON DAK.</span>
           <p className="text-xs md:text-sm truncate">{allNews[0]?.title || 'Haberler yukleniyor...'}</p>
         </div>
       </div>
 
       <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-3">
+        <div className="max-w-full mx-auto px-3">
           <div className="flex gap-1 overflow-x-auto py-2 scrollbar-hide">
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tumu' ? '/' : `/?kategori=${k}`}
@@ -64,7 +64,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-3 py-4 md:py-6">
+      <div className="max-w-full mx-auto px-3 py-4 md:py-6">
         
         {allNews[0] && (
           <div className="mb-6 md:mb-8">
