@@ -23,8 +23,8 @@ export default async function HomePage({ searchParams }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-300 dark:bg-gray-950">
-      <main className="min-h-screen bg-gray-100 dark:bg-gray-900 max-w-6xl mx-auto shadow-2xl">
+    <div style={{background: '#e5e5e5', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
+      <main style={{width: '100%', maxWidth: '1200px', background: 'white', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
       
       <header className="bg-red-700 text-white shadow-lg">
         <div className="px-6 py-4 flex items-center justify-between">
@@ -53,7 +53,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 border-b-2 border-red-600 sticky top-0 z-10 shadow-sm">
+      <div className="bg-white border-b-2 border-red-600 sticky top-0 z-10 shadow-sm">
         <div className="w-full px-4">
           <div className="flex gap-4 overflow-x-auto py-5">
             {kategoriler.map(k => (
@@ -61,7 +61,7 @@ export default async function HomePage({ searchParams }) {
                 className={`shrink-0 px-10 py-5 text-xl font-black transition-colors rounded-xl ${
                   (k === 'Tumu' && !kategori) || kategori === k
                     ? 'bg-red-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-600 hover:text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-red-600 hover:text-white'
                 }`}>
                 {k}
               </Link>
@@ -70,7 +70,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <div className="px-6 py-6">
+      <div className="px-6 py-6 bg-gray-50">
         
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           
@@ -78,7 +78,7 @@ export default async function HomePage({ searchParams }) {
             {allNews[0] && (
               allNews[0].is_custom ? (
                 <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-full">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-full">
                     <div className="relative">
                       {allNews[0].image_url ? (
                         <img src={allNews[0].image_url} alt={allNews[0].title} className="w-full h-72 md:h-96 object-cover" />
@@ -90,15 +90,15 @@ export default async function HomePage({ searchParams }) {
                       <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{allNews[0].category}</span>
                     </div>
                     <div className="p-6">
-                      <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-tight mb-3">{allNews[0].title}</h2>
-                      <p className="text-gray-600 dark:text-gray-300 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 300) + '...'}} />
+                      <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{allNews[0].title}</h2>
+                      <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 300) + '...'}} />
                       <p className="text-sm text-gray-400 mt-4">{new Date(allNews[0].created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
                 </Link>
               ) : (
                 <a href={allNews[0].source_url || '#'} target="_blank" rel="noopener noreferrer">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-full">
+                  <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-full">
                     <div className="relative">
                       {allNews[0].image_url ? (
                         <img src={allNews[0].image_url} alt={allNews[0].title} className="w-full h-72 md:h-96 object-cover" />
@@ -110,8 +110,8 @@ export default async function HomePage({ searchParams }) {
                       <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{allNews[0].category}</span>
                     </div>
                     <div className="p-6">
-                      <h2 className="text-2xl md:text-3xl font-black text-gray-900 dark:text-white leading-tight mb-3">{allNews[0].title}</h2>
-                      <p className="text-gray-600 dark:text-gray-300 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 300) + '...'}} />
+                      <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{allNews[0].title}</h2>
+                      <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 300) + '...'}} />
                       <p className="text-sm text-gray-400 mt-4">{new Date(allNews[0].created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export default async function HomePage({ searchParams }) {
             {allNews.slice(1, 8).map((news, index) => (
               news.is_custom ? (
                 <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer flex gap-3 p-3">
+                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer flex gap-3 p-3">
                     {news.image_url ? (
                       <img src={news.image_url} alt={news.title} className="w-24 h-20 object-cover rounded-lg shrink-0" />
                     ) : (
@@ -134,14 +134,14 @@ export default async function HomePage({ searchParams }) {
                     )}
                     <div className="flex-1 min-w-0">
                       <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                      <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug line-clamp-3 mt-1">{news.title}</h3>
+                      <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-3 mt-1">{news.title}</h3>
                       <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
                 </Link>
               ) : (
                 <a key={index} href={news.source_url || '#'} target="_blank" rel="noopener noreferrer">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer flex gap-3 p-3">
+                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer flex gap-3 p-3">
                     {news.image_url ? (
                       <img src={news.image_url} alt={news.title} className="w-24 h-20 object-cover rounded-lg shrink-0" />
                     ) : (
@@ -151,7 +151,7 @@ export default async function HomePage({ searchParams }) {
                     )}
                     <div className="flex-1 min-w-0">
                       <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                      <h3 className="font-bold text-gray-900 dark:text-white text-sm leading-snug line-clamp-3 mt-1">{news.title}</h3>
+                      <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-3 mt-1">{news.title}</h3>
                       <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
@@ -162,12 +162,12 @@ export default async function HomePage({ searchParams }) {
         </div>
 
         <div className="border-t-2 border-red-600 pt-6">
-          <h2 className="text-xl font-black text-gray-900 dark:text-white mb-4">Diger Haberler</h2>
+          <h2 className="text-xl font-black text-gray-900 mb-4">Diger Haberler</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {allNews.slice(8, 24).map((news, index) => (
               news.is_custom ? (
                 <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
+                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
                     {news.image_url ? (
                       <img src={news.image_url} alt={news.title} className="w-full h-40 object-cover" />
                     ) : (
@@ -177,14 +177,14 @@ export default async function HomePage({ searchParams }) {
                     )}
                     <div className="p-4">
                       <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                      <h3 className="font-bold text-gray-900 dark:text-white mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
+                      <h3 className="font-bold text-gray-900 mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
                       <p className="text-xs text-gray-400 mt-2">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
                 </Link>
               ) : (
                 <a key={index} href={news.source_url || '#'} target="_blank" rel="noopener noreferrer">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
+                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
                     {news.image_url ? (
                       <img src={news.image_url} alt={news.title} className="w-full h-40 object-cover" />
                     ) : (
@@ -194,7 +194,7 @@ export default async function HomePage({ searchParams }) {
                     )}
                     <div className="p-4">
                       <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                      <h3 className="font-bold text-gray-900 dark:text-white mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
+                      <h3 className="font-bold text-gray-900 mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
                       <p className="text-xs text-gray-400 mt-2">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
