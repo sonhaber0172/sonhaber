@@ -23,10 +23,11 @@ export default async function HomePage({ searchParams }) {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-300 dark:bg-gray-950">
+      <main className="min-h-screen bg-gray-100 dark:bg-gray-900 max-w-6xl mx-auto shadow-2xl">
       
       <header className="bg-red-700 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="px-6 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-3xl md:text-5xl font-black tracking-tight">SONHABER</h1>
             <p className="text-red-200 text-sm md:text-base mt-1">Turkiyenin Haber Merkezi</p>
@@ -46,7 +47,7 @@ export default async function HomePage({ searchParams }) {
       </header>
 
       <div className="bg-gray-900 text-white py-2">
-        <div className="max-w-7xl mx-auto px-4 flex items-center gap-4">
+        <div className="px-6 flex items-center gap-4">
           <span className="bg-red-600 text-white text-sm font-black px-3 py-1 rounded shrink-0 uppercase">Son Dakika</span>
           <p className="text-sm md:text-base truncate font-medium">{allNews[0]?.title || 'Haberler yukleniyor...'}</p>
         </div>
@@ -69,7 +70,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className="px-6 py-6">
         
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           
@@ -209,6 +210,7 @@ export default async function HomePage({ searchParams }) {
         <p>2025 SonHaber. Tum haklari saklidir.</p>
         <Link href="/paketler" className="text-red-400 hover:text-red-300 mt-2 block font-medium">Reklam vermek icin tiklayin</Link>
       </footer>
-    </main>
+      </main>
+    </div>
   )
 }
