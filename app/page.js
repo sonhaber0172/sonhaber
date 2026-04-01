@@ -25,7 +25,6 @@ export default async function HomePage({ searchParams }) {
   return (
     <main className="min-h-screen bg-gray-100 dark:bg-gray-900">
       
-      {/* Header */}
       <header className="bg-red-700 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div>
@@ -46,7 +45,6 @@ export default async function HomePage({ searchParams }) {
         </div>
       </header>
 
-      {/* Son Dakika */}
       <div className="bg-gray-900 text-white py-2">
         <div className="max-w-7xl mx-auto px-4 flex items-center gap-4">
           <span className="bg-red-600 text-white text-sm font-black px-3 py-1 rounded shrink-0 uppercase">Son Dakika</span>
@@ -54,16 +52,15 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      {/* Kategoriler */}
       <div className="bg-white dark:bg-gray-800 border-b-2 border-red-600 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-1 overflow-x-auto py-3">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex gap-3 overflow-x-auto py-4">
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tumu' ? '/' : `/?kategori=${k}`}
-                className={`shrink-0 px-4 py-2 text-sm font-semibold transition-colors border-b-2 ${
+                className={`shrink-0 px-6 py-3 text-base font-bold transition-colors rounded-lg ${
                   (k === 'Tumu' && !kategori) || kategori === k
-                    ? 'border-red-600 text-red-600'
-                    : 'border-transparent text-gray-600 dark:text-gray-300 hover:text-red-600 hover:border-red-300'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-600 hover:text-white'
                 }`}>
                 {k}
               </Link>
@@ -72,13 +69,10 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      {/* Ana İcerik */}
       <div className="max-w-7xl mx-auto px-4 py-6">
         
-        {/* Üst Bolum: Sol büyük haber + Sag liste */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           
-          {/* Sol: Büyük Ana Haber */}
           <div className="lg:w-3/5">
             {allNews[0] && (
               allNews[0].is_custom ? (
@@ -125,7 +119,6 @@ export default async function HomePage({ searchParams }) {
             )}
           </div>
 
-          {/* Sag: Haber Listesi */}
           <div className="lg:w-2/5 flex flex-col gap-3">
             {allNews.slice(1, 8).map((news, index) => (
               news.is_custom ? (
@@ -167,7 +160,6 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
 
-        {/* Alt Grid */}
         <div className="border-t-2 border-red-600 pt-6">
           <h2 className="text-xl font-black text-gray-900 dark:text-white mb-4">Diger Haberler</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
