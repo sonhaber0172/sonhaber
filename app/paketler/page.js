@@ -74,7 +74,7 @@ export default function PaketlerPage() {
                   </li>
                 ))}
               </ul>
-              <a href={`https://wa.me/905XXXXXXXXX?text=${encodeURIComponent(paket.mesaj)}`} target="_blank" rel="noopener noreferrer"
+              <a href={`https://wa.me/05419123828?text=${encodeURIComponent(paket.mesaj)}`} target="_blank" rel="noopener noreferrer"
                 className={`block w-full text-center text-white font-bold py-3 px-6 rounded-xl ${paket.butonRenk}`}>
                 WhatsApp ile Iletisime Gec
               </a>
