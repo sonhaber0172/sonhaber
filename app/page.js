@@ -53,11 +53,11 @@ export default async function HomePage({ searchParams }) {
       </div>
 
       <div className="bg-white dark:bg-gray-800 border-b-2 border-red-600 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex gap-3 overflow-x-auto py-4">
+        <div className="w-full px-4">
+          <div className="flex gap-4 overflow-x-auto py-5">
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tumu' ? '/' : `/?kategori=${k}`}
-                className={`shrink-0 px-6 py-3 text-base font-bold transition-colors rounded-lg ${
+                className={`shrink-0 px-10 py-5 text-xl font-black transition-colors rounded-xl ${
                   (k === 'Tumu' && !kategori) || kategori === k
                     ? 'bg-red-600 text-white'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-red-600 hover:text-white'
