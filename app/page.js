@@ -23,8 +23,8 @@ export default async function HomePage({ searchParams }) {
   }
 
   return (
-    <div style={{background: '#e5e5e5', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
-      <main style={{width: '100%', maxWidth: '1200px', background: 'white', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
+    <div style={{background: '#d0d0d0', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
+      <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
       
       <header className="bg-red-700 text-white shadow-lg">
         <div className="px-6 py-4 flex items-center justify-between">
@@ -70,7 +70,7 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <div className="px-6 py-6 bg-gray-50">
+      <div className="px-6 py-6 bg-white">
         
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           
