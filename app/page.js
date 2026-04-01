@@ -23,7 +23,7 @@ export default async function HomePage({ searchParams }) {
   }
 
   return (
-    <div style={{background: '#d0d0d0', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
+    <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
       
       <header className="bg-red-700 text-white shadow-lg">
