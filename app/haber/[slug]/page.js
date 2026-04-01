@@ -4,15 +4,16 @@ import Link from 'next/link'
 export const dynamic = 'force-dynamic'
 
 export default async function HaberDetay({ params }) {
-  const slug = decodeURIComponent(params.slug)
+  const { slug } = await params
+  const id = decodeURIComponent(slug)
   
-  const { data: haber } = await supabase
+  const { data: haber, error } = await supabase
     .from('articles')
     .select('*')
-    .eq('id', slug)
+    .eq('id', id)
     .single()
 
-  if (!haber) {
+  if (!haber || error) {
     return (
       <main className="min-h-screen bg-gray-50">
         <header className="bg-red-700 text-white shadow-lg">
