@@ -73,7 +73,7 @@ export default async function HaberDetay({ params }) {
           )}
         </div>
         <div className="mt-4">
-          <Link href="/" className="text-red-600 hover:text-red-700 font-medium">← Ana sayfaya don</Link>
+          <Link href="/" className="text-red-600 hover:text-red-700 font-medium">Ana sayfaya don</Link>
         </div>
       </div>
 
@@ -83,10 +83,3 @@ export default async function HaberDetay({ params }) {
     </main>
   )
 }
-```
-
-**Ctrl+S** ile kaydet. Sonra terminale:
-```
-git add .
-git commit -m "haber detay guncelleme"
-vercel --prod
