@@ -17,12 +17,11 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
       <header className="bg-red-700 text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">SONHABER</h1>
-            <p className="text-red-200 text-sm">Türkiye'nin Haber Merkezi</p>
+            <p className="text-red-200 text-sm">Turkiyenin Haber Merkezi</p>
           </div>
           <nav className="flex gap-6 text-sm font-medium">
             <Link href="/" className="hover:text-red-200">Ana Sayfa</Link>
@@ -34,18 +33,15 @@ export default async function HomePage() {
         </div>
       </header>
 
-      {/* Breaking News Bar */}
       <div className="bg-gray-900 text-white py-2 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 flex items-center gap-4">
-          <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shrink-0">SON DAKİKA</span>
-          <p className="text-sm truncate">{allNews[0]?.title || 'Haberler yükleniyor...'}</p>
+          <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shrink-0">SON DAKIKA</span>
+          <p className="text-sm truncate">{allNews[0]?.title || 'Haberler yukleniyor...'}</p>
         </div>
       </div>
 
-      {/* Ana İçerik */}
       <div className="max-w-7xl mx-auto px-4 py-6">
         
-        {/* Öne Çıkan Haber */}
         {allNews[0] && (
           <div className="mb-8">
             <Link href={`/haber/${encodeURIComponent(allNews[0].title)}`}>
@@ -63,10 +59,9 @@ export default async function HomePage() {
           </div>
         )}
 
-        {/* Haber Listesi */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {allNews.slice(1, 19).map((news, index) => (
-            <Link key={index} href={news.source_url || '#'} target="_blank">
+            <Link key={index} href={`/haber/${encodeURIComponent(news.title)}`}>
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
                 {news.image_url && (
                   <img src={news.image_url} alt={news.title} className="w-full h-48 object-cover" />
@@ -82,10 +77,9 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 text-center py-6 mt-10 text-sm">
-        <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
-        <Link href="/paketler" className="text-red-400 hover:text-red-300 mt-1 block">Reklam vermek için tıklayın</Link>
+        <p>2025 SonHaber. Tum haklari saklidir.</p>
+        <Link href="/paketler" className="text-red-400 hover:text-red-300 mt-1 block">Reklam vermek icin tiklayin</Link>
       </footer>
     </main>
   )
