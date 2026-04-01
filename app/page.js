@@ -44,7 +44,7 @@ export default async function HomePage() {
         
         {allNews[0] && (
           <div className="mb-8">
-            <Link href={`/haber/${encodeURIComponent(allNews[0].title)}`}>
+            <a href={allNews[0].source_url || '#'} target="_blank" rel="noopener noreferrer">
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer">
                 {allNews[0].image_url && (
                   <img src={allNews[0].image_url} alt={allNews[0].title} className="w-full h-80 object-cover" />
@@ -55,13 +55,13 @@ export default async function HomePage() {
                   <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm line-clamp-3" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 200) + '...'}} />
                 </div>
               </div>
-            </Link>
+            </a>
           </div>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {allNews.slice(1, 19).map((news, index) => (
-            <Link key={index} href={`/haber/${encodeURIComponent(news.title)}`}>
+            <a key={index} href={news.source_url || '#'} target="_blank" rel="noopener noreferrer">
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
                 {news.image_url && (
                   <img src={news.image_url} alt={news.title} className="w-full h-48 object-cover" />
@@ -72,7 +72,7 @@ export default async function HomePage() {
                   <p className="text-xs text-gray-400 mt-2">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                 </div>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>
