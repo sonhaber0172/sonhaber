@@ -4,7 +4,10 @@ import { supabase } from '../lib/supabase'
 
 export const revalidate = 300
 
-export default async function HomePage() {
+const kategoriler = ['Tumu', 'Gundem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dunya', 'Saglik', 'Kultur', 'Yasam']
+
+export default async function HomePage({ searchParams }) {
+  const { kategori } = await searchParams
   const rssNews = await fetchRSSNews()
   
   const { data: customNews } = await supabase
@@ -13,7 +16,11 @@ export default async function HomePage() {
     .eq('is_custom', true)
     .order('priority_score', { ascending: false })
 
-  const allNews = [...(customNews || []), ...rssNews]
+  let allNews = [...(customNews || []), ...rssNews]
+  
+  if (kategori && kategori !== 'Tumu') {
+    allNews = allNews.filter(n => n.category === kategori)
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -37,6 +44,23 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-3 flex items-center gap-3">
           <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shrink-0">SON DAK.</span>
           <p className="text-xs md:text-sm truncate">{allNews[0]?.title || 'Haberler yukleniyor...'}</p>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-3">
+          <div className="flex gap-1 overflow-x-auto py-2 scrollbar-hide">
+            {kategoriler.map(k => (
+              <Link key={k} href={k === 'Tumu' ? '/' : `/?kategori=${k}`}
+                className={`shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  (k === 'Tumu' && !kategori) || kategori === k
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-red-100'
+                }`}>
+                {k}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
