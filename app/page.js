@@ -34,11 +34,11 @@ export default async function HomePage({ searchParams }) {
           </div>
           <nav className="hidden md:flex gap-8 text-base font-medium">
             <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
-            <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">Reklam Ver</Link>
+            <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">İletişim</Link>
           </nav>
           <nav className="flex md:hidden gap-3 text-sm font-medium">
             <Link href="/" className="hover:text-red-200">Ana Sayfa</Link>
-            <Link href="/iletisim" className="hover:text-red-200">Reklam</Link>
+            <Link href="/iletisim" className="hover:text-red-200">İletişim</Link>
           </nav>
         </div>
         <div className="bg-red-800 text-center py-2 text-sm text-red-200">
@@ -148,7 +148,7 @@ export default async function HomePage({ searchParams }) {
       <footer className="bg-gray-900 text-gray-400 text-center py-8 mt-8 text-sm md:text-base">
         <p className="font-bold text-white text-lg mb-1">SONHABER</p>
         <p>2025 SonHaber. Tum haklari saklidir.</p>
-        <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">Reklam vermek icin tiklayin</Link>
+        <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
       </footer>
       </main>
     </div>
