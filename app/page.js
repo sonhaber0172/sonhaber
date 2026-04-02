@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
+import Arama from './components/Arama'
 
 export const revalidate = 300
 
@@ -43,6 +44,9 @@ export default async function HomePage({ searchParams }) {
         </div>
         <div className="bg-red-800 text-center py-2 text-sm text-red-200">
           {new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+        </div>
+        <div className="px-6 py-3 bg-red-600">
+          <Arama haberler={allNews} />
         </div>
       </header>
 
