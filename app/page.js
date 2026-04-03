@@ -156,9 +156,9 @@ export default async function HomePage({ searchParams }) {
             className="text-gray-400 hover:text-pink-400 transition-colors font-bold text-sm">Instagram</a>
           <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-400 transition-colors font-bold text-sm">Twitter</a>
-          <a href="https://facebook.com/sonerbozkurt" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.facebook.com/share/1AeXFntFTx/" target="_blank" rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-600 transition-colors font-bold text-sm">Facebook</a>
-          <a href="https://tiktok.com/@sonhaber" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.tiktok.com/@sonhaber4" target="_blank" rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors font-bold text-sm">TikTok</a>
         </div>
         <p>2025 SonHaber. Tum haklari saklidir.</p>
