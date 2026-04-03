@@ -65,14 +65,14 @@ export default async function HaberDetay({ params }) {
           </div>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-0">
+        <div className="flex flex-col lg:flex-row">
 
           {/* Sol - Ana Haber */}
-          <div className="lg:w-3/5 pl-0 pr-6 py-8 border-r border-gray-100">
-            <div className="bg-white rounded-xl overflow-hidden">
-              {haber.image_url && (
-                <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-6" />
-              )}
+          <div style={{width: '60%'}} className="py-8 pr-6 border-r border-gray-100">
+            {haber.image_url && (
+              <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover mb-6" />
+            )}
+            <div className="px-4">
               <span className="bg-red-100 text-red-700 text-sm font-bold px-3 py-1 rounded">{haber.category}</span>
               <h1 className="text-2xl md:text-3xl font-black text-gray-900 mt-4 mb-3 leading-tight">{haber.title}</h1>
               <p className="text-gray-400 text-sm mb-6 border-b border-gray-100 pb-4">
@@ -80,23 +80,22 @@ export default async function HaberDetay({ params }) {
               </p>
               <div className="text-gray-700 leading-relaxed text-lg"
                 dangerouslySetInnerHTML={{__html: haber.content}} />
-            </div>
-
-            <div className="mt-6 flex items-center justify-between">
-              <Link href="/" className="text-red-600 hover:text-red-700 font-medium">
-                ← Ana sayfaya dön
-              </Link>
-              {haber.source_url && !haber.is_custom && (
-                <a href={haber.source_url} target="_blank" rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-600 text-sm">
-                  Kaynak habere git
-                </a>
-              )}
+              <div className="mt-6 flex items-center justify-between">
+                <Link href="/" className="text-red-600 hover:text-red-700 font-medium">
+                  ← Ana sayfaya dön
+                </Link>
+                {haber.source_url && !haber.is_custom && (
+                  <a href={haber.source_url} target="_blank" rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-600 text-sm">
+                    Kaynak habere git
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Sağ - Diğer Haberler 2li 2li */}
-          <div className="lg:w-2/5 px-4 py-8">
+          <div style={{width: '40%'}} className="px-4 py-8">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-1 h-6 bg-red-600 rounded"></div>
               <h2 className="text-lg font-black text-gray-900">Diğer Haberler</h2>
