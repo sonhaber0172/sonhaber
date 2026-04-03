@@ -199,6 +199,24 @@ export default async function HomePage({ searchParams }) {
                   <circle cx="12" cy="12" r="4.5" stroke="white" strokeWidth="1.8" fill="none"/>
                   <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
                 </svg>
+                
+            <div>
+            <h4 className="text-lg font-black text-white mb-4">Bizi Takip Edin</h4>
+            <div className="flex flex-col gap-3">
+              <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-sm font-medium">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <defs>
+                    <linearGradient id="ig2" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#f09433"/>
+                      <stop offset="50%" stopColor="#dc2743"/>
+                      <stop offset="100%" stopColor="#bc1888"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig2)"/>
+                  <circle cx="12" cy="12" r="4.5" stroke="white" strokeWidth="1.8" fill="none"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+                </svg>
                 Instagram
               </a>
               <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer"
