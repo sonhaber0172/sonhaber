@@ -68,7 +68,7 @@ export default async function HaberDetay({ params }) {
         <div className="flex flex-col lg:flex-row gap-0">
 
           {/* Sol - Ana Haber */}
-          <div className="lg:w-3/5 px-6 py-8 border-r border-gray-100">
+          <div className="lg:w-3/5 pl-0 pr-6 py-8 border-r border-gray-100">
             <div className="bg-white rounded-xl overflow-hidden">
               {haber.image_url && (
                 <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-6" />
