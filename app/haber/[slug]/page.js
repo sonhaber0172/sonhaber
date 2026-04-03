@@ -23,6 +23,19 @@ export default async function HaberDetay({ params }) {
     haber = rssNews.find(h => h.id === id)
   }
 
+  const rssNews = await fetchRSSNews()
+  const { data: customNews } = await supabase
+    .from('articles')
+    .select('*')
+    .eq('is_custom', true)
+    .order('priority_score', { ascending: false })
+    .limit(20)
+
+  const tumHaberler = [...(customNews || []), ...rssNews]
+  const digerHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 10)
+  const benzerHaberler = tumHaberler.filter(h => h.id !== id && h.category === haber?.category).slice(0, 4)
+  const sonHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 6)
+
   if (!haber) {
     return (
       <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
@@ -49,39 +62,139 @@ export default async function HaberDetay({ params }) {
             <Link href="/"><h1 className="text-2xl md:text-3xl font-black cursor-pointer">SONHABER</h1></Link>
             <nav className="flex gap-4 text-sm font-medium">
               <Link href="/" className="hover:text-red-200">Ana Sayfa</Link>
-              <Link href="/iletisim" className="hover:text-red-200">Iletisim</Link>
+              <Link href="/iletisim" className="hover:text-red-200">İletişim</Link>
             </nav>
           </div>
         </header>
 
         <div className="px-6 py-8">
-          <div className="bg-white rounded-xl overflow-hidden">
-            {haber.image_url && (
-              <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-6" />
-            )}
-            <span className="bg-red-100 text-red-700 text-sm font-bold px-3 py-1 rounded">{haber.category}</span>
-            <h1 className="text-2xl md:text-3xl font-black text-gray-900 mt-4 mb-3 leading-tight">{haber.title}</h1>
-            <p className="text-gray-400 text-sm mb-6 border-b border-gray-100 pb-4">
-              {new Date(haber.created_at).toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </p>
-            <div className="text-gray-700 leading-relaxed text-lg"
-              dangerouslySetInnerHTML={{__html: haber.content}} />
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <Link href="/" className="text-red-600 hover:text-red-700 font-medium">
-              ← Ana sayfaya don
-            </Link>
-            {haber.source_url && !haber.is_custom && (
-              <a href={haber.source_url} target="_blank" rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-600 text-sm">
-                Kaynak habere git
-              </a>
-            )}
+          <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Sol - Ana Haber */}
+            <div className="lg:w-2/3">
+              <div className="bg-white rounded-xl overflow-hidden">
+                {haber.image_url && (
+                  <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover rounded-xl mb-6" />
+                )}
+                <span className="bg-red-100 text-red-700 text-sm font-bold px-3 py-1 rounded">{haber.category}</span>
+                <h1 className="text-2xl md:text-3xl font-black text-gray-900 mt-4 mb-3 leading-tight">{haber.title}</h1>
+                <p className="text-gray-400 text-sm mb-6 border-b border-gray-100 pb-4">
+                  {new Date(haber.created_at).toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </p>
+                <div className="text-gray-700 leading-relaxed text-lg"
+                  dangerouslySetInnerHTML={{__html: haber.content}} />
+              </div>
+
+              <div className="mt-6 flex items-center justify-between">
+                <Link href="/" className="text-red-600 hover:text-red-700 font-medium">
+                  ← Ana sayfaya dön
+                </Link>
+                {haber.source_url && !haber.is_custom && (
+                  <a href={haber.source_url} target="_blank" rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-gray-600 text-sm">
+                    Kaynak habere git
+                  </a>
+                )}
+              </div>
+
+              {/* Benzer Haberler */}
+              {benzerHaberler.length > 0 && (
+                <div className="mt-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-1 h-6 bg-red-600 rounded"></div>
+                    <h2 className="text-xl font-black text-gray-900">{haber.category} Haberleri</h2>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {benzerHaberler.map((h, i) => (
+                      <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
+                        <div className="bg-white rounded-xl shadow hover:shadow-md transition-shadow overflow-hidden flex gap-3 p-3 border border-gray-100">
+                          {h.image_url ? (
+                            <img src={h.image_url} alt={h.title} className="w-20 h-16 object-cover rounded-lg shrink-0" />
+                          ) : (
+                            <div className="w-20 h-16 bg-red-100 rounded-lg shrink-0 flex items-center justify-center">
+                              <span className="text-red-600 font-black text-xs">SH</span>
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <span className="text-xs text-red-600 font-bold">{h.category}</span>
+                            <p className="text-sm font-bold text-gray-900 line-clamp-2 mt-1">{h.title}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Bunları da Okuyun */}
+              <div className="mt-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-1 h-6 bg-red-600 rounded"></div>
+                  <h2 className="text-xl font-black text-gray-900">Bunları da Okuyun</h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {digerHaberler.slice(0, 6).map((h, i) => (
+                    <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
+                      <div className="bg-white rounded-xl shadow hover:shadow-md transition-shadow overflow-hidden border border-gray-100">
+                        {h.image_url ? (
+                          <img src={h.image_url} alt={h.title} className="w-full h-32 object-cover" />
+                        ) : (
+                          <div className="w-full h-32 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                            <span className="text-white font-black text-xl opacity-40">SH</span>
+                          </div>
+                        )}
+                        <div className="p-3">
+                          <span className="text-xs text-red-600 font-bold">{h.category}</span>
+                          <p className="text-sm font-bold text-gray-900 line-clamp-2 mt-1">{h.title}</p>
+                          <p className="text-xs text-gray-400 mt-1">{new Date(h.created_at).toLocaleDateString('tr-TR')}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Sağ - Son Haberler */}
+            <div className="lg:w-1/3">
+              <div className="bg-white rounded-xl shadow border border-gray-100 overflow-hidden sticky top-4">
+                <div className="bg-red-600 px-4 py-3">
+                  <h3 className="text-white font-black">Son Haberler</h3>
+                </div>
+                <div className="divide-y divide-gray-50">
+                  {sonHaberler.map((h, i) => (
+                    <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
+                      <div className="p-3 hover:bg-gray-50 transition-colors flex gap-3">
+                        {h.image_url ? (
+                          <img src={h.image_url} alt={h.title} className="w-16 h-12 object-cover rounded-lg shrink-0" />
+                        ) : (
+                          <div className="w-16 h-12 bg-red-100 rounded-lg shrink-0 flex items-center justify-center">
+                            <span className="text-red-600 font-black text-xs">SH</span>
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs text-red-600 font-bold">{h.category}</span>
+                          <p className="text-xs font-bold text-gray-800 line-clamp-2 mt-0.5">{h.title}</p>
+                          <p className="text-xs text-gray-400 mt-0.5">{new Date(h.created_at).toLocaleDateString('tr-TR')}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="p-4">
+                  <Link href="/" className="block w-full text-center bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg text-sm transition-colors">
+                    Tüm Haberlere Git
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <footer className="bg-gray-900 text-gray-400 text-center py-6 mt-10 text-sm">
-          <p>2025 SonHaber. Tum haklari saklidir.</p>
+          <p className="font-bold text-white text-lg mb-1">SONHABER</p>
+          <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+          <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
         </footer>
       </main>
     </div>
