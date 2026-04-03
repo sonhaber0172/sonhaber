@@ -78,9 +78,7 @@ export default async function HomePage({ searchParams }) {
       </div>
 
       <div className="px-6 py-6 bg-white">
-        
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
-          
           <div className="lg:w-3/5">
             {allNews[0] && (
               <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
@@ -152,13 +150,9 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      {/* FOOTER */}
       <footer className="bg-gray-900 text-white mt-8">
-        
-        {/* Üst Kısım */}
         <div className="px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-700">
           
-          {/* Sol - Hakkımızda */}
           <div>
             <h3 className="text-2xl font-black text-white mb-3">SONHABER</h3>
             <p className="text-gray-400 text-sm leading-relaxed">Türkiye'nin güvenilir ve hızlı haber kaynağı. Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası için doğru adres.</p>
@@ -168,7 +162,6 @@ export default async function HomePage({ searchParams }) {
             </a>
           </div>
 
-          {/* Orta - Kategoriler */}
           <div>
             <h4 className="text-lg font-black text-white mb-4">Kategoriler</h4>
             <div className="grid grid-cols-2 gap-2">
@@ -181,26 +174,7 @@ export default async function HomePage({ searchParams }) {
             </div>
           </div>
 
-          {/* Sağ - Sosyal Medya */}
           <div>
-            <h4 className="text-lg font-black text-white mb-4">Bizi Takip Edin</h4>
-            <div className="flex flex-col gap-3">
-              <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-sm font-medium">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <defs>
-                    <linearGradient id="ig2" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#f09433"/>
-                      <stop offset="50%" stopColor="#dc2743"/>
-                      <stop offset="100%" stopColor="#bc1888"/>
-                    </linearGradient>
-                  </defs>
-                  <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig2)"/>
-                  <circle cx="12" cy="12" r="4.5" stroke="white" strokeWidth="1.8" fill="none"/>
-                  <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
-                </svg>
-                
-            <div>
             <h4 className="text-lg font-black text-white mb-4">Bizi Takip Edin</h4>
             <div className="flex flex-col gap-3">
               <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer"
@@ -245,8 +219,8 @@ export default async function HomePage({ searchParams }) {
               </a>
             </div>
           </div>
+        </div>
 
-        {/* Alt Şerit */}
         <div className="px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-gray-500 text-sm">© 2025 SonHaber. Tüm hakları saklıdır.</p>
           <div className="flex gap-6">
@@ -256,7 +230,6 @@ export default async function HomePage({ searchParams }) {
               className="text-red-400 hover:text-red-300 text-sm transition-colors font-medium">Reklam Ver</a>
           </div>
         </div>
-
       </footer>
       </main>
     </div>
