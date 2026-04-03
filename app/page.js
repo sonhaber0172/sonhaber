@@ -152,10 +152,70 @@ export default async function HomePage({ searchParams }) {
         </div>
       </div>
 
-      <footer className="bg-gray-900 text-gray-400 text-center py-8 mt-8 text-sm md:text-base">
-        <p className="font-bold text-white text-lg mb-3">SONHABER</p>
-        <p>2025 SonHaber. Tum haklari saklidir.</p>
-        <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
+      {/* FOOTER */}
+      <footer className="bg-gray-900 text-white mt-8">
+        
+        {/* Üst Kısım */}
+        <div className="px-8 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-700">
+          
+          {/* Sol - Hakkımızda */}
+          <div>
+            <h3 className="text-2xl font-black text-white mb-3">SONHABER</h3>
+            <p className="text-gray-400 text-sm leading-relaxed">Türkiye'nin güvenilir ve hızlı haber kaynağı. Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası için doğru adres.</p>
+            <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm">
+              <span>💬</span> WhatsApp ile İletişim
+            </a>
+          </div>
+
+          {/* Orta - Kategoriler */}
+          <div>
+            <h4 className="text-lg font-black text-white mb-4">Kategoriler</h4>
+            <div className="grid grid-cols-2 gap-2">
+              {['Gundem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dunya', 'Saglik', 'Kultur', 'Yasam'].map(k => (
+                <Link key={k} href={`/?kategori=${k}`}
+                  className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                  → {k}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Sağ - Sosyal Medya */}
+          <div>
+            <h4 className="text-lg font-black text-white mb-4">Bizi Takip Edin</h4>
+            <div className="flex flex-col gap-3">
+              <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-sm font-medium">
+                <span className="text-xl">📷</span> Instagram
+              </a>
+              <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors text-sm font-medium">
+                <span className="text-xl">🐦</span> Twitter / X
+              </a>
+              <a href="https://www.facebook.com/share/1AeXFntFTx/" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-blue-500 transition-colors text-sm font-medium">
+                <span className="text-xl">👥</span> Facebook
+              </a>
+              <a href="https://www.tiktok.com/@sonhaber4" target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm font-medium">
+                <span className="text-xl">🎵</span> TikTok
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Alt Şerit */}
+        <div className="px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-gray-500 text-sm">© 2025 SonHaber. Tüm hakları saklıdır.</p>
+          <div className="flex gap-6">
+            <Link href="/" className="text-gray-500 hover:text-white text-sm transition-colors">Ana Sayfa</Link>
+            <Link href="/iletisim" className="text-gray-500 hover:text-white text-sm transition-colors">İletişim</Link>
+            <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer"
+              className="text-red-400 hover:text-red-300 text-sm transition-colors font-medium">Reklam Ver</a>
+          </div>
+        </div>
+
       </footer>
       </main>
     </div>
