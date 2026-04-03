@@ -39,4 +39,6 @@ a {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}input {
+  color: #111111 !important;
 }

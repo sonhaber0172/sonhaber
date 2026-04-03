@@ -36,7 +36,7 @@ export default function Arama({ haberler }) {
           onChange={handleArama}
           onBlur={() => setTimeout(() => setAcik(false), 200)}
           onFocus={() => aramaMetni.length > 2 && setAcik(true)}
-          className="w-full px-4 py-3 text-base outline-none bg-transparent"
+          className="w-full px-4 py-3 text-base outline-none bg-transparent text-gray-900 placeholder-gray-400"
         />
         {aramaMetni && (
           <button onClick={() => { setAramaMetni(''); setSonuclar([]); setAcik(false) }}
