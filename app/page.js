@@ -150,7 +150,17 @@ export default async function HomePage({ searchParams }) {
       </div>
 
       <footer className="bg-gray-900 text-gray-400 text-center py-8 mt-8 text-sm md:text-base">
-        <p className="font-bold text-white text-lg mb-1">SONHABER</p>
+        <p className="font-bold text-white text-lg mb-3">SONHABER</p>
+        <div className="flex justify-center gap-6 mb-4">
+          <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer"
+            className="text-gray-400 hover:text-pink-400 transition-colors font-bold text-sm">Instagram</a>
+          <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer"
+            className="text-gray-400 hover:text-blue-400 transition-colors font-bold text-sm">Twitter</a>
+          <a href="https://facebook.com/sonerbozkurt" target="_blank" rel="noopener noreferrer"
+            className="text-gray-400 hover:text-blue-600 transition-colors font-bold text-sm">Facebook</a>
+          <a href="https://tiktok.com/@sonhaber" target="_blank" rel="noopener noreferrer"
+            className="text-gray-400 hover:text-white transition-colors font-bold text-sm">TikTok</a>
+        </div>
         <p>2025 SonHaber. Tum haklari saklidir.</p>
         <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
       </footer>
