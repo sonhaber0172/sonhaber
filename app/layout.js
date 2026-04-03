@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata = {
   title: {
@@ -55,7 +56,21 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#b91c1c" />
         <link rel="canonical" href="https://sonhaber-rouge.vercel.app" />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-VTWF4S968M"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-VTWF4S968M');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
