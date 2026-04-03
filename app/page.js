@@ -26,10 +26,10 @@ export default async function HomePage({ searchParams }) {
 
   return (
     <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
-      <div style={{display: 'flex', width: '100%', maxWidth: '1600px', alignItems: 'flex-start'}}>
+      <div style={{display: 'flex', width: '100%', maxWidth: '1200px', justifyContent: 'center'}}>
 
-        {/* Sol Boşluk */}
-        <div className="hidden xl:flex flex-col gap-4 p-4 w-48 shrink-0 sticky top-4">
+        {/* Sağ Boşluk - Son Haberler */}
+        <div className="hidden xl:flex flex-col gap-4 p-4 w-64 shrink-0 sticky top-4">
           <div className="bg-gray-100 rounded-xl p-4 text-center border-2 border-dashed border-gray-300">
             <p className="text-gray-400 text-xs font-bold">REKLAM ALANI</p>
             <p className="text-gray-300 text-xs mt-1">160x600</p>
