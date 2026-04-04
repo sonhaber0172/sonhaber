@@ -1,5 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
+import WhatsappButon from "./components/WhatsappButon";
 
 export const metadata = {
   title: {
@@ -58,6 +59,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col">
         {children}
+        <WhatsappButon />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VTWF4S968M"
           strategy="afterInteractive"

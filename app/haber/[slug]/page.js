@@ -44,7 +44,7 @@ export default async function HaberDetay({ params }) {
         </header>
         <div className="px-4 py-20 text-center">
           <h2 className="text-2xl font-bold text-gray-700">Haber bulunamadi</h2>
-          <Link href="/" className="text-red-600 mt-4 block">Ana sayfaya don</Link>
+          <Link href="/" className="text-red-600 mt-4 block">Ana sayfaya dön</Link>
         </div>
       </main>
     )

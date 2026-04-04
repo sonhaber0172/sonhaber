@@ -126,7 +126,7 @@ export default async function HomePage({ searchParams }) {
         </div>
 
         <div className="border-t-2 border-red-600 pt-6">
-          <h2 className="text-xl font-black text-gray-900 mb-4">Diger Haberler</h2>
+          <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {allNews.slice(8, 24).map((news, index) => (
               <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
