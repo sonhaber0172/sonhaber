@@ -6,7 +6,7 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 
 export const revalidate = 300
 
-const kategoriler = ['Tumu', 'Gundem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dunya', 'Saglik', 'Kultur', 'Yasam']
+const kategoriler = ['Tumu', 'Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Saglık', 'Kültür', 'Yaşam']
 
 export default async function HomePage({ searchParams }) {
   const { kategori } = await searchParams
@@ -32,7 +32,7 @@ export default async function HomePage({ searchParams }) {
         <div className="px-6 py-4 flex items-center justify-between">
           <div>
             <h1 className="text-3xl md:text-5xl font-black tracking-tight">SONHABER</h1>
-            <p className="text-red-200 text-sm md:text-base mt-1">Turkiyenin Haber Merkezi</p>
+            <p className="text-red-200 text-sm md:text-base mt-1">Türkiye'nin Güvenilir Haber Kaynağı</p>
           </div>
           <nav className="hidden md:flex gap-8 text-base font-medium">
             <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
@@ -163,7 +163,7 @@ export default async function HomePage({ searchParams }) {
           <div>
             <h4 className="text-lg font-black text-white mb-4">Kategoriler</h4>
             <div className="grid grid-cols-2 gap-2">
-              {['Gundem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dunya', 'Saglik', 'Kultur', 'Yasam'].map(k => (
+              {['Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Saglık', 'Kültür', 'Yaşam'].map(k => (
                 <Link key={k} href={`/?kategori=${k}`}
                   className="text-gray-400 hover:text-red-400 transition-colors text-sm">
                   → {k}
