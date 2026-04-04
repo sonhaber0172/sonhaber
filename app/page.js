@@ -24,6 +24,51 @@ export default async function HomePage({ searchParams }) {
     allNews = allNews.filter(n => n.category === kategori)
   }
 
+  const BuyukHaber = ({ news }) => (
+    <Link href={`/haber/${encodeURIComponent(news.id)}`} className="block mb-6">
+      <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+        <div className="relative">
+          {news.image_url ? (
+            <img src={news.image_url} alt={news.title} className="w-full h-72 md:h-96 object-cover" />
+          ) : (
+            <div className="w-full h-72 md:h-96 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+              <span className="text-white text-6xl font-black opacity-30">SH</span>
+            </div>
+          )}
+          <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{news.category}</span>
+        </div>
+        <div className="p-6">
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{news.title}</h2>
+          <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 300) + '...'}} />
+          <p className="text-sm text-gray-400 mt-4">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+        </div>
+      </div>
+    </Link>
+  )
+
+  const KucukGrid = ({ haberler }) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+      {haberler.map((news, index) => (
+        <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
+          <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
+            {news.image_url ? (
+              <img src={news.image_url} alt={news.title} className="w-full h-40 object-cover" />
+            ) : (
+              <div className="w-full h-40 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                <span className="text-white font-black text-2xl opacity-40">SH</span>
+              </div>
+            )}
+            <div className="p-4">
+              <span className="text-xs text-red-600 font-bold">{news.category}</span>
+              <h3 className="font-bold text-gray-900 mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
+              <p className="text-xs text-gray-400 mt-2">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+            </div>
+          </div>
+        </Link>
+      ))}
+    </div>
+  )
+
   return (
     <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
@@ -127,53 +172,21 @@ export default async function HomePage({ searchParams }) {
 
         <div className="border-t-2 border-red-600 pt-6">
           <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
-          
-          {/* 2 Büyük Haber */}
-          <div className="flex flex-col gap-6 mb-6">
-            {allNews.slice(8, 10).map((news, index) => (
-              <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
-                  <div className="relative">
-                    {news.image_url ? (
-                      <img src={news.image_url} alt={news.title} className="w-full h-72 md:h-96 object-cover" />
-                    ) : (
-                      <div className="w-full h-72 md:h-96 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
-                        <span className="text-white text-6xl font-black opacity-30">SH</span>
-                      </div>
-                    )}
-                    <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{news.category}</span>
-                  </div>
-                  <div className="p-6">
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{news.title}</h2>
-                    <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 300) + '...'}} />
-                    <p className="text-sm text-gray-400 mt-4">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
 
-          {/* Normal Grid Haberler */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {allNews.slice(10, 30).map((news, index) => (
-              <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
-                  {news.image_url ? (
-                    <img src={news.image_url} alt={news.title} className="w-full h-40 object-cover" />
-                  ) : (
-                    <div className="w-full h-40 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                      <span className="text-white font-black text-2xl opacity-40">SH</span>
-                    </div>
-                  )}
-                  <div className="p-4">
-                    <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                    <h3 className="font-bold text-gray-900 mt-1 text-sm leading-snug line-clamp-3">{news.title}</h3>
-                    <p className="text-xs text-gray-400 mt-2">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {/* 8-14 arası normal grid */}
+          <KucukGrid haberler={allNews.slice(8, 15)} />
+
+          {/* 15. haber büyük - ortadan */}
+          {allNews[15] && <BuyukHaber news={allNews[15]} />}
+
+          {/* 16-24 arası normal grid */}
+          <KucukGrid haberler={allNews.slice(16, 25)} />
+
+          {/* 25. haber büyük - sondan */}
+          {allNews[25] && <BuyukHaber news={allNews[25]} />}
+
+          {/* 26-35 arası normal grid */}
+          <KucukGrid haberler={allNews.slice(26, 35)} />
         </div>
       </div>
 
