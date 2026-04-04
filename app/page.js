@@ -6,7 +6,7 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 
 export const revalidate = 300
 
-const kategoriler = ['Tumu', 'Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Saglık', 'Kültür', 'Yaşam']
+const kategoriler = ['Tumu', 'Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Sağlık', 'Kültür', 'Yaşam']
 
 export default async function HomePage({ searchParams }) {
   const { kategori } = await searchParams
@@ -56,7 +56,7 @@ export default async function HomePage({ searchParams }) {
       <div className="bg-gray-900 text-white py-2">
         <div className="px-6 flex items-center gap-4">
           <span className="bg-red-600 text-white text-sm font-black px-3 py-1 rounded shrink-0 uppercase">Son Dakika</span>
-          <p className="text-sm md:text-base truncate font-medium">{allNews[0]?.title || 'Haberler yukleniyor...'}</p>
+          <p className="text-sm md:text-base truncate font-medium">{allNews[0]?.title || 'Haberler yükleniyor...'}</p>
         </div>
       </div>
 
@@ -127,8 +127,33 @@ export default async function HomePage({ searchParams }) {
 
         <div className="border-t-2 border-red-600 pt-6">
           <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
+          
+          {/* 2 Büyük Haber */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+            {allNews.slice(8, 10).map((news, index) => (
+              <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
+                <div className="bg-white rounded-xl shadow hover:shadow-lg transition-shadow overflow-hidden cursor-pointer h-full">
+                  {news.image_url ? (
+                    <img src={news.image_url} alt={news.title} className="w-full h-56 object-cover" />
+                  ) : (
+                    <div className="w-full h-56 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                      <span className="text-white font-black text-3xl opacity-40">SH</span>
+                    </div>
+                  )}
+                  <div className="p-5">
+                    <span className="text-xs text-red-600 font-bold">{news.category}</span>
+                    <h3 className="font-black text-gray-900 mt-1 text-lg leading-snug line-clamp-2">{news.title}</h3>
+                    <p className="text-gray-500 text-sm mt-2 line-clamp-2" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 120) + '...'}} />
+                    <p className="text-xs text-gray-400 mt-3">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Normal Grid Haberler */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {allNews.slice(8, 24).map((news, index) => (
+            {allNews.slice(10, 30).map((news, index) => (
               <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
                 <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden cursor-pointer h-full">
                   {news.image_url ? (
@@ -163,7 +188,7 @@ export default async function HomePage({ searchParams }) {
           <div>
             <h4 className="text-lg font-black text-white mb-4">Kategoriler</h4>
             <div className="grid grid-cols-2 gap-2">
-              {['Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Saglık', 'Kültür', 'Yaşam'].map(k => (
+              {['Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Sağlık', 'Kültür', 'Yaşam'].map(k => (
                 <Link key={k} href={`/?kategori=${k}`}
                   className="text-gray-400 hover:text-red-400 transition-colors text-sm">
                   → {k}
