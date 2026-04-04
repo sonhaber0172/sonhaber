@@ -32,7 +32,9 @@ export default async function HaberDetay({ params }) {
     .limit(20)
 
   const tumHaberler = [...(customNews || []), ...rssNews]
-  const digerHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 12)
+  const digerHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 16)
+  const sagHaberler = digerHaberler.slice(0, 8)
+  const altHaberler = digerHaberler.slice(8, 16)
 
   if (!haber) {
     return (
@@ -43,7 +45,7 @@ export default async function HaberDetay({ params }) {
           </div>
         </header>
         <div className="px-4 py-20 text-center">
-          <h2 className="text-2xl font-bold text-gray-700">Haber bulunamadi</h2>
+          <h2 className="text-2xl font-bold text-gray-700">Haber bulunamadı</h2>
           <Link href="/" className="text-red-600 mt-4 block">Ana sayfaya dön</Link>
         </div>
       </main>
@@ -62,7 +64,8 @@ export default async function HaberDetay({ params }) {
         </div>
       </header>
 
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      {/* Üst Kısım - Sol Haber + Sağ Haberler */}
+      <div className="flex flex-col lg:flex-row">
 
         {/* Sol - Ana Haber */}
         <div className="lg:w-3/5 py-8 px-6 border-r border-gray-100">
@@ -87,6 +90,34 @@ export default async function HaberDetay({ params }) {
               </a>
             )}
           </div>
+
+          {/* Haberin Altı - Bunları da Okuyun */}
+          <div className="mt-10 border-t-2 border-red-600 pt-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-1 h-6 bg-red-600 rounded"></div>
+              <h2 className="text-lg font-black text-gray-900">Bunları da Okuyun</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {altHaberler.map((h, i) => (
+                <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
+                  <div className="bg-white rounded-xl shadow hover:shadow-md transition-shadow overflow-hidden border border-gray-100 h-full">
+                    {h.image_url ? (
+                      <img src={h.image_url} alt={h.title} className="w-full h-32 object-cover" />
+                    ) : (
+                      <div className="w-full h-32 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                        <span className="text-white font-black text-lg opacity-40">SH</span>
+                      </div>
+                    )}
+                    <div className="p-3">
+                      <span className="text-xs text-red-600 font-bold">{h.category}</span>
+                      <p className="text-xs font-bold text-gray-900 line-clamp-2 mt-1">{h.title}</p>
+                      <p className="text-xs text-gray-400 mt-1">{new Date(h.created_at).toLocaleDateString('tr-TR')}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Sağ - Diğer Haberler */}
@@ -96,7 +127,7 @@ export default async function HaberDetay({ params }) {
             <h2 className="text-lg font-black text-gray-900">Diğer Haberler</h2>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {digerHaberler.map((h, i) => (
+            {sagHaberler.map((h, i) => (
               <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
                 <div className="bg-white rounded-xl shadow hover:shadow-md transition-shadow overflow-hidden border border-gray-100 h-full">
                   {h.image_url ? (
