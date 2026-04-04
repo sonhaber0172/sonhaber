@@ -129,22 +129,24 @@ export default async function HomePage({ searchParams }) {
           <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
           
           {/* 2 Büyük Haber */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+          <div className="flex flex-col gap-6 mb-6">
             {allNews.slice(8, 10).map((news, index) => (
               <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                <div className="bg-white rounded-xl shadow hover:shadow-lg transition-shadow overflow-hidden cursor-pointer h-full">
-                  {news.image_url ? (
-                    <img src={news.image_url} alt={news.title} className="w-full h-56 object-cover" />
-                  ) : (
-                    <div className="w-full h-56 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
-                      <span className="text-white font-black text-3xl opacity-40">SH</span>
-                    </div>
-                  )}
-                  <div className="p-5">
-                    <span className="text-xs text-red-600 font-bold">{news.category}</span>
-                    <h3 className="font-black text-gray-900 mt-1 text-lg leading-snug line-clamp-2">{news.title}</h3>
-                    <p className="text-gray-500 text-sm mt-2 line-clamp-2" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 120) + '...'}} />
-                    <p className="text-xs text-gray-400 mt-3">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
+                  <div className="relative">
+                    {news.image_url ? (
+                      <img src={news.image_url} alt={news.title} className="w-full h-72 md:h-96 object-cover" />
+                    ) : (
+                      <div className="w-full h-72 md:h-96 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                        <span className="text-white text-6xl font-black opacity-30">SH</span>
+                      </div>
+                    )}
+                    <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{news.category}</span>
+                  </div>
+                  <div className="p-6">
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{news.title}</h2>
+                    <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 300) + '...'}} />
+                    <p className="text-sm text-gray-400 mt-4">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                   </div>
                 </div>
               </Link>
