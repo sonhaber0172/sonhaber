@@ -75,10 +75,18 @@ export default async function HomePage({ searchParams }) {
       
       <header className="bg-red-700 text-white shadow-lg">
         <div className="px-6 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight">SONHABER</h1>
-            <p className="text-red-200 text-sm md:text-base mt-1">Türkiye'nin Güvenilir Haber Kaynağı</p>
-          </div>
+          
+          {/* LOGO */}
+          <Link href="/">
+            <div style={{background: 'white', borderRadius: '8px', padding: '8px 16px', borderLeft: '8px solid #a93226', display: 'flex', flexDirection: 'column', justifyContent: 'center', cursor: 'pointer'}}>
+              <div style={{display: 'flex', alignItems: 'baseline', gap: '0px'}}>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '30px', fontWeight: '900', color: '#c0392b', letterSpacing: '1px'}}>SON</span>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '30px', fontWeight: '900', color: '#1a1a1a', letterSpacing: '1px'}}>HABER</span>
+              </div>
+              <span style={{fontSize: '10px', color: '#c0392b', letterSpacing: '3px', fontWeight: '600'}}>TÜRKİYE'NİN SESİ</span>
+            </div>
+          </Link>
+
           <nav className="hidden md:flex gap-8 text-base font-medium">
             <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
             <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">İletişim</Link>
@@ -173,19 +181,10 @@ export default async function HomePage({ searchParams }) {
         <div className="border-t-2 border-red-600 pt-6">
           <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
 
-          {/* 8-14 arası normal grid */}
           <KucukGrid haberler={allNews.slice(8, 15)} />
-
-          {/* 15. haber büyük - ortadan */}
           {allNews[15] && <BuyukHaber news={allNews[15]} />}
-
-          {/* 16-24 arası normal grid */}
           <KucukGrid haberler={allNews.slice(16, 25)} />
-
-          {/* 25. haber büyük - sondan */}
           {allNews[25] && <BuyukHaber news={allNews[25]} />}
-
-          {/* 26-35 arası normal grid */}
           <KucukGrid haberler={allNews.slice(26, 35)} />
         </div>
       </div>
