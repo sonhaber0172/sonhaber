@@ -128,20 +128,20 @@ export default async function HaberDetay({ params }) {
               <div className="w-1 h-5 bg-red-600 rounded"></div>
               <h2 className="text-base font-black text-gray-900">Diğer Haberler</h2>
             </div>
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {sagHaberler.map((h, i) => (
                 <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
-                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden border border-gray-100 flex gap-3 p-2">
+                  <div className="bg-white rounded-lg shadow hover:shadow-md transition-shadow overflow-hidden border border-gray-100 h-full">
                     {h.image_url ? (
-                      <img src={h.image_url} alt={h.title} className="w-20 h-16 object-cover rounded-lg shrink-0" />
+                      <img src={h.image_url} alt={h.title} className="w-full h-32 object-cover" />
                     ) : (
-                      <div className="w-20 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-lg shrink-0 flex items-center justify-center">
-                        <span className="text-white font-black text-sm opacity-40">SH</span>
+                      <div className="w-full h-32 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                        <span className="text-white font-black text-lg opacity-40">SH</span>
                       </div>
                     )}
-                    <div className="flex-1 min-w-0">
+                    <div className="p-3">
                       <span className="text-xs text-red-600 font-bold">{h.category}</span>
-                      <p className="text-xs font-bold text-gray-900 line-clamp-2 mt-1">{h.title}</p>
+                      <p className="text-sm font-bold text-gray-900 line-clamp-2 mt-1">{h.title}</p>
                       <p className="text-xs text-gray-400 mt-1">{new Date(h.created_at).toLocaleDateString('tr-TR')}</p>
                     </div>
                   </div>
