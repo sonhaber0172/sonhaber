@@ -56,15 +56,11 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#b91c1c" />
         <link rel="canonical" href="https://sonhaber-rouge.vercel.app" />
-      </head>
-      <body className="min-h-full flex flex-col">
-        {children}
-        <WhatsappButon />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VTWF4S968M"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="beforeInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -72,6 +68,10 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-VTWF4S968M');
           `}
         </Script>
+      </head>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <WhatsappButon />
       </body>
     </html>
   );
