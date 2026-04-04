@@ -24,27 +24,60 @@ export default async function HomePage({ searchParams }) {
     allNews = allNews.filter(n => n.category === kategori)
   }
 
-  const BuyukHaber = ({ news }) => (
-    <Link href={`/haber/${encodeURIComponent(news.id)}`} className="block mb-6">
-      <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer">
-        <div className="relative">
-          {news.image_url ? (
-            <img src={news.image_url} alt={news.title} className="w-full h-72 md:h-96 object-cover" />
-          ) : (
-            <div className="w-full h-72 md:h-96 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
-              <span className="text-white text-6xl font-black opacity-30">SH</span>
+  const BuyukHaberVeYan = ({ buyukIndex, yanIndex1, yanIndex2 }) => {
+    const buyuk = allNews[buyukIndex]
+    const yan1 = allNews[yanIndex1]
+    const yan2 = allNews[yanIndex2]
+    if (!buyuk) return null
+    return (
+      <div className="flex flex-col lg:flex-row gap-5 mb-6">
+        {/* Sol - Büyük Haber */}
+        <div className="lg:w-2/3">
+          <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer h-full">
+              <div className="relative">
+                {buyuk.image_url ? (
+                  <img src={buyuk.image_url} alt={buyuk.title} className="w-full h-56 md:h-72 object-cover" />
+                ) : (
+                  <div className="w-full h-56 md:h-72 bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                    <span className="text-white text-6xl font-black opacity-30">SH</span>
+                  </div>
+                )}
+                <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{buyuk.category}</span>
+              </div>
+              <div className="p-5">
+                <h2 className="text-xl md:text-2xl font-black text-gray-900 leading-tight mb-2">{buyuk.title}</h2>
+                <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed" dangerouslySetInnerHTML={{__html: buyuk.content?.substring(0, 200) + '...'}} />
+                <p className="text-xs text-gray-400 mt-3">{new Date(buyuk.created_at).toLocaleDateString('tr-TR')}</p>
+              </div>
             </div>
-          )}
-          <span className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1 rounded">{news.category}</span>
+          </Link>
         </div>
-        <div className="p-6">
-          <h2 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-3">{news.title}</h2>
-          <p className="text-gray-600 text-base line-clamp-3 leading-relaxed" dangerouslySetInnerHTML={{__html: news.content?.substring(0, 300) + '...'}} />
-          <p className="text-sm text-gray-400 mt-4">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+
+        {/* Sağ - 2 Küçük Haber */}
+        <div className="lg:w-1/3 flex flex-col gap-4">
+          {[yan1, yan2].filter(Boolean).map((news, i) => (
+            <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
+              <div className="bg-white rounded-xl overflow-hidden shadow hover:shadow-md transition-shadow cursor-pointer h-full">
+                {news.image_url ? (
+                  <img src={news.image_url} alt={news.title} className="w-full h-32 object-cover" />
+                ) : (
+                  <div className="w-full h-32 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                    <span className="text-white font-black text-xl opacity-40">SH</span>
+                  </div>
+                )}
+                <div className="p-3">
+                  <span className="text-xs text-red-600 font-bold">{news.category}</span>
+                  <h3 className="font-bold text-gray-900 mt-1 text-sm leading-snug line-clamp-2">{news.title}</h3>
+                  <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
-    </Link>
-  )
+    )
+  }
 
   const KucukGrid = ({ haberler }) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
@@ -75,8 +108,6 @@ export default async function HomePage({ searchParams }) {
       
       <header className="bg-red-700 text-white shadow-lg">
         <div className="px-6 py-4 flex items-center justify-between">
-          
-          {/* LOGO */}
           <Link href="/">
             <div style={{background: 'white', borderRadius: '8px', padding: '8px 16px', borderLeft: '8px solid #a93226', display: 'flex', flexDirection: 'column', justifyContent: 'center', cursor: 'pointer'}}>
               <div style={{display: 'flex', alignItems: 'baseline', gap: '0px'}}>
@@ -86,7 +117,6 @@ export default async function HomePage({ searchParams }) {
               <span style={{fontSize: '10px', color: '#c0392b', letterSpacing: '3px', fontWeight: '600'}}>TÜRKİYE'NİN SESİ</span>
             </div>
           </Link>
-
           <nav className="hidden md:flex gap-8 text-base font-medium">
             <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
             <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">İletişim</Link>
@@ -182,10 +212,10 @@ export default async function HomePage({ searchParams }) {
           <h2 className="text-xl font-black text-gray-900 mb-4">Diğer Haberler</h2>
 
           <KucukGrid haberler={allNews.slice(8, 15)} />
-          {allNews[15] && <BuyukHaber news={allNews[15]} />}
-          <KucukGrid haberler={allNews.slice(16, 25)} />
-          {allNews[25] && <BuyukHaber news={allNews[25]} />}
-          <KucukGrid haberler={allNews.slice(26, 35)} />
+          <BuyukHaberVeYan buyukIndex={15} yanIndex1={16} yanIndex2={17} />
+          <KucukGrid haberler={allNews.slice(18, 25)} />
+          <BuyukHaberVeYan buyukIndex={25} yanIndex1={26} yanIndex2={27} />
+          <KucukGrid haberler={allNews.slice(28, 37)} />
         </div>
       </div>
 
