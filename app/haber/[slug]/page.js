@@ -206,10 +206,65 @@ export default async function HaberDetay({ params }) {
 
         </div>
 
-        <footer className="bg-gray-900 text-gray-400 text-center py-6 mt-4 text-sm">
-          <p className="font-bold text-white text-lg mb-1">SONHABER</p>
-          <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
-          <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
+       <footer className="bg-gray-900 text-white mt-4">
+          <div className="px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-800">
+            <div>
+              <div style={{borderLeft: '4px solid #c0392b', paddingLeft: '10px', marginBottom: '12px'}}>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '20px', fontWeight: '900', color: '#fff'}}>SON</span>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '20px', fontWeight: '900', color: '#c0392b'}}>HABER</span>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed mb-4">Türkiye'nin güvenilir ve hızlı haber kaynağı.</p>
+              <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm">
+                <span>💬</span> WhatsApp
+              </a>
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Kategoriler</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {['Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Sağlık', 'Kültür', 'Yaşam'].map(k => (
+                  <Link key={k} href={`/?kategori=${k}`} className="text-gray-400 hover:text-red-400 transition-colors text-sm">
+                    {k}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Takip Edin</h4>
+              <div className="flex flex-col gap-3">
+                <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <defs><linearGradient id="ig3" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#f09433"/><stop offset="50%" stopColor="#dc2743"/><stop offset="100%" stopColor="#bc1888"/></linearGradient></defs>
+                    <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig3)"/>
+                    <circle cx="12" cy="12" r="4.5" stroke="white" strokeWidth="1.8" fill="none"/>
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+                  </svg>
+                  Instagram
+                </a>
+                <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors text-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="black"/><path d="M17.5 3h3l-6.5 7.5L21 21h-5.5L11 14.5 5.5 21H2.5l7-8L3 3h5.5l4 6L17.5 3z" fill="white"/></svg>
+                  Twitter / X
+                </a>
+                <a href="https://www.facebook.com/share/1AeXFntFTx/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-blue-500 transition-colors text-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M13.5 21v-7.5h2.5l.5-3H13.5V8.5c0-.8.4-1.5 1.5-1.5H17V4.5s-1.1-.2-2.2-.2c-2.3 0-3.8 1.4-3.8 3.9V10.5H8.5v3H11V21h2.5z" fill="white"/></svg>
+                  Facebook
+                </a>
+                <a href="https://www.tiktok.com/@sonhaber4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#010101"/><path d="M16.5 5.5c.7 1 1.8 1.7 3 1.8v2.5c-1 0-2-.3-2.8-.8v5.5c0 2.8-2.2 5-5 5s-5-2.2-5-5 2.2-5 5-5c.2 0 .5 0 .7.1v2.6c-.2-.1-.5-.1-.7-.1-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5V5.5h2.3z" fill="white"/></svg>
+                  TikTok
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+            <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+            <div className="flex gap-5">
+              <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
+              <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
+              <Link href="/iletisim" className="hover:text-white transition-colors">İletişim</Link>
+              <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 transition-colors">Reklam Ver</a>
+            </div>
+          </div>
         </footer>
       </main>
     </div>
