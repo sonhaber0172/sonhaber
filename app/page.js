@@ -117,14 +117,16 @@ export default async function HomePage({ searchParams }) {
               <span style={{fontSize: '10px', color: '#c0392b', letterSpacing: '3px', fontWeight: '600'}}>TÜRKİYE'NİN SESİ</span>
             </div>
           </Link>
-          <nav className="hidden md:flex gap-8 text-base font-medium">
-            <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
-            <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">İletişim</Link>
-          </nav>
-          <nav className="flex md:hidden gap-3 text-sm font-medium">
-            <Link href="/" className="hover:text-red-200">Ana Sayfa</Link>
-            <Link href="/iletisim" className="hover:text-red-200">İletişim</Link>
-          </nav>
+         <nav className="hidden md:flex gap-8 text-base font-medium">
+  <Link href="/" className="hover:text-red-200 transition-colors">Ana Sayfa</Link>
+  <Link href="/hakkimizda" className="hover:text-red-200 transition-colors">Hakkımızda</Link>
+  <Link href="/iletisim" className="bg-white text-red-700 px-4 py-2 rounded-lg font-bold hover:bg-red-50 transition-colors">İletişim</Link>
+</nav>
+<nav className="flex md:hidden gap-3 text-sm font-medium">
+  <Link href="/" className="hover:text-red-200">Ana Sayfa</Link>
+  <Link href="/hakkimizda" className="hover:text-red-200">Hakkımızda</Link>
+  <Link href="/iletisim" className="hover:text-red-200">İletişim</Link>
+</nav>
         </div>
         <div className="bg-red-800 text-center py-2 text-sm text-red-200">
           {new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
