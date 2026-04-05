@@ -24,7 +24,7 @@ export default function YukariCik() {
       style={{
         position: 'fixed',
         bottom: '90px',
-        right: '20px',
+        left: '20px',
         width: '44px',
         height: '44px',
         background: '#c0392b',
