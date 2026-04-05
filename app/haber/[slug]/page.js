@@ -106,9 +106,13 @@ export default async function HaberDetay({ params }) {
               dangerouslySetInnerHTML={{__html: haber.content}} />
 
             {/* PAYLAŞIM BUTONLARI */}
-            <div className="mt-6 pt-5 border-t border-gray-100">
-              <p className="text-xs text-gray-400 font-semibold uppercase tracking-widest mb-3">Bu haberi paylaş</p>
-              <div className="flex gap-3">
+            {/* PAYLAŞIM BUTONLARI */}
+<div className="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-100">
+  <p className="text-sm font-black text-gray-700 uppercase tracking-widest mb-4 flex items-center gap-2">
+    <span style={{display:'inline-block', width:'4px', height:'20px', background:'#c0392b', borderRadius:'2px'}}></span>
+    Bu Haberi Paylaş
+  </p>
+  <div className="flex gap-3 flex-wrap">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
