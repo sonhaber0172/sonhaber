@@ -51,4 +51,14 @@ a {
   border-left: 6px solid #c0392b !important;
   padding-left: 12px !important;
   line-height: 1.2 !important;
+}.prose h2, article h2, h2 {
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+  color: #111 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 0.8rem !important;
+  text-transform: uppercase !important;
+  border-left: 5px solid #c0392b !important;
+  padding-left: 10px !important;
+  line-height: 1.2 !important;
 }
