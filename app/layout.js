@@ -1,6 +1,7 @@
 import "./globals.css";
 import Script from "next/script";
 import WhatsappButon from "./components/WhatsappButon";
+import YukariCik from "./components/YukariCik";
 
 export const metadata = {
   title: {
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         {children}
         <WhatsappButon />
+        <YukariCik />
       </body>
     </html>
   );
