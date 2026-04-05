@@ -12,6 +12,7 @@ export default function AdminPage() {
   const [mesaj, setMesaj] = useState('')
   const [haberler, setHaberler] = useState([])
   const [onizleme, setOnizleme] = useState(false)
+  const [duzenleId, setDuzenleId] = useState(null)
 
   const handleGiris = () => {
     if (sifre === 'sonhaber2025') setGiris(true)
@@ -36,13 +37,58 @@ export default function AdminPage() {
       setMesaj('Başlık ve içerik zorunludur!')
       return
     }
-    const { error } = await supabase.from('articles').insert([{ ...form, is_custom: true }])
-    if (error) setMesaj('Hata: ' + error.message)
-    else { 
-      setMesaj('Haber başarıyla eklendi!')
-      setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })
-      haberleriGetir()
+
+    if (duzenleId) {
+      // GÜNCELLE
+      const { error } = await supabase
+        .from('articles')
+        .update({ 
+          title: form.title, 
+          content: form.content, 
+          image_url: form.image_url, 
+          category: form.category, 
+          priority_score: form.priority_score 
+        })
+        .eq('id', duzenleId)
+      if (error) setMesaj('Hata: ' + error.message)
+      else {
+        setMesaj('Haber başarıyla güncellendi!')
+        setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })
+        setDuzenleId(null)
+        haberleriGetir()
+        setAktifSekme('haberler')
+      }
+    } else {
+      // YENİ EKLE
+      const { error } = await supabase.from('articles').insert([{ ...form, is_custom: true }])
+      if (error) setMesaj('Hata: ' + error.message)
+      else { 
+        setMesaj('Haber başarıyla eklendi!')
+        setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })
+        haberleriGetir()
+      }
     }
+  }
+
+  const handleDuzenle = (h) => {
+    setDuzenleId(h.id)
+    setForm({
+      title: h.title || '',
+      content: h.content || '',
+      image_url: h.image_url || '',
+      category: h.category || 'Gündem',
+      priority_score: h.priority_score || 0
+    })
+    setMesaj('')
+    setOnizleme(false)
+    setAktifSekme('ekle')
+    window.scrollTo(0, 0)
+  }
+
+  const handleIptal = () => {
+    setDuzenleId(null)
+    setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })
+    setMesaj('')
   }
 
   const handleSil = async (id) => {
@@ -77,9 +123,9 @@ export default function AdminPage() {
 
         <div className="p-6 md:p-8">
           <div className="flex gap-2 mb-6">
-            <button onClick={() => setAktifSekme('ekle')}
+            <button onClick={() => { setAktifSekme('ekle'); handleIptal() }}
               className={`px-6 py-2 rounded-lg font-bold text-sm transition-colors ${aktifSekme === 'ekle' ? 'bg-red-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
-              Haber Ekle
+              {duzenleId ? '✏️ Haber Düzenle' : 'Haber Ekle'}
             </button>
             <button onClick={() => { setAktifSekme('haberler'); haberleriGetir() }}
               className={`px-6 py-2 rounded-lg font-bold text-sm transition-colors ${aktifSekme === 'haberler' ? 'bg-red-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
@@ -89,12 +135,30 @@ export default function AdminPage() {
 
           {aktifSekme === 'ekle' && (
             <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
-              <h2 className="text-xl font-bold text-gray-800 mb-6">Yeni Haber Ekle</h2>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-800">
+                  {duzenleId ? '✏️ Haberi Düzenle' : 'Yeni Haber Ekle'}
+                </h2>
+                {duzenleId && (
+                  <button onClick={handleIptal}
+                    className="text-sm text-gray-500 hover:text-red-600 font-medium border border-gray-200 px-3 py-1 rounded-lg">
+                    İptal
+                  </button>
+                )}
+              </div>
+
+              {duzenleId && (
+                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 text-sm px-4 py-3 rounded-lg mb-4 font-medium">
+                  ⚠️ Mevcut bir haberi düzenliyorsunuz. Değişiklikleri kaydetmek için "Güncelle" butonuna basın.
+                </div>
+              )}
+
               {mesaj && (
                 <div className={`px-4 py-3 rounded-lg mb-4 ${mesaj.includes('Hata') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
                   {mesaj}
                 </div>
               )}
+
               <div className="space-y-5">
                 <div>
                   <label className="text-sm font-semibold text-gray-700 mb-1 block">Haber Başlığı *</label>
@@ -139,7 +203,7 @@ export default function AdminPage() {
                     <div className="border border-gray-300 rounded-lg p-4 min-h-48 prose max-w-none"
                       dangerouslySetInnerHTML={{__html: form.content}} />
                   ) : (
-                    <textarea placeholder="Haberin detaylı içeriğini buraya yazın. Ne kadar detaylı yazarsanız o kadar iyi. Paragraflar arasında boşluk bırakın." 
+                    <textarea placeholder="Haberin detaylı içeriğini buraya yazın." 
                       value={form.content} onChange={e => setForm({...form, content: e.target.value})}
                       rows={14} className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-base leading-relaxed" />
                   )}
@@ -147,10 +211,11 @@ export default function AdminPage() {
                 </div>
 
                 <div className="flex gap-3">
-                  <button onClick={handleEkle} className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-colors text-base">
-                    Haberi Yayınla
+                  <button onClick={handleEkle}
+                    className={`flex-1 text-white font-bold py-3 rounded-lg transition-colors text-base ${duzenleId ? 'bg-blue-600 hover:bg-blue-700' : 'bg-red-600 hover:bg-red-700'}`}>
+                    {duzenleId ? '💾 Güncelle' : '🚀 Haberi Yayınla'}
                   </button>
-                  <button onClick={() => setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })}
+                  <button onClick={handleIptal}
                     className="px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 rounded-lg transition-colors">
                     Temizle
                   </button>
@@ -185,6 +250,10 @@ export default function AdminPage() {
                         className="px-3 py-1 bg-blue-100 text-blue-700 rounded text-xs font-bold hover:bg-blue-200">
                         Gör
                       </a>
+                      <button onClick={() => handleDuzenle(h)}
+                        className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-bold hover:bg-yellow-200">
+                        Düzenle
+                      </button>
                       <button onClick={() => handleSil(h.id)}
                         className="px-3 py-1 bg-red-100 text-red-700 rounded text-xs font-bold hover:bg-red-200">
                         Sil
