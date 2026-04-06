@@ -77,25 +77,25 @@ export default function IletisimPage() {
                     <label className="text-sm font-bold text-gray-700 mb-2 block">Adınız Soyadınız <span className="text-red-500">*</span></label>
                     <input placeholder="Adınızı ve soyadınızı girin" value={form.isim} 
                       onChange={e => setForm({...form, isim: e.target.value})}
-                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors" />
+                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors text-gray-900" />
                   </div>
                   <div>
                     <label className="text-sm font-bold text-gray-700 mb-2 block">Telefon Numaranız <span className="text-red-500">*</span></label>
                     <input placeholder="05XX XXX XX XX" value={form.telefon}
                       onChange={e => setForm({...form, telefon: e.target.value})}
-                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors" />
+                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors text-gray-900" />
                   </div>
                   <div>
                     <label className="text-sm font-bold text-gray-700 mb-2 block">E-posta Adresiniz <span className="text-gray-400 font-normal">(opsiyonel)</span></label>
                     <input placeholder="ornek@email.com" value={form.email}
                       onChange={e => setForm({...form, email: e.target.value})}
-                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors" />
+                      className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors text-gray-900" />
                   </div>
                   <div>
                     <label className="text-sm font-bold text-gray-700 mb-2 block">Mesajınız <span className="text-gray-400 font-normal">(opsiyonel)</span></label>
                     <textarea placeholder="Reklam paketi, haber yayını veya diğer taleplerinizi kısaca belirtin..." 
                       value={form.mesaj} onChange={e => setForm({...form, mesaj: e.target.value})}
-                      rows={5} className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors" />
+                      rows={5} className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-red-500 text-base transition-colors text-gray-900" />
                   </div>
 
                   <div className="bg-gray-50 rounded-xl p-4 text-sm text-gray-500 flex items-start gap-3">
