@@ -139,7 +139,13 @@ export default async function HomePage({ searchParams }) {
       </header>
 
       <SosyalMediaBar />
-
+<div className="bg-gray-50 border-b border-gray-100 px-6 py-1.5 text-xs text-gray-400 flex items-center justify-between">
+  <span>Son güncelleme: {new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })} — {new Date().toLocaleDateString('tr-TR')}</span>
+  <span className="flex items-center gap-1">
+    <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
+    Canlı Yayın
+  </span>
+</div>
       {/* SON DAKİKA */}
       <div className="bg-red-600 text-white py-2 px-6 flex items-center gap-3">
         <span className="text-xs font-bold uppercase tracking-widest shrink-0 bg-white text-red-600 px-2 py-0.5 rounded">Son Dakika</span>
@@ -280,7 +286,7 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
         <div className="px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-          <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+          <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
           <div className="flex gap-5">
             <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
             <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
