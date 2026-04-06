@@ -113,7 +113,7 @@ export default function HakkimizdaPage() {
 
         <footer className="bg-gray-900 text-gray-400 text-center py-6 mt-10 text-sm">
           <p className="font-bold text-white text-lg mb-1">SONHABER</p>
-          <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+          <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
           <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
         </footer>
       </main>

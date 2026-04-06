@@ -13,6 +13,7 @@ export default function AdminPage() {
   const [haberler, setHaberler] = useState([])
   const [onizleme, setOnizleme] = useState(false)
   const [duzenleId, setDuzenleId] = useState(null)
+  const [arama, setArama] = useState('')
 
   const handleGiris = () => {
     if (sifre === 'sonhaber2025') setGiris(true)
@@ -32,6 +33,11 @@ export default function AdminPage() {
     if (giris) haberleriGetir()
   }, [giris])
 
+  const filtreliHaberler = haberler.filter(h =>
+    h.title?.toLowerCase().includes(arama.toLowerCase()) ||
+    h.category?.toLowerCase().includes(arama.toLowerCase())
+  )
+
   const handleEkle = async () => {
     if (!form.title || !form.content) {
       setMesaj('Başlık ve içerik zorunludur!')
@@ -39,7 +45,6 @@ export default function AdminPage() {
     }
 
     if (duzenleId) {
-      // GÜNCELLE
       const { error } = await supabase
         .from('articles')
         .update({ 
@@ -59,7 +64,6 @@ export default function AdminPage() {
         setAktifSekme('haberler')
       }
     } else {
-      // YENİ EKLE
       const { error } = await supabase.from('articles').insert([{ ...form, is_custom: true }])
       if (error) setMesaj('Hata: ' + error.message)
       else { 
@@ -226,12 +230,28 @@ export default function AdminPage() {
 
           {aktifSekme === 'haberler' && (
             <div className="space-y-4">
-              {haberler.length === 0 ? (
+              {/* ARAMA ÇUBUĞU */}
+              <div className="bg-white rounded-xl shadow p-4">
+                <input
+                  type="text"
+                  placeholder="🔍 Haber başlığı veya kategori ara..."
+                  value={arama}
+                  onChange={e => setArama(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-base text-gray-900"
+                />
+                {arama && (
+                  <p className="text-xs text-gray-400 mt-2">
+                    {filtreliHaberler.length} haber bulundu
+                  </p>
+                )}
+              </div>
+
+              {filtreliHaberler.length === 0 ? (
                 <div className="bg-white rounded-2xl shadow-lg p-8 text-center text-gray-400">
-                  Henüz haber eklenmemiş.
+                  {arama ? `"${arama}" için haber bulunamadı.` : 'Henüz haber eklenmemiş.'}
                 </div>
               ) : (
-                haberler.map(h => (
+                filtreliHaberler.map(h => (
                   <div key={h.id} className="bg-white rounded-xl shadow p-4 flex gap-4 items-start">
                     {h.image_url ? (
                       <img src={h.image_url} alt={h.title} className="w-24 h-20 object-cover rounded-lg shrink-0" />
