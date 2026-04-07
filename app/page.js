@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
@@ -34,11 +35,11 @@ export default async function HomePage({ searchParams }) {
         <div className="lg:w-2/3">
           <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
             <div className="group cursor-pointer">
-              <div className="overflow-hidden rounded-lg">
+              <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
                 {buyuk.image_url ? (
-                  <img src={buyuk.image_url} alt={buyuk.title} className="w-full h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <img src={buyuk.image_url} alt={buyuk.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 ) : (
-                  <div className="w-full h-56 md:h-64 bg-gray-100 flex items-center justify-center rounded-lg">
+                  <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded-lg">
                     <span className="text-gray-300 text-4xl font-black">SH</span>
                   </div>
                 )}
@@ -56,11 +57,11 @@ export default async function HomePage({ searchParams }) {
           {[yan1, yan2].filter(Boolean).map((news, i) => (
             <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
               <div className="group cursor-pointer flex gap-3">
-                <div className="overflow-hidden rounded-lg shrink-0">
+                <div className="overflow-hidden rounded-lg shrink-0" style={{width: '96px', height: '80px'}}>
                   {news.image_url ? (
-                    <img src={news.image_url} alt={news.title} className="w-24 h-20 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
-                    <div className="w-24 h-20 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                       <span className="text-gray-300 font-black">SH</span>
                     </div>
                   )}
@@ -83,11 +84,11 @@ export default async function HomePage({ searchParams }) {
       {haberler.map((news, index) => (
         <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
           <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg" style={{height: '144px'}}>
               {news.image_url ? (
-                <img src={news.image_url} alt={news.title} className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-300" />
+                <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               ) : (
-                <div className="w-full h-36 bg-gray-100 rounded-lg flex items-center justify-center">
+                <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                   <span className="text-gray-300 font-black text-xl">SH</span>
                 </div>
               )}
@@ -181,11 +182,11 @@ export default async function HomePage({ searchParams }) {
             {allNews[0] && (
               <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
                 <div className="group cursor-pointer">
-                  <div className="overflow-hidden rounded-xl">
+                  <div className="overflow-hidden rounded-xl" style={{height: '320px'}}>
                     {allNews[0].image_url ? (
-                      <img src={allNews[0].image_url} alt={allNews[0].title} className="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src={allNews[0].image_url} alt={allNews[0].title} priority="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     ) : (
-                      <div className="w-full h-64 md:h-80 bg-gray-100 rounded-xl flex items-center justify-center">
+                      <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center">
                         <span className="text-gray-300 text-5xl font-black">SH</span>
                       </div>
                     )}
@@ -210,11 +211,11 @@ export default async function HomePage({ searchParams }) {
             {allNews.slice(1, 8).map((news, index) => (
               <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
                 <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
-                  <div className="overflow-hidden rounded-lg shrink-0">
+                  <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
                     {news.image_url ? (
-                      <img src={news.image_url} alt={news.title} className="w-20 h-16 object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                     ) : (
-                      <div className="w-20 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                         <span className="text-gray-300 font-black text-sm">SH</span>
                       </div>
                     )}
@@ -292,9 +293,9 @@ export default async function HomePage({ searchParams }) {
             </div>
           </div>
         </div>
-       <div className="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-base text-gray-400">
+        <div className="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-base text-gray-400">
           <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
-          <div className="flex gap-10">
+          <div className="flex gap-8">
             <Link href="/" className="hover:text-white transition-colors font-medium">Ana Sayfa</Link>
             <Link href="/hakkimizda" className="hover:text-white transition-colors font-medium">Hakkımızda</Link>
             <Link href="/iletisim" className="hover:text-white transition-colors font-medium">İletişim</Link>
