@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
@@ -7,7 +6,41 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 
 export const revalidate = 300
 
+export async function generateMetadata({ searchParams }) {
+  const { kategori } = await searchParams
+  if (kategori && kategori !== 'Tümü') {
+    return {
+      title: `${kategori} Haberleri | SonHaber`,
+      description: `${kategori} kategorisindeki son dakika haberleri SonHaber'de. Türkiye'nin en güncel haber kaynağı.`,
+      alternates: { canonical: `https://sonhaber-rouge.vercel.app/?kategori=${kategori}` }
+    }
+  }
+  return {
+    title: 'SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi',
+    description: 'Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber\'de. Türkiye\'nin en güncel haber kaynağı.',
+    alternates: { canonical: 'https://sonhaber-rouge.vercel.app' }
+  }
+}
+
 const kategoriler = ['Tümü', 'Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Sağlık', 'Kültür', 'Yaşam']
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  "name": "SonHaber",
+  "url": "https://sonhaber-rouge.vercel.app",
+  "description": "Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber'de.",
+  "inLanguage": "tr-TR",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Adana, Türkiye"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "availableLanguage": "Turkish"
+  }
+}
 
 export default async function HomePage({ searchParams }) {
   const { kategori } = await searchParams
@@ -107,6 +140,11 @@ export default async function HomePage({ searchParams }) {
   return (
     <div style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       
       {/* HEADER */}
       <header className="bg-white border-b border-gray-100">
