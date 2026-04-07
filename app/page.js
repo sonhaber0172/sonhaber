@@ -160,7 +160,7 @@ export default async function HomePage({ searchParams }) {
           <div className="flex gap-2 overflow-x-auto py-3">
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tümü' ? '/' : `/?kategori=${k}`}
-                className={`shrink-0 px-5 py-2 text-sm font-bold transition-colors rounded-full ${
+                className={`shrink-0 px-7 py-3 text-base font-bold transition-colors rounded-full ${
                   (k === 'Tümü' && !kategori) || kategori === k
                     ? 'bg-red-600 text-white'
                     : 'text-gray-600 hover:text-red-600 hover:bg-red-50 border border-gray-200'
@@ -292,9 +292,9 @@ export default async function HomePage({ searchParams }) {
             </div>
           </div>
         </div>
-        <div className="px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-400">
+       <div className="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-base text-gray-400">
           <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
-          <div className="flex gap-6">
+          <div className="flex gap-10">
             <Link href="/" className="hover:text-white transition-colors font-medium">Ana Sayfa</Link>
             <Link href="/hakkimizda" className="hover:text-white transition-colors font-medium">Hakkımızda</Link>
             <Link href="/iletisim" className="hover:text-white transition-colors font-medium">İletişim</Link>
