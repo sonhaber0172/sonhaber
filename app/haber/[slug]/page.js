@@ -2,36 +2,26 @@ import { supabase } from '../../../lib/supabase'
 import { fetchRSSNews } from '../../../lib/rss'
 import Link from 'next/link'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 export default async function HaberDetay({ params }) {
   const { slug } = await params
   const id = decodeURIComponent(slug)
-  
+
+  const [rssNews, customHaberResult, customNewsResult] = await Promise.all([
+    fetchRSSNews(),
+    supabase.from('articles').select('*').eq('id', id).single(),
+    supabase.from('articles').select('*').eq('is_custom', true).order('priority_score', { ascending: false }).limit(20)
+  ])
+
   let haber = null
-
-  const { data: customHaber } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('id', id)
-    .single()
-
-  if (customHaber) {
-    haber = customHaber
+  if (customHaberResult.data) {
+    haber = customHaberResult.data
   } else {
-    const rssNews = await fetchRSSNews()
     haber = rssNews.find(h => h.id === id)
   }
 
-  const rssNews = await fetchRSSNews()
-  const { data: customNews } = await supabase
-    .from('articles')
-    .select('*')
-    .eq('is_custom', true)
-    .order('priority_score', { ascending: false })
-    .limit(20)
-
-  const tumHaberler = [...(customNews || []), ...rssNews]
+  const tumHaberler = [...(customNewsResult.data || []), ...rssNews]
   const digerHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 16)
   const sagHaberler = digerHaberler.slice(0, 8)
   const altHaberler = digerHaberler.slice(8, 16)
@@ -69,7 +59,6 @@ export default async function HaberDetay({ params }) {
     <div style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
 
-        {/* HEADER */}
         <header className="bg-white border-b border-gray-100">
           <div className="px-6 py-4 flex items-center justify-between">
             <Link href="/">
@@ -91,7 +80,6 @@ export default async function HaberDetay({ params }) {
 
         <div className="flex flex-col lg:flex-row">
 
-          {/* Sol - Ana Haber */}
           <div className="lg:w-3/5 py-6 px-6 border-r border-gray-100">
             {haber.image_url && (
               <img src={haber.image_url} alt={haber.title} className="w-full h-48 md:h-64 object-cover mb-4 rounded-xl" />
@@ -105,14 +93,12 @@ export default async function HaberDetay({ params }) {
             <div className="text-gray-700 leading-relaxed text-base"
               dangerouslySetInnerHTML={{__html: haber.content}} />
 
-            {/* PAYLAŞIM BUTONLARI */}
-            {/* PAYLAŞIM BUTONLARI */}
-<div className="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-100">
-  <p className="text-sm font-black text-gray-700 uppercase tracking-widest mb-4 flex items-center gap-2">
-    <span style={{display:'inline-block', width:'4px', height:'20px', background:'#c0392b', borderRadius:'2px'}}></span>
-    Bu Haberi Paylaş
-  </p>
-  <div className="flex gap-3 flex-wrap">
+            <div className="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-100">
+              <p className="text-sm font-black text-gray-700 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span style={{display:'inline-block', width:'4px', height:'20px', background:'#c0392b', borderRadius:'2px'}}></span>
+                Bu Haberi Paylaş
+              </p>
+              <div className="flex gap-3 flex-wrap">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
@@ -149,7 +135,6 @@ export default async function HaberDetay({ params }) {
               )}
             </div>
 
-            {/* Bunları da Okuyun */}
             <div className="mt-8 border-t border-gray-100 pt-6">
               <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Bunları da Okuyun</h2>
               <div className="grid grid-cols-2 gap-3">
@@ -158,7 +143,7 @@ export default async function HaberDetay({ params }) {
                     <div className="group cursor-pointer">
                       <div className="overflow-hidden rounded-lg">
                         {h.image_url ? (
-                          <img src={h.image_url} alt={h.title} className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <img src={h.image_url} alt={h.title} loading="lazy" className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="w-full h-24 bg-gray-100 rounded-lg flex items-center justify-center">
                             <span className="text-gray-300 font-black">SH</span>
@@ -177,7 +162,6 @@ export default async function HaberDetay({ params }) {
             </div>
           </div>
 
-          {/* Sağ - Diğer Haberler */}
           <div className="lg:w-2/5 px-4 py-6 bg-gray-50">
             <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Diğer Haberler</h2>
             <div className="grid grid-cols-2 gap-3">
@@ -186,7 +170,7 @@ export default async function HaberDetay({ params }) {
                   <div className="group cursor-pointer">
                     <div className="overflow-hidden rounded-lg">
                       {h.image_url ? (
-                        <img src={h.image_url} alt={h.title} className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" />
+                        <img src={h.image_url} alt={h.title} loading="lazy" className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" />
                       ) : (
                         <div className="w-full h-28 bg-gray-100 rounded-lg flex items-center justify-center">
                           <span className="text-gray-300 font-black">SH</span>
@@ -206,7 +190,7 @@ export default async function HaberDetay({ params }) {
 
         </div>
 
-       <footer className="bg-gray-900 text-white mt-4">
+        <footer className="bg-gray-900 text-white mt-4">
           <div className="px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-800">
             <div>
               <div style={{borderLeft: '4px solid #c0392b', paddingLeft: '10px', marginBottom: '12px'}}>
@@ -262,6 +246,7 @@ export default async function HaberDetay({ params }) {
               <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
               <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
               <Link href="/iletisim" className="hover:text-white transition-colors">İletişim</Link>
+              <Link href="/gizlilik" className="hover:text-white transition-colors">Gizlilik</Link>
               <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 transition-colors">Reklam Ver</a>
             </div>
           </div>
