@@ -15,19 +15,19 @@ export async function generateMetadata({ params }) {
 
   let title = 'Son Dakika Haberleri | SonHaber'
   let description = 'Türkiye ve dünyadan son dakika haberleri SonHaber\'de.'
-  let image = 'https://sonhaber-rouge.vercel.app/og-image.jpg'
+  let image = null
 
   if (customHaber) {
     title = `${customHaber.title} | SonHaber`
     description = customHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
-    image = customHaber.image_url || image
+    image = customHaber.image_url || null
   } else {
     const rssNews = await fetchRSSNews()
     const rssHaber = rssNews.find(h => h.id === id)
     if (rssHaber) {
       title = `${rssHaber.title} | SonHaber`
       description = rssHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
-      image = rssHaber.image_url || image
+      image = rssHaber.image_url || null
     }
   }
 
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title,
       description,
-      images: [{ url: image }],
+      images: image ? [{ url: image }] : [],
       type: 'article',
       siteName: 'SonHaber',
       locale: 'tr_TR',
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
       card: 'summary_large_image',
       title,
       description,
-      images: [image],
+      images: image ? [image] : [],
     },
     alternates: {
       canonical: `https://sonhaber-rouge.vercel.app/haber/${encodeURIComponent(id)}`,
@@ -82,6 +82,32 @@ export default async function HaberDetay({ params }) {
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(haberBaslik + ' ' + haberUrl)}`
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(haberUrl)}`
 
+  const schemaData = haber ? {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": haber.title,
+    "description": haber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || '',
+    "image": haber.image_url ? [haber.image_url] : [],
+    "datePublished": haber.created_at,
+    "dateModified": haber.updated_at || haber.created_at,
+    "author": {
+      "@type": "Organization",
+      "name": "SonHaber",
+      "url": "https://sonhaber-rouge.vercel.app"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "SonHaber",
+      "url": "https://sonhaber-rouge.vercel.app"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": haberUrl
+    },
+    "articleSection": haber.category || "Gündem",
+    "inLanguage": "tr-TR"
+  } : null
+
   if (!haber) {
     return (
       <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
@@ -108,6 +134,13 @@ export default async function HaberDetay({ params }) {
   return (
     <div style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
+
+        {schemaData && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+          />
+        )}
 
         <header className="bg-white border-b border-gray-100">
           <div className="px-6 py-4 flex items-center justify-between">
