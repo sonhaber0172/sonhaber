@@ -6,19 +6,22 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 
 export const revalidate = 300
 
+const SAYFA_BASI_HABER = 30
+
 export async function generateMetadata({ searchParams }) {
-  const { kategori } = await searchParams
+  const { kategori, sayfa } = await searchParams
+  const sayfaNo = parseInt(sayfa) || 1
   if (kategori && kategori !== 'Tümü') {
     return {
-      title: `${kategori} Haberleri | SonHaber`,
+      title: sayfaNo > 1 ? `${kategori} Haberleri - Sayfa ${sayfaNo} | SonHaber` : `${kategori} Haberleri | SonHaber`,
       description: `${kategori} kategorisindeki son dakika haberleri SonHaber'de. Türkiye'nin en güncel haber kaynağı.`,
-      alternates: { canonical: `https://sonhaber-rouge.vercel.app/?kategori=${kategori}` }
+      alternates: { canonical: `https://sonhaber-rouge.vercel.app/?kategori=${kategori}${sayfaNo > 1 ? `&sayfa=${sayfaNo}` : ''}` }
     }
   }
   return {
-    title: 'SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi',
+    title: sayfaNo > 1 ? `Son Dakika Haberleri - Sayfa ${sayfaNo} | SonHaber` : 'SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi',
     description: 'Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber\'de. Türkiye\'nin en güncel haber kaynağı.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app' }
+    alternates: { canonical: `https://sonhaber-rouge.vercel.app${sayfaNo > 1 ? `?sayfa=${sayfaNo}` : ''}` }
   }
 }
 
@@ -43,7 +46,9 @@ const websiteSchema = {
 }
 
 export default async function HomePage({ searchParams }) {
-  const { kategori } = await searchParams
+  const { kategori, sayfa } = await searchParams
+  const sayfaNo = parseInt(sayfa) || 1
+
   const rssNews = await fetchRSSNews()
   
   const { data: customNews } = await supabase
@@ -58,10 +63,22 @@ export default async function HomePage({ searchParams }) {
     allNews = allNews.filter(n => n.category === kategori)
   }
 
+  const toplamHaber = allNews.length
+  const toplamSayfa = Math.ceil(toplamHaber / SAYFA_BASI_HABER)
+  const baslangic = (sayfaNo - 1) * SAYFA_BASI_HABER
+  const sayfaHaberleri = sayfaNo === 1 ? allNews : allNews.slice(baslangic, baslangic + SAYFA_BASI_HABER)
+
+  const kategoriParam = kategori && kategori !== 'Tümü' ? `&kategori=${kategori}` : ''
+  const oncekiSayfa = sayfaNo > 1 ? `/?sayfa=${sayfaNo - 1}${kategoriParam}` : null
+  const sonrakiSayfa = sayfaNo < toplamSayfa ? `/?sayfa=${sayfaNo + 1}${kategoriParam}` : null
+
+  const gosterilecekHaberler = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
+
   const BuyukHaberVeYan = ({ buyukIndex, yanIndex1, yanIndex2 }) => {
-    const buyuk = allNews[buyukIndex]
-    const yan1 = allNews[yanIndex1]
-    const yan2 = allNews[yanIndex2]
+    const liste = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
+    const buyuk = liste[buyukIndex]
+    const yan1 = liste[yanIndex1]
+    const yan2 = liste[yanIndex2]
     if (!buyuk) return null
     return (
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
@@ -134,6 +151,32 @@ export default async function HomePage({ searchParams }) {
           </div>
         </Link>
       ))}
+    </div>
+  )
+
+  const Sayfalama = () => (
+    <div className="flex items-center justify-center gap-4 py-10 border-t border-gray-100 mt-4">
+      {oncekiSayfa ? (
+        <Link href={oncekiSayfa} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition-colors">
+          ← Önceki Sayfa
+        </Link>
+      ) : (
+        <span className="flex items-center gap-2 bg-gray-100 text-gray-400 font-bold px-6 py-3 rounded-lg cursor-not-allowed">
+          ← Önceki Sayfa
+        </span>
+      )}
+      <span className="text-gray-500 font-semibold text-sm">
+        {sayfaNo} / {toplamSayfa}
+      </span>
+      {sonrakiSayfa ? (
+        <Link href={sonrakiSayfa} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition-colors">
+          Sonraki Sayfa →
+        </Link>
+      ) : (
+        <span className="flex items-center gap-2 bg-gray-100 text-gray-400 font-bold px-6 py-3 rounded-lg cursor-not-allowed">
+          Sonraki Sayfa →
+        </span>
+      )}
     </div>
   )
 
@@ -213,71 +256,78 @@ export default async function HomePage({ searchParams }) {
 
       {/* ANA İÇERİK */}
       <div className="px-6 py-6 bg-white">
-        
-        {/* Ana haber + sağ liste */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-10 pb-8 border-b border-gray-100">
-          <div className="lg:w-3/5">
-            {allNews[0] && (
-              <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
-                <div className="group cursor-pointer">
-                  <div className="overflow-hidden rounded-xl" style={{height: '320px'}}>
-                    {allNews[0].image_url ? (
-                      <img src={allNews[0].image_url} alt={allNews[0].title} priority="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    ) : (
-                      <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center">
-                        <span className="text-gray-300 text-5xl font-black">SH</span>
-                      </div>
-                    )}
-                  </div>
-                  <div className="pt-4">
-                    <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{allNews[0].category}</span>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mt-1 mb-2 group-hover:text-red-600 transition-colors">{allNews[0].title}</h2>
-                    <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 200) + '...'}} />
-                    <p className="text-xs text-gray-400 mt-3">{new Date(allNews[0].created_at).toLocaleDateString('tr-TR')}</p>
-                    <div className="mt-4">
-                      <span className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors">
-                        Haberin Devamını Oku →
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )}
-          </div>
 
-          <div className="lg:w-2/5 flex flex-col gap-5">
-            {allNews.slice(1, 8).map((news, index) => (
-              <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
-                <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
-                  <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
-                    {news.image_url ? (
-                      <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    ) : (
-                      <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-                        <span className="text-gray-300 font-black text-sm">SH</span>
+        {sayfaNo === 1 && (
+          <>
+            {/* Ana haber + sağ liste - sadece 1. sayfada */}
+            <div className="flex flex-col lg:flex-row gap-6 mb-10 pb-8 border-b border-gray-100">
+              <div className="lg:w-3/5">
+                {allNews[0] && (
+                  <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
+                    <div className="group cursor-pointer">
+                      <div className="overflow-hidden rounded-xl" style={{height: '320px'}}>
+                        {allNews[0].image_url ? (
+                          <img src={allNews[0].image_url} alt={allNews[0].title} priority="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        ) : (
+                          <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center">
+                            <span className="text-gray-300 text-5xl font-black">SH</span>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{news.category}</span>
-                    <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{news.title}</h3>
-                    <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+                      <div className="pt-4">
+                        <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{allNews[0].category}</span>
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mt-1 mb-2 group-hover:text-red-600 transition-colors">{allNews[0].title}</h2>
+                        <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 200) + '...'}} />
+                        <p className="text-xs text-gray-400 mt-3">{new Date(allNews[0].created_at).toLocaleDateString('tr-TR')}</p>
+                        <div className="mt-4">
+                          <span className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors">
+                            Haberin Devamını Oku →
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </div>
+              <div className="lg:w-2/5 flex flex-col gap-5">
+                {allNews.slice(1, 8).map((news, index) => (
+                  <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
+                    <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
+                      <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
+                        {news.image_url ? (
+                          <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        ) : (
+                          <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+                            <span className="text-gray-300 font-black text-sm">SH</span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{news.category}</span>
+                        <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{news.title}</h3>
+                        <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
 
         {/* Diğer Haberler */}
         <div className="pt-2">
-          <h2 className="text-base font-bold text-gray-500 uppercase tracking-widest mb-6 pb-2 border-b border-gray-100">Diğer Haberler</h2>
-          <KucukGrid haberler={allNews.slice(8, 15)} />
-          <BuyukHaberVeYan buyukIndex={15} yanIndex1={16} yanIndex2={17} />
-          <KucukGrid haberler={allNews.slice(18, 25)} />
-          <BuyukHaberVeYan buyukIndex={25} yanIndex1={26} yanIndex2={27} />
-          <KucukGrid haberler={allNews.slice(28, 37)} />
+          <h2 className="text-base font-bold text-gray-500 uppercase tracking-widest mb-6 pb-2 border-b border-gray-100">
+            {sayfaNo === 1 ? 'Diğer Haberler' : `Haberler - Sayfa ${sayfaNo}`}
+          </h2>
+          <KucukGrid haberler={gosterilecekHaberler.slice(0, 7)} />
+          <BuyukHaberVeYan buyukIndex={7} yanIndex1={8} yanIndex2={9} />
+          <KucukGrid haberler={gosterilecekHaberler.slice(10, 17)} />
+          <BuyukHaberVeYan buyukIndex={17} yanIndex1={18} yanIndex2={19} />
+          <KucukGrid haberler={gosterilecekHaberler.slice(20, 30)} />
         </div>
+
+        <Sayfalama />
       </div>
 
       {/* FOOTER */}
