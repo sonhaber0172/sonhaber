@@ -82,6 +82,30 @@ export default async function HaberDetay({ params }) {
   const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(haberBaslik + ' ' + haberUrl)}`
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(haberUrl)}`
 
+  const breadcrumbSchema = haber ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Ana Sayfa",
+      "item": "https://sonhaber-rouge.vercel.app"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": haber.category || "Gündem",
+      "item": `https://sonhaber-rouge.vercel.app/?kategori=${encodeURIComponent(haber.category || 'Gündem')}`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": haber.title,
+      "item": haberUrl
+    }
+  ]
+} : null
   const schemaData = haber ? {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -140,8 +164,13 @@ export default async function HaberDetay({ params }) {
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
           />
-        )}
-
+        )
+        }{breadcrumbSchema && (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+  />
+)}
         <header className="bg-white border-b border-gray-100">
           <div className="px-6 py-4 flex items-center justify-between">
             <Link href="/">
