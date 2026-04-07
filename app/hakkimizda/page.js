@@ -44,7 +44,7 @@ export default function HakkimizdaPage() {
               <h2 className="text-2xl font-black text-gray-900">BİZ KİMİZ?</h2>
             </div>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              SonHaber, 2025 yılında Adana'dan yola çıkarak Türkiye'nin dijital haber dünyasına güçlü bir giriş yapan bağımsız bir haber platformudur. Amacımız tek: Doğru haberi, doğru zamanda, doğrudan sizinle buluşturmak.
+              SonHaber, 2026 yılında Adana'dan yola çıkarak Türkiye'nin dijital haber dünyasına güçlü bir giriş yapan bağımsız bir haber platformudur. Amacımız tek: Doğru haberi, doğru zamanda, doğrudan sizinle buluşturmak.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               Gündem, spor, ekonomi, teknoloji, dünya ve daha pek çok alanda sunduğumuz içeriklerle okuyucularımızı her an bilgili ve bilinçli tutmayı hedefliyoruz. Sansasyondan uzak, gerçeğe yakın habercilik anlayışımızla fark yaratıyoruz.

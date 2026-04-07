@@ -142,7 +142,7 @@ export default function IletisimPage() {
               <div>
                 <h4 className="font-black text-yellow-900 mb-1">Neden SonHaber?</h4>
                 <ul className="text-yellow-800 text-sm space-y-1">
-                  <li>✓ Binlerce günlük aktif okuyucu</li>
+                  <li>✓ Her geçen gün büyüyen okuyucu kitlesi</li>
                   <li>✓ Türkiye genelinde geniş erişim</li>
                   <li>✓ Hızlı ve güvenilir yayın</li>
                   <li>✓ Uygun fiyatlı reklam paketleri</li>
@@ -205,7 +205,7 @@ export default function IletisimPage() {
             </div>
           </div>
           <div className="px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+            <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
             <div className="flex gap-5">
               <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
               <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>

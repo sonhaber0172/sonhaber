@@ -257,7 +257,7 @@ export default async function HaberDetay({ params }) {
             </div>
           </div>
           <div className="px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>© 2025 SonHaber. Tüm hakları saklıdır.</p>
+            <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
             <div className="flex gap-5">
               <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
               <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
