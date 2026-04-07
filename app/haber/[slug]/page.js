@@ -3,6 +3,56 @@ import { fetchRSSNews } from '../../../lib/rss'
 import Link from 'next/link'
 
 export const revalidate = 300
+export async function generateMetadata({ params }) {
+  const { slug } = await params
+  const id = decodeURIComponent(slug)
+
+  const { data: customHaber } = await supabase
+    .from('articles')
+    .select('title, content, image_url, category')
+    .eq('id', id)
+    .single()
+
+  let title = 'Son Dakika Haberleri | SonHaber'
+  let description = 'Türkiye ve dünyadan son dakika haberleri SonHaber\'de.'
+  let image = 'https://sonhaber-rouge.vercel.app/og-image.jpg'
+
+  if (customHaber) {
+    title = `${customHaber.title} | SonHaber`
+    description = customHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
+    image = customHaber.image_url || image
+  } else {
+    const rssNews = await fetchRSSNews()
+    const rssHaber = rssNews.find(h => h.id === id)
+    if (rssHaber) {
+      title = `${rssHaber.title} | SonHaber`
+      description = rssHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
+      image = rssHaber.image_url || image
+    }
+  }
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: image }],
+      type: 'article',
+      siteName: 'SonHaber',
+      locale: 'tr_TR',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+    alternates: {
+      canonical: `https://sonhaber-rouge.vercel.app/haber/${encodeURIComponent(id)}`,
+    },
+  }
+}
 
 export default async function HaberDetay({ params }) {
   const { slug } = await params
