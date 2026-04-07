@@ -241,8 +241,8 @@ export default async function HomePage({ searchParams }) {
       <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="px-4">
           <div className="flex gap-2 overflow-x-auto py-3">
-            {kategoriler.map(k => (
-              <Link key={k} href={k === 'Tümü' ? '/' : `/?kategori=${k}`}
+           {kategoriler.map(k => (
+  <Link key={k} href={k === 'Tümü' ? '/' : `/${k === 'Gündem' ? 'gundem' : k === 'Dünya' ? 'dunya' : k === 'Sağlık' ? 'saglik' : k === 'Kültür' ? 'kultur' : k === 'Yaşam' ? 'yasam' : k.toLowerCase()}`}
                 className={`shrink-0 px-7 py-3 text-base font-bold transition-colors rounded-full ${
                   (k === 'Tümü' && !kategori) || kategori === k
                     ? 'bg-red-600 text-white'
