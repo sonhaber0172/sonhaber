@@ -154,27 +154,28 @@ export default async function HomePage({ searchParams }) {
     </div>
   )
 
-  const Sayfalama = () => (
-    <div className="flex items-center justify-center gap-4 py-10 border-t border-gray-100 mt-4">
+ const Sayfalama = () => (
+    <div className="flex items-center justify-center gap-6 py-12 border-t-4 border-red-600 mt-8 bg-gray-50 rounded-xl">
       {oncekiSayfa ? (
-        <Link href={oncekiSayfa} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition-colors">
-          ← Önceki Sayfa
+        <Link href={oncekiSayfa} className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl transition-colors text-lg shadow-lg">
+          ← Önceki
         </Link>
       ) : (
-        <span className="flex items-center gap-2 bg-gray-100 text-gray-400 font-bold px-6 py-3 rounded-lg cursor-not-allowed">
-          ← Önceki Sayfa
+        <span className="flex items-center gap-3 bg-gray-200 text-gray-400 font-black px-8 py-4 rounded-xl cursor-not-allowed text-lg">
+          ← Önceki
         </span>
       )}
-      <span className="text-gray-500 font-semibold text-sm">
-        {sayfaNo} / {toplamSayfa}
-      </span>
+      <div className="flex flex-col items-center">
+        <span className="text-red-600 font-black text-3xl">{sayfaNo}</span>
+        <span className="text-gray-400 text-sm font-semibold">/ {toplamSayfa} sayfa</span>
+      </div>
       {sonrakiSayfa ? (
-        <Link href={sonrakiSayfa} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition-colors">
-          Sonraki Sayfa →
+        <Link href={sonrakiSayfa} className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl transition-colors text-lg shadow-lg">
+          Sonraki →
         </Link>
       ) : (
-        <span className="flex items-center gap-2 bg-gray-100 text-gray-400 font-bold px-6 py-3 rounded-lg cursor-not-allowed">
-          Sonraki Sayfa →
+        <span className="flex items-center gap-3 bg-gray-200 text-gray-400 font-black px-8 py-4 rounded-xl cursor-not-allowed text-lg">
+          Sonraki →
         </span>
       )}
     </div>
