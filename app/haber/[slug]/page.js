@@ -172,21 +172,29 @@ export default async function HaberDetay({ params }) {
   />
 )}
         <header className="bg-white border-b border-gray-100">
-          <div className="px-6 py-4 flex items-center justify-between">
+          <div className="px-6 py-5 flex items-center justify-between">
             <Link href="/">
               <div style={{borderLeft: '5px solid #c0392b', paddingLeft: '12px', cursor: 'pointer'}}>
                 <div style={{display: 'flex', alignItems: 'baseline'}}>
-                  <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '24px', fontWeight: '900', color: '#c0392b'}}>SON</span>
-                  <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '24px', fontWeight: '900', color: '#111'}}>HABER</span>
+                  <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#c0392b'}}>SON</span>
+                  <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#111'}}>HABER</span>
                 </div>
-                <span style={{fontSize: '9px', color: '#999', letterSpacing: '3px', fontWeight: '600'}}>TÜRKİYE'NİN SESİ</span>
+                <span style={{fontSize: '11px', color: '#999', letterSpacing: '3px', fontWeight: '700'}}>TÜRKİYE'NİN SESİ</span>
               </div>
             </Link>
-            <nav className="flex gap-4 text-sm font-medium text-gray-600">
-              <Link href="/" className="hover:text-red-600 transition-colors">Ana Sayfa</Link>
-              <Link href="/hakkimizda" className="hover:text-red-600 transition-colors">Hakkımızda</Link>
-              <Link href="/iletisim" className="hover:text-red-600 transition-colors">İletişim</Link>
+            <nav className="hidden md:flex items-center gap-6 text-base font-semibold text-gray-600">
+              <Link href="/" className="hover:text-red-600 transition-colors px-2 py-1">Ana Sayfa</Link>
+              <Link href="/hakkimizda" className="hover:text-red-600 transition-colors px-2 py-1">Hakkımızda</Link>
+              <Link href="/iletisim" className="bg-red-600 text-white px-5 py-2.5 rounded-lg hover:bg-red-700 transition-colors font-bold">İletişim</Link>
             </nav>
+            <nav className="flex md:hidden gap-4 text-sm font-semibold text-gray-600">
+              <Link href="/" className="hover:text-red-600">Ana Sayfa</Link>
+              <Link href="/hakkimizda" className="hover:text-red-600">Hakkımızda</Link>
+              <Link href="/iletisim" className="bg-red-600 text-white px-3 py-1.5 rounded-lg hover:bg-red-700">İletişim</Link>
+            </nav>
+          </div>
+          <div className="px-6 py-2 text-xs text-gray-400 border-t border-gray-50">
+            {new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
         </header>
 
