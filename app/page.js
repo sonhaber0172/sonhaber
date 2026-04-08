@@ -3,7 +3,7 @@ import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
 import SosyalMediaBar from './components/SosyalMediaBar'
-
+import MobilMenu from './components/MobilMenu'
 export const revalidate = 300
 
 const SAYFA_BASI_HABER = 30
@@ -207,11 +207,7 @@ export default async function HomePage({ searchParams }) {
             <Link href="/hakkimizda" className="hover:text-red-600 transition-colors px-2 py-1">Hakkımızda</Link>
             <Link href="/iletisim" className="bg-red-600 text-white px-5 py-2.5 rounded-lg hover:bg-red-700 transition-colors font-bold text-base">İletişim</Link>
           </nav>
-          <nav className="flex md:hidden gap-4 text-sm font-semibold text-gray-600">
-            <Link href="/" className="hover:text-red-600">Ana Sayfa</Link>
-            <Link href="/hakkimizda" className="hover:text-red-600">Hakkımızda</Link>
-            <Link href="/iletisim" className="bg-red-600 text-white px-3 py-1.5 rounded-lg hover:bg-red-700">İletişim</Link>
-          </nav>
+          <MobilMenu />
         </div>
         <div className="px-6 py-2 text-xs text-gray-400 border-t border-gray-50">
           {new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
