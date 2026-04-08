@@ -348,11 +348,20 @@ export default async function HomePage({ searchParams }) {
           <div>
             <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Kategoriler</h4>
             <div className="grid grid-cols-2 gap-2">
-              {['Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Dünya', 'Sağlık', 'Kültür', 'Yaşam'].map(k => (
-                <Link key={k} href={`/?kategori=${k}`} className="text-gray-400 hover:text-red-400 transition-colors text-base font-medium">
-                  {k}
-                </Link>
-              ))}
+            {[
+  { ad: 'Gündem', url: '/gundem' },
+  { ad: 'Spor', url: '/spor' },
+  { ad: 'Ekonomi', url: '/ekonomi' },
+  { ad: 'Teknoloji', url: '/teknoloji' },
+  { ad: 'Dünya', url: '/dunya' },
+  { ad: 'Sağlık', url: '/saglik' },
+  { ad: 'Kültür', url: '/kultur' },
+  { ad: 'Yaşam', url: '/yasam' },
+].map(k => (
+  <Link key={k.ad} href={k.url} className="text-gray-400 hover:text-red-400 transition-colors text-base font-medium">
+    {k.ad}
+  </Link>
+))}
             </div>
           </div>
           <div>
