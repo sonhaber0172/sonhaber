@@ -14,60 +14,89 @@ export default function HaberSlider({ haberler }) {
   }, [sliderHaberler.length])
 
   if (!sliderHaberler.length) return null
-
   const haber = sliderHaberler[aktif]
 
   return (
-    <div className="w-full">
-      {/* Resim kısmı */}
-      <div className="relative w-full overflow-hidden" style={{height: '320px'}}>
+    <div style={{width:'100%', background:'#000'}}>
+      
+      {/* RESİM ALANI */}
+      <div style={{position:'relative', width:'100%', height:'350px', overflow:'hidden'}}>
         {sliderHaberler.map((h, i) => (
-          <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === aktif ? 'opacity-100' : 'opacity-0'}`}>
-            {h.image_url ? (
-              <img src={h.image_url} alt={h.title} className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full bg-gray-800" />
-            )}
+          <div key={i} style={{
+            position:'absolute', inset:0,
+            opacity: i === aktif ? 1 : 0,
+            transition:'opacity 0.7s ease'
+          }}>
+            {h.image_url
+              ? <img src={h.image_url} alt={h.title} style={{width:'100%', height:'100%', objectFit:'cover'}} />
+              : <div style={{width:'100%', height:'100%', background:'#222'}} />
+            }
           </div>
         ))}
 
-        <button onClick={() => setAktif(prev => (prev - 1 + sliderHaberler.length) % sliderHaberler.length)}
-          style={{position:'absolute', left:'16px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'40px', height:'40px', borderRadius:'50%', fontSize:'22px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
+        {/* Sol ok */}
+        <button onClick={() => setAktif(p => (p - 1 + sliderHaberler.length) % sliderHaberler.length)}
+          style={{position:'absolute', left:'12px', top:'50%', transform:'translateY(-50%)',
+            width:'44px', height:'44px', borderRadius:'50%', border:'none', cursor:'pointer',
+            background:'rgba(0,0,0,0.6)', color:'#fff', fontSize:'24px', display:'flex',
+            alignItems:'center', justifyContent:'center', zIndex:10}}>
           ‹
         </button>
-        <button onClick={() => setAktif(prev => (prev + 1) % sliderHaberler.length)}
-          style={{position:'absolute', right:'16px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'40px', height:'40px', borderRadius:'50%', fontSize:'22px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
+
+        {/* Sağ ok */}
+        <button onClick={() => setAktif(p => (p + 1) % sliderHaberler.length)}
+          style={{position:'absolute', right:'12px', top:'50%', transform:'translateY(-50%)',
+            width:'44px', height:'44px', borderRadius:'50%', border:'none', cursor:'pointer',
+            background:'rgba(0,0,0,0.6)', color:'#fff', fontSize:'24px', display:'flex',
+            alignItems:'center', justifyContent:'center', zIndex:10}}>
           ›
         </button>
+
+        {/* Nokta navigasyonu */}
+        <div style={{position:'absolute', bottom:'12px', right:'16px', display:'flex', gap:'6px', zIndex:10}}>
+          {sliderHaberler.map((_, i) => (
+            <button key={i} onClick={() => setAktif(i)}
+              style={{height:'8px', width: i === aktif ? '28px' : '8px',
+                borderRadius:'4px', border:'none', cursor:'pointer',
+                background: i === aktif ? '#c0392b' : 'rgba(255,255,255,0.5)',
+                transition:'all 0.3s'}} />
+          ))}
+        </div>
       </div>
 
-      {/* Başlık kısmı - resmin altında ayrı alan */}
+      {/* BAŞLIK ALANI - Resmin Altında, Ayrı Kutu */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
-        <div style={{background:'#1a1a1a', padding:'16px 24px', cursor:'pointer'}} className="hover:bg-gray-800 transition-colors">
-          <div className="flex items-center gap-3 mb-2">
-            <span style={{background:'#c0392b', color:'white', fontSize:'11px', fontWeight:'800', padding:'3px 10px', borderRadius:'4px', textTransform:'uppercase', letterSpacing:'1px'}}>
+        <div style={{
+          background:'#111111',
+          padding:'18px 28px',
+          borderLeft:'4px solid #c0392b',
+          cursor:'pointer'
+        }}>
+          <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'10px'}}>
+            <span style={{
+              background:'#c0392b', color:'#fff',
+              fontSize:'11px', fontWeight:'800',
+              padding:'4px 12px', borderRadius:'4px',
+              textTransform:'uppercase', letterSpacing:'1px'
+            }}>
               {haber.category}
             </span>
-            <p style={{color:'#aaaaaa', fontSize:'12px'}}>
-              {new Date(haber.created_at).toLocaleDateString('tr-TR', { day:'numeric', month:'long', year:'numeric' })}
-            </p>
+            <span style={{color:'#888', fontSize:'12px'}}>
+              {new Date(haber.created_at).toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'})}
+            </span>
           </div>
-          <h2 style={{color:'#ffffff', fontSize:'20px', fontWeight:'900', lineHeight:'1.4'}}>
+          <h2 style={{
+            color:'#ffffff',
+            fontSize:'20px',
+            fontWeight:'900',
+            lineHeight:'1.4',
+            margin:0
+          }}>
             {haber.title}
           </h2>
         </div>
       </Link>
 
-      {/* Nokta navigasyonu */}
-      <div style={{background:'#111', padding:'8px 24px', display:'flex', gap:'6px', alignItems:'center'}}>
-        {sliderHaberler.map((_, i) => (
-          <button key={i} onClick={() => setAktif(i)} style={{
-            height:'6px', width: i === aktif ? '24px' : '6px',
-            borderRadius:'3px', background: i === aktif ? '#c0392b' : 'rgba(255,255,255,0.3)',
-            border:'none', cursor:'pointer', transition:'all 0.3s'
-          }} />
-        ))}
-      </div>
     </div>
   )
 }
