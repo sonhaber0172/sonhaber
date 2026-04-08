@@ -5,7 +5,7 @@ import Arama from './components/Arama'
 import SosyalMediaBar from './components/SosyalMediaBar'
 import MobilMenu from './components/MobilMenu'
 export const revalidate = 300
-
+import KaranlikMod from './components/KaranlikMod'
 const SAYFA_BASI_HABER = 30
 
 export async function generateMetadata({ searchParams }) {
@@ -202,6 +202,7 @@ export default async function HomePage({ searchParams }) {
               <span style={{fontSize: '11px', color: '#999', letterSpacing: '3px', fontWeight: '700'}}>TÜRKİYE'NİN SESİ</span>
             </div>
           </Link>
+          <KaranlikMod />
           <nav className="hidden md:flex items-center gap-6 text-base font-semibold text-gray-600">
             <Link href="/" className="hover:text-red-600 transition-colors px-2 py-1">Ana Sayfa</Link>
             <Link href="/hakkimizda" className="hover:text-red-600 transition-colors px-2 py-1">Hakkımızda</Link>

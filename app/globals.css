@@ -72,3 +72,48 @@ a {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+.dark body {
+  background-color: #111 !important;
+  color: #f1f1f1 !important;
+}
+.dark main {
+  background-color: #1a1a1a !important;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5) !important;
+}
+.dark header {
+  background-color: #1a1a1a !important;
+  border-color: #333 !important;
+}
+.dark .bg-white {
+  background-color: #1a1a1a !important;
+}
+.dark .bg-gray-50 {
+  background-color: #222 !important;
+}
+.dark .bg-gray-100 {
+  background-color: #2a2a2a !important;
+}
+.dark .text-gray-900 {
+  color: #f1f1f1 !important;
+}
+.dark .text-gray-700 {
+  color: #d1d1d1 !important;
+}
+.dark .text-gray-600 {
+  color: #aaa !important;
+}
+.dark .text-gray-500 {
+  color: #999 !important;
+}
+.dark .text-gray-400 {
+  color: #777 !important;
+}
+.dark .border-gray-100 {
+  border-color: #333 !important;
+}
+.dark .border-gray-200 {
+  border-color: #333 !important;
+}
+.dark footer {
+  background-color: #000 !important;
+}
