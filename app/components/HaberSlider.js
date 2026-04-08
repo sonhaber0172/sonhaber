@@ -29,7 +29,7 @@ export default function HaberSlider({ haberler }) {
           <div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.2) 100%)'}} />
         </div>
       ))}
-
+<div className="absolute inset-0" style={{background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 35%, transparent 100%)', pointerEvents: 'none'}} />
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
         <div className="absolute bottom-0 left-0 right-0 px-8 pb-8 pt-16 cursor-pointer">
           <span className="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded mb-3 uppercase tracking-wide">
