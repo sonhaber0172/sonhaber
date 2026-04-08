@@ -4,6 +4,8 @@ import Link from 'next/link'
 
 export default function HaberSlider({ haberler }) {
   const [aktif, setAktif] = useState(0)
+  const [yuklendi, setYuklendi] = useState(false)
+  useEffect(() => { setYuklendi(true) }, [])
   const sliderHaberler = haberler.slice(0, 6)
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export default function HaberSlider({ haberler }) {
   const haber = sliderHaberler[aktif]
 
   return (
-    <div style={{width:'100%', background:'#000'}}>
+    <div style={{width:'100%', background:'#000', opacity: yuklendi ? 1 : 0, transition: 'opacity 0.3s'}}>
       
       {/* RESİM ALANI */}
       <div style={{position:'relative', width:'100%', height:'350px', overflow:'hidden'}}>
