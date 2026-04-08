@@ -228,9 +228,22 @@ export default async function HomePage({ searchParams }) {
       </div>
 
       {/* SON DAKİKA */}
-      <div className="bg-red-600 text-white py-2.5 px-6 flex items-center gap-3">
+      <div className="bg-red-600 text-white py-2.5 px-6 flex items-center gap-3 overflow-hidden">
         <span className="text-xs font-bold uppercase tracking-widest shrink-0 bg-white text-red-600 px-2 py-0.5 rounded">Son Dakika</span>
-        <p className="text-sm truncate">{allNews[0]?.title || 'Haberler yükleniyor...'}</p>
+        <div className="overflow-hidden flex-1">
+          <div className="flex gap-12 animate-marquee whitespace-nowrap">
+            {allNews.slice(0, 8).map((h, i) => (
+              <a key={i} href={`/haber/${encodeURIComponent(h.id)}`} className="text-sm hover:underline shrink-0">
+                {h.title}
+              </a>
+            ))}
+            {allNews.slice(0, 8).map((h, i) => (
+              <a key={`b${i}`} href={`/haber/${encodeURIComponent(h.id)}`} className="text-sm hover:underline shrink-0">
+                {h.title}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* KATEGORİLER */}
