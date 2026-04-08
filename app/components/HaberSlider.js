@@ -86,14 +86,15 @@ export default function HaberSlider({ haberler }) {
             </span>
           </div>
           <h2 style={{
-            color:'#f5c518',
-            fontSize:'20px',
-            fontWeight:'900',
-            lineHeight:'1.4',
-            margin:0
-          }}>
-            {haber.title}
-          </h2>
+  color:'#f5c518 !important',
+  fontSize:'22px',
+  fontWeight:'900',
+  lineHeight:'1.4',
+  margin:0,
+  textShadow:'none'
+}}>
+  {haber.title}
+</h2>
         </div>
       </Link>
 
