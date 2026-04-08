@@ -2,7 +2,7 @@ import "./globals.css";
 import Script from "next/script";
 import WhatsappButon from "./components/WhatsappButon";
 import YukariCik from "./components/YukariCik";
-
+import KaranlikMod from './components/KaranlikMod'
 export const metadata = {
   title: {
     default: "SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi",
@@ -51,6 +51,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         {children}
         <WhatsappButon />
+        <KaranlikMod />
         <YukariCik />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VTWF4S968M"
