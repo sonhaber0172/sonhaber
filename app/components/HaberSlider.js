@@ -35,8 +35,8 @@ export default function HaberSlider({ haberler }) {
         bottom: 0,
         left: 0,
         right: 0,
-        height: '180px',
-        background: 'linear-gradient(to top, #000000 0%, #000000 40%, transparent 100%)'
+        height: '140px',
+        background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 60%, transparent 100%)'
       }} />
 
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
