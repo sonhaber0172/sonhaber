@@ -264,7 +264,7 @@ export default async function HomePage({ searchParams }) {
                     <div className="group cursor-pointer">
                       <div className="overflow-hidden rounded-xl" style={{height: '320px'}}>
                         {allNews[0].image_url ? (
-                          <img src={allNews[0].image_url} alt={allNews[0].title} priority="true" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <img src={allNews[0].image_url} alt={allNews[0].title} fetchpriority="high" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center">
                             <span className="text-gray-300 text-5xl font-black">SH</span>
