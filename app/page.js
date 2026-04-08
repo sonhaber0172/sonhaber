@@ -265,7 +265,11 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
       </div>
-{sayfaNo === 1 && <HaberSlider haberler={allNews} />}
+{sayfaNo === 1 && (
+        <div style={{margin: '0', padding: '0'}}>
+          <HaberSlider haberler={allNews} />
+        </div>
+      )}
       {/* ANA İÇERİK */}
       <div className="px-6 py-6 bg-white">
 
