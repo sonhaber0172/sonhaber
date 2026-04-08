@@ -72,9 +72,14 @@ export default async function HaberDetay({ params }) {
   }
 
   const tumHaberler = [...(customNewsResult.data || []), ...rssNews]
-  const digerHaberler = tumHaberler.filter(h => h.id !== id).slice(0, 16)
-  const sagHaberler = digerHaberler.slice(0, 8)
-  const altHaberler = digerHaberler.slice(8, 16)
+
+// Aynı kategoriden haberler önce göster
+const ayniKategori = tumHaberler.filter(h => h.id !== id && h.category === haber?.category)
+const digerKategori = tumHaberler.filter(h => h.id !== id && h.category !== haber?.category)
+const siraliHaberler = [...ayniKategori, ...digerKategori].slice(0, 16)
+
+const sagHaberler = siraliHaberler.slice(0, 8)
+const altHaberler = siraliHaberler.slice(8, 16)
 
   const haberUrl = `https://sonhaber-rouge.vercel.app/haber/${encodeURIComponent(id)}`
   const haberBaslik = haber?.title || ''
