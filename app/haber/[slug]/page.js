@@ -287,22 +287,22 @@ const altHaberler = siraliHaberler.slice(8, 16)
             </div>
           </div>
 
-          <div className="lg:w-2/5 px-4 py-6 bg-gray-50">
+          <div className="lg:w-1/3 px-4 py-6 bg-gray-50">
             <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Diğer Haberler</h2>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-3">
               {sagHaberler.map((h, i) => (
                 <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
-                  <div className="group cursor-pointer">
-                    <div className="overflow-hidden rounded-lg">
+                  <div className="group cursor-pointer flex gap-3 pb-3 border-b border-gray-200 last:border-0">
+                    <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
                       {h.image_url ? (
-                        <img src={h.image_url} alt={h.title} loading="lazy" className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" />
+                        <img src={h.image_url} alt={h.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                       ) : (
-                        <div className="w-full h-28 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <span className="text-gray-300 font-black">SH</span>
+                        <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+                          <span className="text-gray-300 font-black text-sm">SH</span>
                         </div>
                       )}
                     </div>
-                    <div className="pt-2">
+                    <div className="flex-1 min-w-0">
                       <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{h.category}</span>
                       <p className="text-sm font-semibold text-gray-900 line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{h.title}</p>
                       <p className="text-xs text-gray-400 mt-1">{new Date(h.created_at).toLocaleDateString('tr-TR')}</p>
@@ -312,6 +312,7 @@ const altHaberler = siraliHaberler.slice(8, 16)
               ))}
             </div>
           </div>
+                      
 
         </div>
 
