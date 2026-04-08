@@ -67,6 +67,7 @@ export default function HaberSlider({ haberler }) {
       {/* BAŞLIK ALANI */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
         <div style={{
+          background:'#1a1a1a',
           padding:'18px 28px',
           borderLeft:'4px solid #c0392b',
           cursor:'pointer'
@@ -85,7 +86,7 @@ export default function HaberSlider({ haberler }) {
             </span>
           </div>
           <h2 style={{
-            color:'#ffffff',
+            color:'#f5c518',
             fontSize:'20px',
             fontWeight:'900',
             lineHeight:'1.4',
