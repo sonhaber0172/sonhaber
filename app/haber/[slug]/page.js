@@ -78,8 +78,8 @@ const ayniKategori = tumHaberler.filter(h => h.id !== id && h.category === haber
 const digerKategori = tumHaberler.filter(h => h.id !== id && h.category !== haber?.category)
 const siraliHaberler = [...ayniKategori, ...digerKategori].slice(0, 16)
 
-const sagHaberler = siraliHaberler.slice(0, 8)
-const altHaberler = siraliHaberler.slice(8, 16)
+const sagHaberler = siraliHaberler.slice(0, 12)
+const altHaberler = siraliHaberler.slice(12, 18)
 
   const haberUrl = `https://sonhaber-rouge.vercel.app/haber/${encodeURIComponent(id)}`
   const haberBaslik = haber?.title || ''
@@ -205,9 +205,9 @@ const altHaberler = siraliHaberler.slice(8, 16)
 
         <div className="flex flex-col lg:flex-row">
 
-          <div className="lg:w-3/5 py-6 px-6 border-r border-gray-100">
+          <div className="lg:w-2/3 py-6 px-6 border-r border-gray-100">
             {haber.image_url && (
-              <img src={haber.image_url} alt={haber.title} className="w-full h-48 md:h-64 object-cover mb-4 rounded-xl" />
+              <img src={haber.image_url} alt={haber.title} className="w-full h-64 md:h-96 object-cover mb-4 rounded-xl" />
             )}
             <span className="bg-red-50 text-red-600 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">{haber.category}</span>
             <h1 className="text-xl md:text-2xl font-bold text-gray-900 mt-3 mb-2 leading-tight">{haber.title}</h1>
@@ -262,7 +262,7 @@ const altHaberler = siraliHaberler.slice(8, 16)
 
             <div className="mt-8 border-t border-gray-100 pt-6">
               <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4">Bunları da Okuyun</h2>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 {altHaberler.map((h, i) => (
                   <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`}>
                     <div className="group cursor-pointer">
