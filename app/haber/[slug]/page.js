@@ -1,7 +1,7 @@
 import { supabase } from '../../../lib/supabase'
 import { fetchRSSNews } from '../../../lib/rss'
 import Link from 'next/link'
-
+import OkumaCubugu from '../../components/OkumaCubugu'
 export const revalidate = 300
 export async function generateMetadata({ params }) {
   const { slug } = await params
