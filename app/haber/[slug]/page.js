@@ -331,7 +331,7 @@ const altHaberler = siraliHaberler.slice(12, 18)
             </div>
             <div>
               <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Kategoriler</h4>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 {[
   { ad: 'Gündem', url: '/gundem' },
   { ad: 'Spor', url: '/spor' },

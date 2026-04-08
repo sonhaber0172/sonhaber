@@ -6,7 +6,6 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 import MobilMenu from './components/MobilMenu'
 export const revalidate = 300
 import KaranlikMod from './components/KaranlikMod'
-import HaberSlider from './components/HaberSlider'
 const SAYFA_BASI_HABER = 30
 
 export async function generateMetadata({ searchParams }) {
@@ -265,7 +264,6 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
       </div>
-{sayfaNo === 1 && <HaberSlider haberler={allNews} />}
       {/* ANA İÇERİK */}
       <div className="px-6 py-6 bg-white">
 
