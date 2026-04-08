@@ -14,7 +14,7 @@ export default function AdminPage() {
   const [onizleme, setOnizleme] = useState(false)
   const [duzenleId, setDuzenleId] = useState(null)
   const [arama, setArama] = useState('')
-
+  const [istatistik, setIstatistik] = useState({})
   const handleGiris = () => {
     if (sifre === 'sonhaber2025') setGiris(true)
     else alert('Hatalı şifre!')
@@ -32,7 +32,11 @@ export default function AdminPage() {
   useEffect(() => {
     if (giris) haberleriGetir()
   }, [giris])
-
+useEffect(() => {
+  const stats = {}
+  kategoriler.forEach(k => { stats[k] = haberler.filter(h => h.category === k).length })
+  setIstatistik(stats)
+}, [haberler])
   const filtreliHaberler = haberler.filter(h =>
     h.title?.toLowerCase().includes(arama.toLowerCase()) ||
     h.category?.toLowerCase().includes(arama.toLowerCase())
@@ -126,6 +130,14 @@ export default function AdminPage() {
         </div>
 
         <div className="p-6 md:p-8">
+          <div className="grid grid-cols-4 gap-3 mb-6">
+  {kategoriler.map(k => (
+    <div key={k} className="bg-white rounded-xl shadow p-4 text-center">
+      <p className="text-2xl font-black text-red-600">{istatistik[k] || 0}</p>
+      <p className="text-xs text-gray-500 font-semibold mt-1">{k}</p>
+    </div>
+  ))}
+</div>
           <div className="flex gap-2 mb-6">
             <button onClick={() => { setAktifSekme('ekle'); handleIptal() }}
               className={`px-6 py-2 rounded-lg font-bold text-sm transition-colors ${aktifSekme === 'ekle' ? 'bg-red-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
