@@ -6,6 +6,7 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 import MobilMenu from './components/MobilMenu'
 export const revalidate = 300
 import KaranlikMod from './components/KaranlikMod'
+import HaberSlider from './components/HaberSlider'
 const SAYFA_BASI_HABER = 30
 
 export async function generateMetadata({ searchParams }) {
@@ -82,7 +83,7 @@ export default async function HomePage({ searchParams }) {
     if (!buyuk) return null
     return (
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        <div className="lg:w-2/3">
+        <div className="lg:w-1/2">
           <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
             <div className="group cursor-pointer">
               <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
@@ -103,7 +104,7 @@ export default async function HomePage({ searchParams }) {
             </div>
           </Link>
         </div>
-        <div className="lg:w-1/3 flex flex-col gap-4">
+        <div className="lg:w-1/2 flex flex-col gap-4">
           {[yan1, yan2].filter(Boolean).map((news, i) => (
             <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
               <div className="group cursor-pointer flex gap-3">
@@ -264,7 +265,7 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
       </div>
-
+{sayfaNo === 1 && <HaberSlider haberler={allNews} />}
       {/* ANA İÇERİK */}
       <div className="px-6 py-6 bg-white">
 
