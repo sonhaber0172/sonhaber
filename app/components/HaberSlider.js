@@ -18,44 +18,61 @@ export default function HaberSlider({ haberler }) {
   const haber = sliderHaberler[aktif]
 
   return (
-    <div className="relative w-full overflow-hidden bg-gray-100" style={{height: '420px'}}>
+    <div className="relative w-full overflow-hidden" style={{height: '420px'}}>
       {sliderHaberler.map((h, i) => (
         <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i === aktif ? 'opacity-100' : 'opacity-0'}`}>
           {h.image_url ? (
-            <img src={h.image_url} alt={h.title} className="w-full h-full object-cover opacity-30" />
+            <img src={h.image_url} alt={h.title} className="w-full h-full object-cover" />
           ) : (
-            <div className="w-full h-full bg-gray-200" />
+            <div className="w-full h-full bg-gray-800" />
           )}
         </div>
       ))}
 
+      {/* Sadece alt kısımda koyu şerit */}
+      <div style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '180px',
+        background: 'linear-gradient(to top, #000000 0%, #000000 40%, transparent 100%)'
+      }} />
+
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
-        <div className="absolute inset-0 flex flex-col justify-end px-8 pb-8 cursor-pointer">
-          <span className="inline-block bg-red-600 text-white text-xs font-bold px-3 py-1 rounded mb-3 uppercase tracking-wide w-fit">
+        <div style={{position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 32px', cursor: 'pointer'}}>
+          <span style={{background: '#c0392b', color: 'white', fontSize: '11px', fontWeight: '800', padding: '3px 10px', borderRadius: '4px', marginBottom: '10px', display: 'inline-block', textTransform: 'uppercase', letterSpacing: '1px'}}>
             {haber.category}
           </span>
-          <h2 style={{color: '#111111', fontSize: '26px', fontWeight: '900', lineHeight: '1.3', marginBottom: '8px'}}>
+          <h2 style={{color: '#ffffff', fontSize: '22px', fontWeight: '900', lineHeight: '1.3', margin: '8px 0 6px 0'}}>
             {haber.title}
           </h2>
-          <p style={{color: '#555555', fontSize: '13px'}}>
+          <p style={{color: '#cccccc', fontSize: '12px'}}>
             {new Date(haber.created_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
       </Link>
 
-      <div className="absolute bottom-4 right-8 flex gap-2">
+      <div style={{position: 'absolute', bottom: '12px', right: '32px', display: 'flex', gap: '6px'}}>
         {sliderHaberler.map((_, i) => (
-          <button key={i} onClick={() => setAktif(i)}
-            className={`h-2.5 rounded-full transition-all ${i === aktif ? 'bg-red-500 w-6' : 'bg-gray-400 w-2.5'}`} />
+          <button key={i} onClick={() => setAktif(i)} style={{
+            height: '8px',
+            width: i === aktif ? '24px' : '8px',
+            borderRadius: '4px',
+            background: i === aktif ? '#c0392b' : 'rgba(255,255,255,0.6)',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'all 0.3s'
+          }} />
         ))}
       </div>
 
       <button onClick={() => setAktif(prev => (prev - 1 + sliderHaberler.length) % sliderHaberler.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center text-xl shadow">
+        style={{position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', width: '40px', height: '40px', borderRadius: '50%', fontSize: '22px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         ‹
       </button>
       <button onClick={() => setAktif(prev => (prev + 1) % sliderHaberler.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-800 w-10 h-10 rounded-full flex items-center justify-center text-xl shadow">
+        style={{position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', width: '40px', height: '40px', borderRadius: '50%', fontSize: '22px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         ›
       </button>
     </div>
