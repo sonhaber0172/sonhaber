@@ -226,9 +226,9 @@ export default async function HomePage({ searchParams }) {
       <div className="bg-gray-50 border-b border-gray-100 px-6 py-1.5 text-xs text-gray-400 flex items-center justify-between">
         <span>Son güncelleme: {new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })} — {new Date().toLocaleDateString('tr-TR')}</span>
         <span className="flex items-center gap-1">
-          <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
-          Canlı Yayın
-        </span>
+  <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
+  Güncel
+</span>
       </div>
 
       {/* SON DAKİKA */}
