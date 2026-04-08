@@ -64,10 +64,9 @@ export default function HaberSlider({ haberler }) {
         </div>
       </div>
 
-      {/* BAŞLIK ALANI - Resmin Altında, Ayrı Kutu */}
+      {/* BAŞLIK ALANI */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
         <div style={{
-          background:'#111111',
           padding:'18px 28px',
           borderLeft:'4px solid #c0392b',
           cursor:'pointer'
