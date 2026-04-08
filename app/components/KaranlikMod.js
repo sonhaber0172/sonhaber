@@ -27,7 +27,7 @@ export default function KaranlikMod() {
     <button onClick={toggle} aria-label="Karanlık mod"
       style={{
         position: 'fixed',
-        bottom: '80px',
+        bottom: '150px',
         right: '20px',
         zIndex: 9999,
         width: '48px',
