@@ -6,6 +6,7 @@ import SosyalMediaBar from './components/SosyalMediaBar'
 import MobilMenu from './components/MobilMenu'
 export const revalidate = 300
 import KaranlikMod from './components/KaranlikMod'
+import AnaHaberSlider from './components/AnaHaberSlider'
 const SAYFA_BASI_HABER = 30
 
 export async function generateMetadata({ searchParams }) {
@@ -269,38 +270,13 @@ export default async function HomePage({ searchParams }) {
 
         {sayfaNo === 1 && (
           <>
-            {/* Ana haber + sağ liste - sadece 1. sayfada */}
+           {/* Ana haber slider + sağ liste - sadece 1. sayfada */}
             <div className="flex flex-col lg:flex-row gap-6 mb-10 pb-8 border-b border-gray-100">
               <div className="lg:w-3/5">
-                {allNews[0] && (
-                  <Link href={`/haber/${encodeURIComponent(allNews[0].id)}`}>
-                    <div className="group cursor-pointer">
-                      <div className="overflow-hidden rounded-xl" style={{height: '320px'}}>
-                        {allNews[0].image_url ? (
-                          <img src={allNews[0].image_url} alt={allNews[0].title} fetchpriority="high" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                        ) : (
-                          <div className="w-full h-full bg-gray-100 rounded-xl flex items-center justify-center">
-                            <span className="text-gray-300 text-5xl font-black">SH</span>
-                          </div>
-                        )}
-                      </div>
-                      <div className="pt-4">
-                        <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{allNews[0].category}</span>
-                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mt-1 mb-2 group-hover:text-red-600 transition-colors">{allNews[0].title}</h2>
-                        <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed" dangerouslySetInnerHTML={{__html: allNews[0].content?.substring(0, 200) + '...'}} />
-                        <p className="text-xs text-gray-400 mt-3">{new Date(allNews[0].created_at).toLocaleDateString('tr-TR')}</p>
-                        <div className="mt-4">
-                          <span className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-2.5 rounded-lg text-sm transition-colors">
-                            Haberin Devamını Oku →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                )}
+                <AnaHaberSlider haberler={allNews.slice(0, 5)} />
               </div>
               <div className="lg:w-2/5 flex flex-col gap-5">
-                {allNews.slice(1, 8).map((news, index) => (
+                {allNews.slice(5, 12).map((news, index) => (
                   <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
                     <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
                       <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
