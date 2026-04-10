@@ -217,7 +217,17 @@ const altHaberler = siraliHaberler.slice(12, 18)
 
             <div className="text-gray-700 leading-relaxed text-base"
               dangerouslySetInnerHTML={{__html: haber.content}} />
-
+<div className="mt-6 p-4 bg-red-50 rounded-xl border border-red-100">
+  <p className="text-xs font-bold text-red-600 uppercase tracking-widest mb-3">📌 İlgili Haberler</p>
+  <div className="flex flex-col gap-2">
+    {ayniKategori.slice(0, 3).map((h, i) => (
+      <Link key={i} href={`/haber/${encodeURIComponent(h.id)}`} className="text-sm font-semibold text-gray-800 hover:text-red-600 transition-colors flex items-start gap-2">
+        <span className="text-red-500 shrink-0 mt-0.5">→</span>
+        {h.title}
+      </Link>
+    ))}
+  </div>
+</div>
             <div className="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-100">
               <p className="text-sm font-black text-gray-700 uppercase tracking-widest mb-4 flex items-center gap-2">
                 <span style={{display:'inline-block', width:'4px', height:'20px', background:'#c0392b', borderRadius:'2px'}}></span>
