@@ -18,7 +18,7 @@ export default function AnaHaberSlider({ haberler }) {
   return (
     <div style={{borderRadius:'12px', overflow:'hidden', border:'1px solid #f0f0f0'}}>
       {/* Resim */}
-      <div style={{position:'relative', height:'300px', overflow:'hidden', background:'#f1f1f1'}}>
+      <div style={{position:'relative', height:'380px', overflow:'hidden', background:'#f1f1f1'}}>
         {haberler.map((h, i) => (
           <div key={i} style={{
             position:'absolute', inset:0,
@@ -49,14 +49,14 @@ export default function AnaHaberSlider({ haberler }) {
 
       {/* Başlık - beyaz arka plan üzerinde, her zaman görünür */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
-        <div style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
+        <div className="dark:bg-gray-900" style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
           <span style={{color:'#c0392b', fontSize:'11px', fontWeight:'800', textTransform:'uppercase', letterSpacing:'1px'}}>
             {haber.category}
           </span>
-          <h2 style={{color:'#111111', fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
+          <h2 className="dark:text-white" style={{color:'#111111', fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
             {haber.title}
           </h2>
-          <p style={{color:'#888', fontSize:'12px', margin:'0 0 10px 0'}}>
+          <p className="dark:text-gray-400" style={{color:'#888', fontSize:'12px', margin:'0 0 10px 0'}}>
             {new Date(haber.created_at).toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'})}
           </p>
           <span style={{background:'#c0392b', color:'white', padding:'8px 16px', borderRadius:'8px', fontSize:'13px', fontWeight:'700', display:'inline-block'}}>
