@@ -82,6 +82,29 @@ export default async function HomePage({ searchParams }) {
     const buyuk = liste[buyukIndex]
     const yan1 = liste[yanIndex1]
     const yan2 = liste[yanIndex2]
+    if (!yan1 && !yan2) return (
+      <div className="flex flex-col lg:flex-row gap-4 mb-8">
+        <div className="lg:w-full">
+          <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
+            <div className="group cursor-pointer">
+              <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
+                {buyuk.image_url ? (
+                  <img src={buyuk.image_url} alt={buyuk.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                ) : (
+                  <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded-lg">
+                    <span className="text-gray-300 text-4xl font-black">SH</span>
+                  </div>
+                )}
+              </div>
+              <div className="pt-3">
+                <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{buyuk.category}</span>
+                <h2 className="text-lg md:text-xl font-bold text-gray-900 leading-snug mt-1 mb-2 group-hover:text-red-600 transition-colors">{buyuk.title}</h2>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    )
     if (!buyuk) return null
     return (
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
@@ -106,11 +129,11 @@ export default async function HomePage({ searchParams }) {
             </div>
           </Link>
         </div>
-        <div className="lg:w-2/5 flex flex-col gap-4">
+        <div className="lg:w-2/5 grid grid-cols-1 gap-4">
           {[yan1, yan2].filter(Boolean).map((news, i) => (
             <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
-              <div className="group cursor-pointer">
-                <div className="overflow-hidden rounded-lg mb-2" style={{height: '140px'}}>
+              <div className="group cursor-pointer h-full">
+                <div className="overflow-hidden rounded-lg mb-2" style={{height: '160px'}}>
                   {news.image_url ? (
                     <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
