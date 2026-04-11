@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase'
 export const revalidate = 300
 
 export default async function sitemap() {
-  const baseUrl = 'https://sonhaber-rouge.vercel.app'
+  const baseUrl = 'https://HaberSon-rouge.vercel.app'
 
   const [rssNews, customNewsResult] = await Promise.all([
     fetchRSSNews(),
