@@ -3,16 +3,17 @@ import Script from "next/script";
 import WhatsappButon from "./components/WhatsappButon";
 import YukariCik from "./components/YukariCik";
 import KaranlikMod from './components/KaranlikMod'
+
 export const metadata = {
   title: {
-    default: "SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi",
-    template: "%s | SonHaber"
+    default: "HaberSon - Son Dakika Haberleri, Gündem, Spor, Ekonomi",
+    template: "%s | HaberSon"
   },
-  description: "Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber'de. Türkiye'nin en güncel haber kaynağı.",
-  keywords: ["son dakika", "haberler", "gündem", "spor haberleri", "ekonomi haberleri", "türkiye haberleri", "sonhaber", "son dakika haberleri"],
-  authors: [{ name: "SonHaber" }],
-  creator: "SonHaber",
-  publisher: "SonHaber",
+  description: "Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası HaberSon'de. Türkiye'nin en güncel haber kaynağı.",
+  keywords: ["son dakika", "haberler", "gündem", "spor haberleri", "ekonomi haberleri", "türkiye haberleri", "haberson", "son dakika haberleri"],
+  authors: [{ name: "HaberSon" }],
+  creator: "HaberSon",
+  publisher: "HaberSon",
   robots: {
     index: true,
     follow: true,
@@ -27,14 +28,14 @@ export const metadata = {
     type: "website",
     locale: "tr_TR",
     url: "https://sonhaber-rouge.vercel.app",
-    siteName: "SonHaber",
-    title: "SonHaber - Son Dakika Haberleri",
-    description: "Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası SonHaber'de.",
+    siteName: "HaberSon",
+    title: "HaberSon - Son Dakika Haberleri",
+    description: "Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası HaberSon'de.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SonHaber - Son Dakika Haberleri",
-    description: "Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası SonHaber'de.",
+    title: "HaberSon - Son Dakika Haberleri",
+    description: "Son dakika haberleri, gündem, spor, ekonomi ve daha fazlası HaberSon'de.",
   },
   alternates: {
     canonical: "https://sonhaber-rouge.vercel.app",
