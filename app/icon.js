@@ -6,7 +6,7 @@ export default function Icon() {
     new Response(
       `<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <rect width="32" height="32" rx="6" fill="#c0392b"/>
-        <text x="16" y="22" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="15" font-weight="700" fill="#ffffff">SH</text>
+        <text x="16" y="22" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="15" font-weight="700" fill="#ffffff">HS</text>
       </svg>`,
       { headers: { 'Content-Type': 'image/svg+xml' } }
     )
