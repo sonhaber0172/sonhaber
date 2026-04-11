@@ -4,9 +4,11 @@ import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
 import SosyalMediaBar from './components/SosyalMediaBar'
 import MobilMenu from './components/MobilMenu'
-export const revalidate = 300
 import KaranlikMod from './components/KaranlikMod'
 import AnaHaberSlider from './components/AnaHaberSlider'
+
+export const revalidate = 300
+
 const SAYFA_BASI_HABER = 30
 
 export async function generateMetadata({ searchParams }) {
@@ -83,7 +85,7 @@ export default async function HomePage({ searchParams }) {
     if (!buyuk) return null
     return (
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        <div className="lg:w-1/2">
+        <div className="lg:w-3/5">
           <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
             <div className="group cursor-pointer">
               <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
@@ -104,11 +106,11 @@ export default async function HomePage({ searchParams }) {
             </div>
           </Link>
         </div>
-        <div className="lg:w-1/2 flex flex-col gap-4">
+        <div className="lg:w-2/5 flex flex-col gap-4">
           {[yan1, yan2].filter(Boolean).map((news, i) => (
             <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
-              <div className="group cursor-pointer flex gap-3">
-                <div className="overflow-hidden rounded-lg shrink-0" style={{width: '96px', height: '80px'}}>
+              <div className="group cursor-pointer">
+                <div className="overflow-hidden rounded-lg mb-2" style={{height: '140px'}}>
                   {news.image_url ? (
                     <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
@@ -117,9 +119,9 @@ export default async function HomePage({ searchParams }) {
                     </div>
                   )}
                 </div>
-                <div className="flex-1 min-w-0">
+                <div>
                   <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{news.category}</span>
-                  <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-3 mt-1 group-hover:text-red-600 transition-colors">{news.title}</h3>
+                  <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{news.title}</h3>
                   <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
                 </div>
               </div>
@@ -155,7 +157,7 @@ export default async function HomePage({ searchParams }) {
     </div>
   )
 
- const Sayfalama = () => (
+  const Sayfalama = () => (
     <div className="flex items-center justify-center gap-6 py-12 border-t-4 border-red-600 mt-8 bg-gray-50 rounded-xl">
       {oncekiSayfa ? (
         <Link href={oncekiSayfa} className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl transition-colors text-lg shadow-lg">
@@ -224,9 +226,9 @@ export default async function HomePage({ searchParams }) {
       <div className="bg-gray-50 border-b border-gray-100 px-6 py-1.5 text-xs text-gray-400 flex items-center justify-between">
         <span>Son güncelleme: {new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })} — {new Date().toLocaleDateString('tr-TR')}</span>
         <span className="flex items-center gap-1">
-  <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
-  Güncel
-</span>
+          <span className="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span>
+          Güncel
+        </span>
       </div>
 
       {/* SON DAKİKA */}
@@ -252,8 +254,8 @@ export default async function HomePage({ searchParams }) {
       <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="px-4">
           <div className="flex gap-2 overflow-x-auto py-3">
-           {kategoriler.map(k => (
-  <Link key={k} href={k === 'Tümü' ? '/' : `/${k === 'Gündem' ? 'gundem' : k === 'Dünya' ? 'dunya' : k === 'Sağlık' ? 'saglik' : k === 'Kültür' ? 'kultur' : k === 'Yaşam' ? 'yasam' : k.toLowerCase()}`}
+            {kategoriler.map(k => (
+              <Link key={k} href={k === 'Tümü' ? '/' : `/${k === 'Gündem' ? 'gundem' : k === 'Dünya' ? 'dunya' : k === 'Sağlık' ? 'saglik' : k === 'Kültür' ? 'kultur' : k === 'Yaşam' ? 'yasam' : k.toLowerCase()}`}
                 className={`shrink-0 px-7 py-3 text-base font-bold transition-colors rounded-full ${
                   (k === 'Tümü' && !kategori) || kategori === k
                     ? 'bg-red-600 text-white'
@@ -265,12 +267,13 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
       </div>
+
       {/* ANA İÇERİK */}
       <div className="px-6 py-6 bg-white">
 
         {sayfaNo === 1 && (
           <>
-           {/* Ana haber slider + sağ liste - sadece 1. sayfada */}
+            {/* Ana haber slider + sağ liste - sadece 1. sayfada */}
             <div className="flex flex-col lg:flex-row gap-6 mb-10 pb-8 border-b border-gray-100">
               <div className="lg:w-3/5">
                 <AnaHaberSlider haberler={allNews.slice(0, 5)} />
@@ -333,20 +336,20 @@ export default async function HomePage({ searchParams }) {
           <div>
             <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Kategoriler</h4>
             <div className="grid grid-cols-2 gap-2">
-            {[
-  { ad: 'Gündem', url: '/gundem' },
-  { ad: 'Spor', url: '/spor' },
-  { ad: 'Ekonomi', url: '/ekonomi' },
-  { ad: 'Teknoloji', url: '/teknoloji' },
-  { ad: 'Dünya', url: '/dunya' },
-  { ad: 'Sağlık', url: '/saglik' },
-  { ad: 'Kültür', url: '/kultur' },
-  { ad: 'Yaşam', url: '/yasam' },
-].map(k => (
-  <Link key={k.ad} href={k.url} className="text-gray-400 hover:text-red-400 transition-colors text-base font-medium">
-    {k.ad}
-  </Link>
-))}
+              {[
+                { ad: 'Gündem', url: '/gundem' },
+                { ad: 'Spor', url: '/spor' },
+                { ad: 'Ekonomi', url: '/ekonomi' },
+                { ad: 'Teknoloji', url: '/teknoloji' },
+                { ad: 'Dünya', url: '/dunya' },
+                { ad: 'Sağlık', url: '/saglik' },
+                { ad: 'Kültür', url: '/kultur' },
+                { ad: 'Yaşam', url: '/yasam' },
+              ].map(k => (
+                <Link key={k.ad} href={k.url} className="text-gray-400 hover:text-red-400 transition-colors text-base font-medium">
+                  {k.ad}
+                </Link>
+              ))}
             </div>
           </div>
           <div>
