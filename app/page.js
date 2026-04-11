@@ -206,8 +206,8 @@ export default async function HomePage({ searchParams }) {
           <Link href="/">
             <div style={{borderLeft: '5px solid #c0392b', paddingLeft: '12px', cursor: 'pointer'}}>
               <div style={{display: 'flex', alignItems: 'baseline'}}>
-                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#c0392b'}}>SON</span>
-                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#111'}}>HABER</span>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#c0392b'}}>HABER</span>
+                <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#111'}}>SON</span>
               </div>
               <span style={{fontSize: '11px', color: '#999', letterSpacing: '3px', fontWeight: '700'}}>TÜRKİYE'NİN SESİ</span>
             </div>
@@ -331,8 +331,8 @@ export default async function HomePage({ searchParams }) {
         <div className="px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-800">
           <div>
             <div style={{borderLeft: '4px solid #c0392b', paddingLeft: '10px', marginBottom: '12px'}}>
-              <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '22px', fontWeight: '900', color: '#fff'}}>SON</span>
-              <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '22px', fontWeight: '900', color: '#c0392b'}}>HABER</span>
+              <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '22px', fontWeight: '900', color: '#fff'}}>HABER</span>
+              <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '22px', fontWeight: '900', color: '#c0392b'}}>SON</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">Türkiye'nin güvenilir ve hızlı haber kaynağı.</p>
             <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer"
@@ -362,7 +362,7 @@ export default async function HomePage({ searchParams }) {
           <div>
             <h4 className="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4">Takip Edin</h4>
             <div className="flex flex-col gap-3">
-              <a href="https://instagram.com/sonhaber0165" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-base">
+              <a href="https://instagram.com/HaberSon0165" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-pink-400 transition-colors text-base">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <defs><linearGradient id="ig2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#f09433"/><stop offset="50%" stopColor="#dc2743"/><stop offset="100%" stopColor="#bc1888"/></linearGradient></defs>
                   <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig2)"/>
@@ -371,7 +371,7 @@ export default async function HomePage({ searchParams }) {
                 </svg>
                 Instagram
               </a>
-              <a href="https://twitter.com/sonhaber263775" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors text-base">
+              <a href="https://twitter.com/HaberSon263775" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors text-base">
                 <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="black"/><path d="M17.5 3h3l-6.5 7.5L21 21h-5.5L11 14.5 5.5 21H2.5l7-8L3 3h5.5l4 6L17.5 3z" fill="white"/></svg>
                 Twitter / X
               </a>
@@ -379,7 +379,7 @@ export default async function HomePage({ searchParams }) {
                 <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M13.5 21v-7.5h2.5l.5-3H13.5V8.5c0-.8.4-1.5 1.5-1.5H17V4.5s-1.1-.2-2.2-.2c-2.3 0-3.8 1.4-3.8 3.9V10.5H8.5v3H11V21h2.5z" fill="white"/></svg>
                 Facebook
               </a>
-              <a href="https://www.tiktok.com/@sonhaber4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-base">
+              <a href="https://www.tiktok.com/@HaberSon4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-base">
                 <svg width="20" height="20" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#010101"/><path d="M16.5 5.5c.7 1 1.8 1.7 3 1.8v2.5c-1 0-2-.3-2.8-.8v5.5c0 2.8-2.2 5-5 5s-5-2.2-5-5 2.2-5 5-5c.2 0 .5 0 .7.1v2.6c-.2-.1-.5-.1-.7-.1-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5V5.5h2.3z" fill="white"/></svg>
                 TikTok
               </a>

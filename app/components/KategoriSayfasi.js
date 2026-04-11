@@ -200,7 +200,7 @@ export default function KategoriSayfasi({ haberler, kategoriAdi, sayfaNo, toplam
             </div>
           </div>
           <div className="px-8 py-4 text-center text-xs text-gray-500">
-            <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
+            <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
           </div>
         </footer>
       </main>
