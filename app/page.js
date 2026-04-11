@@ -16,15 +16,15 @@ export async function generateMetadata({ searchParams }) {
   const sayfaNo = parseInt(sayfa) || 1
   if (kategori && kategori !== 'Tümü') {
     return {
-      title: sayfaNo > 1 ? `${kategori} Haberleri - Sayfa ${sayfaNo} | SonHaber` : `${kategori} Haberleri | SonHaber`,
-      description: `${kategori} kategorisindeki son dakika haberleri SonHaber'de. Türkiye'nin en güncel haber kaynağı.`,
-      alternates: { canonical: `https://sonhaber-rouge.vercel.app/?kategori=${kategori}${sayfaNo > 1 ? `&sayfa=${sayfaNo}` : ''}` }
+      title: sayfaNo > 1 ? `${kategori} Haberleri - Sayfa ${sayfaNo} | HaberSon` : `${kategori} Haberleri | HaberSon`,
+      description: `${kategori} kategorisindeki son dakika haberleri HaberSon'de. Türkiye'nin en güncel haber kaynağı.`,
+      alternates: { canonical: `https://haberson-rouge.vercel.app/?kategori=${kategori}${sayfaNo > 1 ? `&sayfa=${sayfaNo}` : ''}` }
     }
   }
   return {
-    title: sayfaNo > 1 ? `Son Dakika Haberleri - Sayfa ${sayfaNo} | SonHaber` : 'SonHaber - Son Dakika Haberleri, Gündem, Spor, Ekonomi',
-    description: 'Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber\'de. Türkiye\'nin en güncel haber kaynağı.',
-    alternates: { canonical: `https://sonhaber-rouge.vercel.app${sayfaNo > 1 ? `?sayfa=${sayfaNo}` : ''}` }
+    title: sayfaNo > 1 ? `Son Dakika Haberleri - Sayfa ${sayfaNo} | HaberSon` : 'HaberSon - Son Dakika Haberleri, Gündem, Spor, Ekonomi',
+    description: 'Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası HaberSon\'de. Türkiye\'nin en güncel haber kaynağı.',
+    alternates: { canonical: `https://haberson-rouge.vercel.app${sayfaNo > 1 ? `?sayfa=${sayfaNo}` : ''}` }
   }
 }
 
@@ -33,9 +33,9 @@ const kategoriler = ['Tümü', 'Gündem', 'Spor', 'Ekonomi', 'Teknoloji', 'Düny
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "NewsMediaOrganization",
-  "name": "SonHaber",
-  "url": "https://sonhaber-rouge.vercel.app",
-  "description": "Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası SonHaber'de.",
+  "name": "HaberSon",
+  "url": "https://haberson-rouge.vercel.app",
+  "description": "Son dakika haberleri, gündem, spor, ekonomi, teknoloji ve daha fazlası HaberSon'de.",
   "inLanguage": "tr-TR",
   "foundingLocation": {
     "@type": "Place",
@@ -135,8 +135,11 @@ export default async function HomePage({ searchParams }) {
     )
   }
 
-  const KucukGrid = ({ haberler }) => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+  const KucukGrid = ({ haberler }) => {
+    if (!haberler || haberler.length === 0) return null
+    const cols = haberler.length >= 4 ? 4 : haberler.length
+    return (
+    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${cols} gap-5 mb-8`}>
       {haberler.map((news, index) => (
         <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
           <div className="group cursor-pointer">
@@ -158,7 +161,8 @@ export default async function HomePage({ searchParams }) {
         </Link>
       ))}
     </div>
-  )
+    )
+  }
 
   const Sayfalama = () => (
     <div className="flex items-center justify-center gap-6 py-12 border-t-4 border-red-600 mt-8 bg-gray-50 rounded-xl">
@@ -383,7 +387,7 @@ export default async function HomePage({ searchParams }) {
           </div>
         </div>
         <div className="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-base text-gray-400">
-          <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
+          <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
           <div className="flex gap-8">
             <Link href="/" className="hover:text-white transition-colors font-medium">Ana Sayfa</Link>
             <Link href="/hakkimizda" className="hover:text-white transition-colors font-medium">Hakkımızda</Link>
