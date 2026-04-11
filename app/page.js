@@ -82,33 +82,11 @@ export default async function HomePage({ searchParams }) {
     const buyuk = liste[buyukIndex]
     const yan1 = liste[yanIndex1]
     const yan2 = liste[yanIndex2]
-    if (!yan1 && !yan2) return (
-      <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        <div className="lg:w-full">
-          <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
-            <div className="group cursor-pointer">
-              <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
-                {buyuk.image_url ? (
-                  <img src={buyuk.image_url} alt={buyuk.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                ) : (
-                  <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded-lg">
-                    <span className="text-gray-300 text-4xl font-black">SH</span>
-                  </div>
-                )}
-              </div>
-              <div className="pt-3">
-                <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{buyuk.category}</span>
-                <h2 className="text-lg md:text-xl font-bold text-gray-900 leading-snug mt-1 mb-2 group-hover:text-red-600 transition-colors">{buyuk.title}</h2>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </div>
-    )
+    const yanlar = [yan1, yan2].filter(Boolean)
     if (!buyuk) return null
     return (
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
-        <div className="lg:w-3/5">
+        <div className={yanlar.length > 0 ? "lg:w-3/5" : "lg:w-full"}>
           <Link href={`/haber/${encodeURIComponent(buyuk.id)}`}>
             <div className="group cursor-pointer">
               <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
@@ -129,28 +107,30 @@ export default async function HomePage({ searchParams }) {
             </div>
           </Link>
         </div>
-        <div className="lg:w-2/5 grid grid-cols-1 gap-4">
-          {[yan1, yan2].filter(Boolean).map((news, i) => (
-            <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
-              <div className="group cursor-pointer h-full">
-                <div className="overflow-hidden rounded-lg mb-2" style={{height: '160px'}}>
-                  {news.image_url ? (
-                    <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  ) : (
-                    <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
-                      <span className="text-gray-300 font-black">SH</span>
-                    </div>
-                  )}
+        {yanlar.length > 0 && (
+          <div className="lg:w-2/5 flex flex-col gap-4">
+            {yanlar.map((news, i) => (
+              <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
+                <div className="group cursor-pointer">
+                  <div className="overflow-hidden rounded-lg mb-2" style={{height: '160px'}}>
+                    {news.image_url ? (
+                      <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    ) : (
+                      <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
+                        <span className="text-gray-300 font-black">SH</span>
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{news.category}</span>
+                    <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{news.title}</h3>
+                    <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
+                  </div>
                 </div>
-                <div>
-                  <span className="text-xs text-red-600 font-semibold uppercase tracking-wide">{news.category}</span>
-                  <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 mt-0.5 group-hover:text-red-600 transition-colors">{news.title}</h3>
-                  <p className="text-xs text-gray-400 mt-1">{new Date(news.created_at).toLocaleDateString('tr-TR')}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     )
   }
