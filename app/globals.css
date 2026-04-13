@@ -5,13 +5,6 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,7 +13,7 @@
 
 body {
   background: #ffffff;
-  color: var(--foreground);
+  color: #171717;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
@@ -39,19 +32,13 @@ a {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}input {
+}
+
+input {
   color: #111111 !important;
-}.prose h2, article h2, h2 {
-  font-size: 1.6rem !important;
-  font-weight: 900 !important;
-  color: #111 !important;
-  margin-top: 2rem !important;
-  margin-bottom: 0.8rem !important;
-  text-transform: uppercase !important;
-  border-left: 6px solid #c0392b !important;
-  padding-left: 12px !important;
-  line-height: 1.2 !important;
-}.prose h2, article h2, h2 {
+}
+
+.prose h2, article h2, h2 {
   font-size: 1.4rem !important;
   font-weight: 900 !important;
   color: #111 !important;
@@ -62,16 +49,21 @@ a {
   padding-left: 10px !important;
   line-height: 1.2 !important;
 }
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
+
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* KARANLIK MOD */
 .dark body {
   background-color: #111 !important;
   color: #f1f1f1 !important;
@@ -82,7 +74,7 @@ a {
 }
 .dark header {
   background-color: #1a1a1a !important;
-  border-color: #333 !important;
+  border-color: #444 !important;
 }
 .dark .bg-white {
   background-color: #1a1a1a !important;
@@ -97,23 +89,35 @@ a {
   color: #f1f1f1 !important;
 }
 .dark .text-gray-700 {
-  color: #d1d1d1 !important;
+  color: #e0e0e0 !important;
 }
 .dark .text-gray-600 {
-  color: #aaa !important;
+  color: #cccccc !important;
 }
 .dark .text-gray-500 {
-  color: #999 !important;
+  color: #bbbbbb !important;
 }
 .dark .text-gray-400 {
-  color: #777 !important;
+  color: #999999 !important;
 }
 .dark .border-gray-100 {
-  border-color: #333 !important;
+  border-color: #444 !important;
 }
 .dark .border-gray-200 {
-  border-color: #333 !important;
+  border-color: #444 !important;
 }
 .dark footer {
   background-color: #000 !important;
+}
+.dark .prose h2, .dark article h2, .dark h2 {
+  color: #f1f1f1 !important;
+  border-left-color: #c0392b !important;
+}
+.dark input {
+  background-color: #2a2a2a !important;
+  color: #f1f1f1 !important;
+  border-color: #444 !important;
+}
+.dark .text-gray-400 {
+  color: #aaaaaa !important;
 }
