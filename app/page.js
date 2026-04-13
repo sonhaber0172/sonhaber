@@ -209,7 +209,7 @@ export default async function HomePage({ searchParams }) {
                 <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#c0392b'}}>HABER</span>
                 <span style={{fontFamily: 'Arial Black, sans-serif', fontSize: '32px', fontWeight: '900', color: '#111'}}>SON</span>
               </div>
-              <span style={{fontSize: '11px', color: '#999', letterSpacing: '3px', fontWeight: '700'}}>TÜRKİYE'NİN SESİ</span>
+              <span style={{fontSize: '11px', color: '#555', letterSpacing: '3px', fontWeight: '700'}}>TÜRKİYE'NİN SESİ</span>
             </div>
           </Link>
           <KaranlikMod />
@@ -220,7 +220,7 @@ export default async function HomePage({ searchParams }) {
           </nav>
           <MobilMenu />
         </div>
-        <div className="px-6 py-2 text-xs text-gray-400 border-t border-gray-50">
+        <div className="px-6 py-2 text-xs text-gray-600 border-t border-gray-50">
           {new Date().toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
         </div>
         <div className="px-6 py-2 border-t border-gray-100">
