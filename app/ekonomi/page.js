@@ -6,9 +6,9 @@ export const revalidate = 300
 
 export async function generateMetadata() {
   return {
-    title: 'Ekonomi Haberleri | SonHaber - Borsa, Döviz, Piyasalar',
-    description: 'Son dakika ekonomi haberleri SonHaber\'de. Borsa, döviz, piyasalar ve daha fazlası.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/ekonomi' }
+    title: 'Ekonomi Haberleri | HaberSon - Borsa, Döviz, Piyasalar',
+    description: 'Son dakika ekonomi haberleri HaberSon\'de. Borsa, döviz, piyasalar ve daha fazlası.',
+    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/ekonomi' }
   }
 }
 

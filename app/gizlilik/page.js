@@ -37,7 +37,7 @@ export default function GizlilikPage() {
 
             <div>
               <h2 className="text-xl font-black text-gray-900 mb-3">1. Genel Bilgi</h2>
-              <p>SonHaber olarak, kullanıcılarımızın gizliliğine büyük önem veriyoruz. Bu gizlilik politikası, <strong>sonhaber.com.tr</strong> adresinde yayın yapan SonHaber platformunun hangi verileri topladığını, bu verileri nasıl kullandığını ve koruduğunu açıklamaktadır. Sitemizi kullanarak bu politikayı kabul etmiş sayılırsınız.</p>
+              <p>HaberSon olarak, kullanıcılarımızın gizliliğine büyük önem veriyoruz. Bu gizlilik politikası, <strong>HaberSon.com.tr</strong> adresinde yayın yapan HaberSon platformunun hangi verileri topladığını, bu verileri nasıl kullandığını ve koruduğunu açıklamaktadır. Sitemizi kullanarak bu politikayı kabul etmiş sayılırsınız.</p>
             </div>
 
             <div>
@@ -92,15 +92,15 @@ export default function GizlilikPage() {
                 <li>Kişisel verilerinizin silinmesini veya yok edilmesini isteme</li>
                 <li>İşlenen verilerinizin düzeltilmesini talep etme</li>
               </ul>
-              <p className="mt-2">Bu haklarınızı kullanmak için <a href="mailto:sonhaber0165@gmail.com" className="text-red-600 hover:underline">sonhaber0165@gmail.com</a> adresine e-posta gönderebilirsiniz.</p>
+              <p className="mt-2">Bu haklarınızı kullanmak için <a href="mailto:HaberSon0165@gmail.com" className="text-red-600 hover:underline">HaberSon0165@gmail.com</a> adresine e-posta gönderebilirsiniz.</p>
             </div>
 
             <div>
               <h2 className="text-xl font-black text-gray-900 mb-3">9. İletişim</h2>
               <p>Gizlilik politikamız hakkında sorularınız için bizimle iletişime geçebilirsiniz:</p>
               <div className="mt-3 bg-gray-50 rounded-xl p-4">
-                <p><strong>SonHaber</strong></p>
-                <p>E-posta: <a href="mailto:sonhaber0165@gmail.com" className="text-red-600 hover:underline">sonhaber0165@gmail.com</a></p>
+                <p><strong>HaberSon</strong></p>
+                <p>E-posta: <a href="mailto:HaberSon0165@gmail.com" className="text-red-600 hover:underline">HaberSon0165@gmail.com</a></p>
                 <p>WhatsApp: <a href="https://wa.me/905419123828" className="text-red-600 hover:underline">+90 541 912 38 28</a></p>
                 <p>Adres: Adana, Türkiye</p>
               </div>
@@ -148,7 +148,7 @@ export default function GizlilikPage() {
             </div>
           </div>
           <div className="px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-            <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
+            <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
             <div className="flex gap-5">
               <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
               <Link href="/gizlilik" className="hover:text-white transition-colors">Gizlilik</Link>

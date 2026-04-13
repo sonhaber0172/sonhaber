@@ -1,9 +1,9 @@
 'use client'
-import Link from 'next/link'
 
 export default function WhatsappButon() {
   return (
     <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer"
+      className="hidden md:flex"
       style={{
         position: 'fixed',
         bottom: '30px',
@@ -13,7 +13,6 @@ export default function WhatsappButon() {
         borderRadius: '50%',
         width: '60px',
         height: '60px',
-        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         boxShadow: '0 4px 20px rgba(37,211,102,0.4)',

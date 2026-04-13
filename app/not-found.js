@@ -44,7 +44,7 @@ export default function NotFound() {
         </div>
 
         <footer className="bg-gray-900 text-white px-8 py-6 text-center text-sm text-gray-400">
-          <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
+          <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
         </footer>
       </main>
     </div>

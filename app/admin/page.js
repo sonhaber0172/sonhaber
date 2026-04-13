@@ -16,7 +16,7 @@ export default function AdminPage() {
   const [arama, setArama] = useState('')
   const [istatistik, setIstatistik] = useState({})
   const handleGiris = () => {
-    if (sifre === 'sonhaber2025') setGiris(true)
+    if (sifre === 'HaberSon2025') setGiris(true)
     else alert('Hatalı şifre!')
   }
 
@@ -109,7 +109,7 @@ useEffect(() => {
   if (!giris) return (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl p-8 shadow-2xl w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center mb-2 text-gray-800">SONHABER</h1>
+        <h1 className="text-2xl font-bold text-center mb-2 text-gray-800">HaberSon</h1>
         <p className="text-center text-gray-400 text-sm mb-6">Admin Paneli</p>
         <input type="password" placeholder="Şifre" value={sifre} onChange={e => setSifre(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleGiris()}
@@ -125,7 +125,7 @@ useEffect(() => {
     <div style={{background: '#f1f5f9', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1000px', background: '#f1f5f9'}}>
         <div className="bg-red-700 text-white px-6 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-black">SONHABER Admin Paneli</h1>
+          <h1 className="text-xl font-black">HaberSon Admin Paneli</h1>
           <a href="/" className="text-red-200 hover:text-white text-sm">Siteye Dön</a>
         </div>
 

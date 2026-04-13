@@ -6,9 +6,9 @@ export const revalidate = 300
 
 export async function generateMetadata() {
   return {
-    title: 'Gündem Haberleri | SonHaber - Son Dakika Gündem',
-    description: 'Son dakika gündem haberleri SonHaber\'de. Türkiye\'nin en güncel gündem haber kaynağı.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/gundem' }
+    title: 'Gündem Haberleri | HaberSon - Son Dakika Gündem',
+    description: 'Son dakika gündem haberleri HaberSon\'de. Türkiye\'nin en güncel gündem haber kaynağı.',
+    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/gundem' }
   }
 }
 

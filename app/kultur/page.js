@@ -6,9 +6,9 @@ export const revalidate = 300
 
 export async function generateMetadata() {
   return {
-    title: 'Kültür Haberleri | SonHaber - Son Dakika Kültür Sanat',
-    description: 'Son dakika kültür ve sanat haberleri SonHaber\'de. Sinema, müzik, tiyatro ve daha fazlası.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/kultur' }
+    title: 'Kültür Haberleri | HaberSon - Son Dakika Kültür Sanat',
+    description: 'Son dakika kültür ve sanat haberleri HaberSon\'de. Sinema, müzik, tiyatro ve daha fazlası.',
+    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/kultur' }
   }
 }
 

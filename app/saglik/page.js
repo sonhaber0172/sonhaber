@@ -6,9 +6,9 @@ export const revalidate = 300
 
 export async function generateMetadata() {
   return {
-    title: 'Sağlık Haberleri | SonHaber - Son Dakika Sağlık',
-    description: 'Son dakika sağlık haberleri SonHaber\'de. Sağlık, tıp ve yaşam haberleri.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/saglik' }
+    title: 'Sağlık Haberleri | HaberSon - Son Dakika Sağlık',
+    description: 'Son dakika sağlık haberleri HaberSon\'de. Sağlık, tıp ve yaşam haberleri.',
+    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/saglik' }
   }
 }
 

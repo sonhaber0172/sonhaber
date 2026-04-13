@@ -31,7 +31,7 @@ export default function HakkimizdaPage() {
           
           {/* Üst Banner */}
           <div className="bg-red-700 rounded-2xl p-10 mb-12 text-center text-white">
-            <h1 className="text-4xl md:text-5xl font-black mb-4">SONHABER Hakkında</h1>
+            <h1 className="text-4xl md:text-5xl font-black mb-4">HaberSon Hakkında</h1>
             <p className="text-red-200 text-lg md:text-xl max-w-2xl mx-auto">
               Türkiye'nin en hızlı ve en güvenilir haber kaynağı olma yolunda kararlı adımlarla ilerliyoruz.
             </p>
@@ -44,13 +44,13 @@ export default function HakkimizdaPage() {
               <h2 className="text-2xl font-black text-gray-900">BİZ KİMİZ?</h2>
             </div>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
-              SonHaber, 2026 yılında Adana'dan yola çıkarak Türkiye'nin dijital haber dünyasına güçlü bir giriş yapan bağımsız bir haber platformudur. Amacımız tek: Doğru haberi, doğru zamanda, doğrudan sizinle buluşturmak.
+              HaberSon, 2026 yılında Adana'dan yola çıkarak Türkiye'nin dijital haber dünyasına güçlü bir giriş yapan bağımsız bir haber platformudur. Amacımız tek: Doğru haberi, doğru zamanda, doğrudan sizinle buluşturmak.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed mb-4">
               Gündem, spor, ekonomi, teknoloji, dünya ve daha pek çok alanda sunduğumuz içeriklerle okuyucularımızı her an bilgili ve bilinçli tutmayı hedefliyoruz. Sansasyondan uzak, gerçeğe yakın habercilik anlayışımızla fark yaratıyoruz.
             </p>
             <p className="text-gray-700 text-lg leading-relaxed">
-              SonHaber, büyük medya kuruluşlarının gölgesinde kalmayı reddeden, cesur ve bağımsız bir ses olmayı seçmiştir. Türkiye'nin dört bir yanından okurlara ulaşan platformumuz, her geçen gün büyümeye ve güçlenmeye devam ediyor.
+              HaberSon, büyük medya kuruluşlarının gölgesinde kalmayı reddeden, cesur ve bağımsız bir ses olmayı seçmiştir. Türkiye'nin dört bir yanından okurlara ulaşan platformumuz, her geçen gün büyümeye ve güçlenmeye devam ediyor.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function HakkimizdaPage() {
                 <h3 className="text-2xl font-black text-gray-900 mb-1">Soner Kaçuk</h3>
                 <p className="text-red-600 font-bold mb-3">Kurucu & Genel Yayın Yönetmeni — Adana</p>
                 <p className="text-gray-700 leading-relaxed">
-                  Dijital medyaya olan tutkusu ve Türkiye'de bağımsız haberciliğe duyduğu inanç ile SonHaber'i hayata geçiren Soner Kaçuk, platformun tüm editoryal ve yönetimsel süreçlerini bizzat yürütmektedir. Kaliteli, hızlı ve tarafsız habercilik onun için bir hedef değil, bir yaşam biçimidir.
+                  Dijital medyaya olan tutkusu ve Türkiye'de bağımsız haberciliğe duyduğu inanç ile HaberSon'i hayata geçiren Soner Kaçuk, platformun tüm editoryal ve yönetimsel süreçlerini bizzat yürütmektedir. Kaliteli, hızlı ve tarafsız habercilik onun için bir hedef değil, bir yaşam biçimidir.
                 </p>
               </div>
             </div>
@@ -112,8 +112,8 @@ export default function HakkimizdaPage() {
         </div>
 
         <footer className="bg-gray-900 text-gray-400 text-center py-6 mt-10 text-sm">
-          <p className="font-bold text-white text-lg mb-1">SONHABER</p>
-          <p>© 2026 SonHaber. Tüm hakları saklıdır.</p>
+          <p className="font-bold text-white text-lg mb-1">HaberSon</p>
+          <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
           <Link href="/iletisim" className="text-red-400 hover:text-red-300 mt-2 block font-medium">İletişim için tıklayın</Link>
         </footer>
       </main>
