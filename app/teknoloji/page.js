@@ -6,9 +6,9 @@ export const revalidate = 300
 
 export async function generateMetadata() {
   return {
-    title: 'Teknoloji Haberleri | SonHaber - Son Dakika Teknoloji',
-    description: 'Son dakika teknoloji haberleri SonHaber\'de. Yapay zeka, telefon, bilgisayar ve daha fazlası.',
-    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/teknoloji' }
+    title: 'Teknoloji Haberleri | HaberSon - Son Dakika Teknoloji',
+    description: 'Son dakika teknoloji haberleri HaberSon\'de. Yapay zeka, telefon, bilgisayar ve daha fazlası.',
+    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/teknoloji' }
   }
 }
 
