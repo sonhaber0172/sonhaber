@@ -164,3 +164,15 @@ input {
 .dark .slider-alt span {
   color: #c0392b !important;
 }
+.dark .ilgili-haberler-kutu {
+  background-color: #1a1a1a !important;
+  border-color: #c0392b !important;
+}
+
+.dark .ilgili-haberler-kutu a {
+  color: #ffffff !important;
+}
+
+.dark .ilgili-haberler-kutu p {
+  color: #ff4444 !important;
+}

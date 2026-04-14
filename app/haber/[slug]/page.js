@@ -183,7 +183,7 @@ export default async function HaberDetay({ params }) {
             <div className="text-gray-700 leading-relaxed text-base" style={{overflowX: 'hidden', maxWidth: '100%'}}
               dangerouslySetInnerHTML={{__html: haber.content}} />
 
-            <div className="mt-6 p-4 bg-red-50 rounded-xl border border-red-100">
+            <div className="ilgili-haberler-kutu mt-6 p-4 bg-red-50 rounded-xl border border-red-100">
               <p className="text-xs font-bold text-red-600 uppercase tracking-widest mb-3">📌 İlgili Haberler</p>
               <div className="flex flex-col gap-2">
                 {ayniKategori.slice(0, 3).map((h, i) => (
