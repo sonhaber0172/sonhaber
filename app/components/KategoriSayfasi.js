@@ -199,8 +199,15 @@ export default function KategoriSayfasi({ haberler, kategoriAdi, sayfaNo, toplam
               </div>
             </div>
           </div>
-          <div className="px-8 py-4 text-center text-xs text-gray-500">
+          <div className="px-4 py-6 flex flex-col items-center gap-3 text-sm text-gray-400">
             <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
+              <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
+              <Link href="/iletisim" className="hover:text-white transition-colors">İletişim</Link>
+              <Link href="/gizlilik" className="hover:text-white transition-colors">Gizlilik</Link>
+              <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 transition-colors">Reklam Ver</a>
+            </div>
           </div>
         </footer>
       </main>

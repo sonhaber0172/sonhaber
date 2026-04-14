@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="h-full">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="theme-color" content="#b91c1c" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />

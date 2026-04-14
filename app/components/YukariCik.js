@@ -24,7 +24,7 @@ export default function YukariCik() {
       style={{
         position: 'fixed',
         bottom: '90px',
-        left: '20px',
+        right: '20px',
         width: '44px',
         height: '44px',
         background: '#c0392b',
@@ -40,8 +40,8 @@ export default function YukariCik() {
         fontSize: '18px',
         transition: 'background 0.2s'
       }}
-      onMouseEnter={e => e.target.style.background = '#a93226'}
-      onMouseLeave={e => e.target.style.background = '#c0392b'}
+      onMouseEnter={e => e.currentTarget.style.background = '#a93226'}
+      onMouseLeave={e => e.currentTarget.style.background = '#c0392b'}
       title="Yukarı çık"
     >
       ↑

@@ -137,3 +137,6 @@ input {
 .dark .border-gray-800 {
   border-color: #444444 !important;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

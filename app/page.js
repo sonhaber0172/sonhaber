@@ -260,7 +260,7 @@ export default async function HomePage({ searchParams }) {
       {/* KATEGORİLER */}
       <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="px-4">
-          <div className="flex gap-2 overflow-x-auto py-3">
+          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide" style={{WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tümü' ? '/' : `/${k === 'Gündem' ? 'gundem' : k === 'Dünya' ? 'dunya' : k === 'Sağlık' ? 'saglik' : k === 'Kültür' ? 'kultur' : k === 'Yaşam' ? 'yasam' : k.toLowerCase()}`}
                 className={`shrink-0 px-7 py-3 text-base font-bold transition-colors rounded-full ${
@@ -386,14 +386,14 @@ export default async function HomePage({ searchParams }) {
             </div>
           </div>
         </div>
-        <div className="px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-base text-gray-400">
+        <div className="px-4 py-6 flex flex-col items-center gap-3 text-sm text-gray-400">
           <p>© 2026 HaberSon. Tüm hakları saklıdır.</p>
-          <div className="flex gap-8">
-            <Link href="/" className="hover:text-white transition-colors font-medium">Ana Sayfa</Link>
-            <Link href="/hakkimizda" className="hover:text-white transition-colors font-medium">Hakkımızda</Link>
-            <Link href="/iletisim" className="hover:text-white transition-colors font-medium">İletişim</Link>
-            <Link href="/gizlilik" className="hover:text-white transition-colors font-medium">Gizlilik</Link>
-            <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 transition-colors font-medium">Reklam Ver</a>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/" className="hover:text-white transition-colors">Ana Sayfa</Link>
+            <Link href="/hakkimizda" className="hover:text-white transition-colors">Hakkımızda</Link>
+            <Link href="/iletisim" className="hover:text-white transition-colors">İletişim</Link>
+            <Link href="/gizlilik" className="hover:text-white transition-colors">Gizlilik</Link>
+            <a href="https://wa.me/905419123828" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:text-red-300 transition-colors">Reklam Ver</a>
           </div>
         </div>
       </footer>
