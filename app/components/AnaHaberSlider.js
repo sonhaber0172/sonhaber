@@ -76,11 +76,11 @@ export default function AnaHaberSlider({ haberler }) {
 
       {/* Başlık */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
-        <div style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
+        <div className="slider-alt" style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
           <span style={{color:'#c0392b', fontSize:'11px', fontWeight:'800', textTransform:'uppercase', letterSpacing:'1px'}}>
             {haber.category}
           </span>
-          <h2 style={{color:'#111111', fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
+          <h2 className="slider-baslik" style={{fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
             {haber.title}
           </h2>
           <p style={{color:'#666', fontSize:'12px', margin:'0 0 10px 0'}}>

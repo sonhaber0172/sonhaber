@@ -143,3 +143,24 @@ input {
 .dark .ilgili-haber-baslik {
   color: #ffffff !important;
 }
+.dark .ilgili-haber-baslik {
+  color: #ffffff !important;
+}
+
+.dark .slider-baslik {
+  color: #ffffff !important;
+}.dark .slider-alt {
+  background-color: #1a1a1a !important;
+}
+
+.dark .slider-alt h2 {
+  color: #ffffff !important;
+}
+
+.dark .slider-alt p {
+  color: #aaaaaa !important;
+}
+
+.dark .slider-alt span {
+  color: #c0392b !important;
+}
