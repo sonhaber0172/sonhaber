@@ -260,7 +260,7 @@ export default async function HomePage({ searchParams }) {
       {/* KATEGORİLER */}
       <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="px-4">
-          <div className="flex gap-2 overflow-x-auto py-3 scrollbar-hide" style={{WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+          <div className="flex flex-wrap gap-2 py-3">
             {kategoriler.map(k => (
               <Link key={k} href={k === 'Tümü' ? '/' : `/${k === 'Gündem' ? 'gundem' : k === 'Dünya' ? 'dunya' : k === 'Sağlık' ? 'saglik' : k === 'Kültür' ? 'kultur' : k === 'Yaşam' ? 'yasam' : k.toLowerCase()}`}
                 className={`shrink-0 px-7 py-3 text-base font-bold transition-colors rounded-full ${

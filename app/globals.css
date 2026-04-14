@@ -140,3 +140,6 @@ input {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+.dark .ilgili-haber-baslik {
+  color: #ffffff !important;
+}
