@@ -48,6 +48,11 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#b91c1c" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" />
+        <link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full flex flex-col">
         {children}

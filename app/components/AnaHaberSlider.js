@@ -1,9 +1,23 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export default function AnaHaberSlider({ haberler }) {
   const [aktif, setAktif] = useState(0)
+  const [yuklendi, setYuklendi] = useState(false)
+  const ilkResimRef = useRef(null)
+
+  useEffect(() => {
+    setYuklendi(true)
+    // İlk resmi preload et
+    if (haberler[0]?.image_url) {
+      const link = document.createElement('link')
+      link.rel = 'preload'
+      link.as = 'image'
+      link.href = haberler[0].image_url
+      document.head.appendChild(link)
+    }
+  }, [haberler])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,14 +37,26 @@ export default function AnaHaberSlider({ haberler }) {
           <div key={i} style={{
             position:'absolute', inset:0,
             opacity: i === aktif ? 1 : 0,
-            transition:'opacity 0.6s ease'
+            transition:'opacity 0.6s ease',
+            willChange: 'opacity'
           }}>
-            {h.image_url
-              ? <img src={h.image_url} alt={h.title} style={{width:'100%', height:'100%', objectFit:'cover'}} />
-              : <div style={{width:'100%', height:'100%', background:'#e5e5e5'}} />
-            }
+            {h.image_url ? (
+              <img
+                src={h.image_url}
+                alt={h.title}
+                fetchpriority={i === 0 ? "high" : "low"}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding={i === 0 ? "sync" : "async"}
+                style={{width:'100%', height:'100%', objectFit:'cover'}}
+              />
+            ) : (
+              <div style={{width:'100%', height:'100%', background:'#e5e5e5', display:'flex', alignItems:'center', justifyContent:'center'}}>
+                <span style={{color:'#999', fontSize:'24px', fontWeight:'900'}}>HS</span>
+              </div>
+            )}
           </div>
         ))}
+
         <button onClick={() => setAktif(p => (p - 1 + haberler.length) % haberler.length)}
           style={{position:'absolute', left:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
           ‹
@@ -39,6 +65,7 @@ export default function AnaHaberSlider({ haberler }) {
           style={{position:'absolute', right:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
           ›
         </button>
+
         <div style={{position:'absolute', bottom:'10px', left:'50%', transform:'translateX(-50%)', display:'flex', gap:'6px'}}>
           {haberler.map((_, i) => (
             <button key={i} onClick={() => setAktif(i)}
@@ -47,16 +74,16 @@ export default function AnaHaberSlider({ haberler }) {
         </div>
       </div>
 
-      {/* Başlık - beyaz arka plan üzerinde, her zaman görünür */}
+      {/* Başlık */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
-        <div className="dark:bg-gray-900" style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
+        <div style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
           <span style={{color:'#c0392b', fontSize:'11px', fontWeight:'800', textTransform:'uppercase', letterSpacing:'1px'}}>
             {haber.category}
           </span>
-          <h2 className="dark:text-white" style={{color:'#111111', fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
+          <h2 style={{color:'#111111', fontSize:'20px', fontWeight:'900', lineHeight:'1.4', margin:'6px 0 8px 0'}}>
             {haber.title}
           </h2>
-          <p className="dark:text-gray-400" style={{color:'#888', fontSize:'12px', margin:'0 0 10px 0'}}>
+          <p style={{color:'#666', fontSize:'12px', margin:'0 0 10px 0'}}>
             {new Date(haber.created_at).toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'})}
           </p>
           <span style={{background:'#c0392b', color:'white', padding:'8px 16px', borderRadius:'8px', fontSize:'13px', fontWeight:'700', display:'inline-block'}}>
