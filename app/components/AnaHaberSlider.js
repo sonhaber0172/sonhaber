@@ -86,9 +86,9 @@ export default function AnaHaberSlider({ haberler }) {
           <p style={{color:'#666', fontSize:'12px', margin:'0 0 10px 0'}}>
             {new Date(haber.created_at).toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'})}
           </p>
-          <span style={{background:'#c0392b', color:'white', padding:'8px 16px', borderRadius:'8px', fontSize:'13px', fontWeight:'700', display:'inline-block', marginTop:'8px'}}>
-            Haberin Devamını Oku →
-          </span>
+          <span className="slider-buton" style={{background:'#c0392b', color:'#ffffff', padding:'8px 16px', borderRadius:'8px', fontSize:'13px', fontWeight:'700', display:'inline-block', marginTop:'8px'}}>
+  Haberin Devamını Oku →
+</span>
         </div>
       </Link>
     </div>
