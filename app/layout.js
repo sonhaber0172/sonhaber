@@ -48,6 +48,17 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
         <meta name="theme-color" content="#b91c1c" />
+        <script dangerouslySetInnerHTML={{__html: `
+          (function() {
+            try {
+              var karanlik = localStorage.getItem('karanlik-mod');
+              if (karanlik === 'true') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.style.backgroundColor = '#0d0d0d';
+              }
+            } catch(e) {}
+          })();
+        `}} />
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" />
