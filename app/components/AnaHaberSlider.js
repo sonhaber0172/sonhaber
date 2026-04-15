@@ -1,23 +1,9 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function AnaHaberSlider({ haberler }) {
   const [aktif, setAktif] = useState(0)
-  const [yuklendi, setYuklendi] = useState(false)
-  const ilkResimRef = useRef(null)
-
-  useEffect(() => {
-    setYuklendi(true)
-    // İlk resmi preload et
-    if (haberler[0]?.image_url) {
-      const link = document.createElement('link')
-      link.rel = 'preload'
-      link.as = 'image'
-      link.href = haberler[0].image_url
-      document.head.appendChild(link)
-    }
-  }, [haberler])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -31,8 +17,7 @@ export default function AnaHaberSlider({ haberler }) {
 
   return (
     <div style={{borderRadius:'12px', overflow:'hidden', border:'1px solid #f0f0f0'}}>
-      {/* Resim */}
-      <div style={{position:'relative', height:'380px', overflow:'hidden', background:'#f1f1f1'}}>
+      <div style={{position:'relative', width:'100%', aspectRatio:'16/10', overflow:'hidden', background:'#f1f1f1'}}>
         {haberler.map((h, i) => (
           <div key={i} style={{
             position:'absolute', inset:0,
@@ -44,10 +29,12 @@ export default function AnaHaberSlider({ haberler }) {
               <img
                 src={h.image_url}
                 alt={h.title}
-                fetchpriority={i === 0 ? "high" : "low"}
+                fetchPriority={i === 0 ? "high" : "low"}
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding={i === 0 ? "sync" : "async"}
-                style={{width:'100%', height:'100%', objectFit:'cover'}}
+                width="800"
+                height="500"
+                style={{width:'100%', height:'100%', objectFit:'cover', display:'block'}}
               />
             ) : (
               <div style={{width:'100%', height:'100%', background:'#e5e5e5', display:'flex', alignItems:'center', justifyContent:'center'}}>
@@ -58,10 +45,12 @@ export default function AnaHaberSlider({ haberler }) {
         ))}
 
         <button onClick={() => setAktif(p => (p - 1 + haberler.length) % haberler.length)}
+          aria-label="Önceki haber"
           style={{position:'absolute', left:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
           ‹
         </button>
         <button onClick={() => setAktif(p => (p + 1) % haberler.length)}
+          aria-label="Sonraki haber"
           style={{position:'absolute', right:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
           ›
         </button>
@@ -69,12 +58,12 @@ export default function AnaHaberSlider({ haberler }) {
         <div style={{position:'absolute', bottom:'10px', left:'50%', transform:'translateX(-50%)', display:'flex', gap:'6px'}}>
           {haberler.map((_, i) => (
             <button key={i} onClick={() => setAktif(i)}
+              aria-label={`Slide ${i+1}`}
               style={{width: i === aktif ? '24px' : '8px', height:'8px', borderRadius:'4px', border:'none', cursor:'pointer', background: i === aktif ? '#c0392b' : 'rgba(255,255,255,0.8)', transition:'all 0.3s'}} />
           ))}
         </div>
       </div>
 
-      {/* Başlık */}
       <Link href={`/haber/${encodeURIComponent(haber.id)}`}>
         <div className="slider-alt" style={{background:'#ffffff', padding:'16px', borderTop:'3px solid #c0392b', cursor:'pointer'}}>
           <span style={{color:'#c0392b', fontSize:'11px', fontWeight:'800', textTransform:'uppercase', letterSpacing:'1px'}}>
@@ -87,8 +76,8 @@ export default function AnaHaberSlider({ haberler }) {
             {new Date(haber.created_at).toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'})}
           </p>
           <span className="slider-buton" style={{background:'#c0392b', color:'#ffffff', padding:'8px 16px', borderRadius:'8px', fontSize:'13px', fontWeight:'700', display:'inline-block', marginTop:'8px'}}>
-  Haberin Devamını Oku →
-</span>
+            Haberin Devamını Oku →
+          </span>
         </div>
       </Link>
     </div>

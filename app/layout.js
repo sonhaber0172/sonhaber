@@ -2,7 +2,6 @@ import "./globals.css";
 import Script from "next/script";
 import WhatsappButon from "./components/WhatsappButon";
 import YukariCik from "./components/YukariCik";
-import KaranlikMod from './components/KaranlikMod'
 
 export const metadata = {
   title: {
@@ -54,21 +53,28 @@ export default function RootLayout({ children }) {
               var karanlik = localStorage.getItem('karanlik-mod');
               if (karanlik === 'true') {
                 document.documentElement.classList.add('dark');
-                document.documentElement.style.backgroundColor = '#0d0d0d';
               }
             } catch(e) {}
           })();
         `}} />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://i.ytimg.com" />
-        <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" />
+        {/* Haber kaynaklarına önceden bağlan - LCP için kritik */}
+        <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.aksam.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://iaahbr.tmgrup.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://iasbh.tmgrup.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.haberglobal.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.ensonhaber.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.sozcu.com.tr" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://im.haberturk.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.cnnturk.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://image.hurimg.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
       </head>
       <body className="min-h-full flex flex-col">
         {children}
         <WhatsappButon />
-        <KaranlikMod />
         <YukariCik />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VTWF4S968M"
