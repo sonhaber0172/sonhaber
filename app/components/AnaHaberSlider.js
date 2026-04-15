@@ -19,31 +19,33 @@ export default function AnaHaberSlider({ haberler }) {
   return (
     <div style={{borderRadius:'12px', overflow:'hidden', border:'1px solid #f0f0f0'}}>
       <div style={{position:'relative', width:'100%', aspectRatio:'16/10', overflow:'hidden', background:'#f1f1f1'}}>
-        {haberler.map((h, i) => (
-          <div key={i} style={{
-            position:'absolute', inset:0,
-            opacity: i === aktif ? 1 : 0,
-            transition:'opacity 0.6s ease',
-            willChange: 'opacity',
-            zIndex: i === aktif ? 2 : 1
-          }}>
-            {h.image_url ? (
-              <Image
-                src={h.image_url}
-                alt={h.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 720px"
-                priority={i === 0}
-                quality={75}
-                style={{objectFit:'cover'}}
-              />
-            ) : (
-              <div style={{width:'100%', height:'100%', background:'#e5e5e5', display:'flex', alignItems:'center', justifyContent:'center'}}>
-                <span style={{color:'#999', fontSize:'24px', fontWeight:'900'}}>HS</span>
-              </div>
-            )}
-          </div>
-        ))}
+       {haberler.map((h, i) => {
+  const yuklenmeli = i === 0 || Math.abs(i - aktif) <= 1 || (aktif === 0 && i === haberler.length - 1) || (aktif === haberler.length - 1 && i === 0)
+  return (
+    <div key={i} style={{
+      position:'absolute', inset:0,
+      opacity: i === aktif ? 1 : 0,
+      transition:'opacity 0.6s ease',
+      willChange: 'opacity',
+      zIndex: i === aktif ? 2 : 1
+    }}>
+      {h.image_url && yuklenmeli ? (
+        <Image
+          src={h.image_url}
+          alt={h.title}
+          fill
+          sizes="(max-width: 768px) 100vw, 720px"
+          priority={i === 0}
+          loading={i === 0 ? "eager" : "lazy"}
+          quality={70}
+          style={{objectFit:'cover'}}
+        />
+      ) : (
+        <div style={{width:'100%', height:'100%', background:'#e5e5e5'}} />
+      )}
+    </div>
+  )
+})}
 
         <button onClick={() => setAktif(p => (p - 1 + haberler.length) % haberler.length)}
           aria-label="Önceki haber"

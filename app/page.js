@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
@@ -76,6 +77,7 @@ export default async function HomePage({ searchParams }) {
   const sonrakiSayfa = sayfaNo < toplamSayfa ? `/?sayfa=${sayfaNo + 1}${kategoriParam}` : null
 
   const gosterilecekHaberler = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
+  const lcpResim = sayfaNo === 1 ? allNews[0]?.image_url : null
   const BuyukHaberVeYan = ({ buyukIndex, yanIndex1, yanIndex2 }) => {
     const liste = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
     const buyuk = liste[buyukIndex]
@@ -290,7 +292,7 @@ export default async function HomePage({ searchParams }) {
                     <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
                       <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
                         {news.image_url ? (
-                          <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                         <Image src={news.image_url} alt={news.title} width={80} height={64} loading="lazy" quality={60} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                             <span className="text-gray-300 font-black text-sm">SH</span>
