@@ -59,15 +59,8 @@ export default function RootLayout({ children }) {
         `}} />
         {/* Haber kaynaklarına önceden bağlan - LCP için kritik */}
         <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i.aksam.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://iaahbr.tmgrup.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://iasbh.tmgrup.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i.haberglobal.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdn.ensonhaber.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i.sozcu.com.tr" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://im.haberturk.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://i.cnnturk.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://image.hurimg.com" crossOrigin="anonymous" />
+<link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
+<link rel="dns-prefetch" href="https://api.rss2json.com" />
         <link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />

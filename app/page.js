@@ -76,7 +76,6 @@ export default async function HomePage({ searchParams }) {
   const sonrakiSayfa = sayfaNo < toplamSayfa ? `/?sayfa=${sayfaNo + 1}${kategoriParam}` : null
 
   const gosterilecekHaberler = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
-const lcpResim = sayfaNo === 1 ? allNews[0]?.image_url : null
   const BuyukHaberVeYan = ({ buyukIndex, yanIndex1, yanIndex2 }) => {
     const liste = sayfaNo === 1 ? allNews.slice(8) : sayfaHaberleri
     const buyuk = liste[buyukIndex]
@@ -194,14 +193,7 @@ const lcpResim = sayfaNo === 1 ? allNews[0]?.image_url : null
   return (
     <div className="sayfa-wrapper" style={{minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main className="sayfa-icerik" style={{width: '100%', maxWidth: '1200px', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
-{lcpResim && (
-  <link
-    rel="preload"
-    as="image"
-    href={lcpResim}
-    fetchPriority="high"
-  />
-)}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}

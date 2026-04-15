@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function AnaHaberSlider({ haberler }) {
   const [aktif, setAktif] = useState(0)
@@ -23,18 +24,18 @@ export default function AnaHaberSlider({ haberler }) {
             position:'absolute', inset:0,
             opacity: i === aktif ? 1 : 0,
             transition:'opacity 0.6s ease',
-            willChange: 'opacity'
+            willChange: 'opacity',
+            zIndex: i === aktif ? 2 : 1
           }}>
             {h.image_url ? (
-              <img
+              <Image
                 src={h.image_url}
                 alt={h.title}
-                fetchPriority={i === 0 ? "high" : "low"}
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding={i === 0 ? "sync" : "async"}
-                width="800"
-                height="500"
-                style={{width:'100%', height:'100%', objectFit:'cover', display:'block'}}
+                fill
+                sizes="(max-width: 768px) 100vw, 720px"
+                priority={i === 0}
+                quality={75}
+                style={{objectFit:'cover'}}
               />
             ) : (
               <div style={{width:'100%', height:'100%', background:'#e5e5e5', display:'flex', alignItems:'center', justifyContent:'center'}}>
@@ -46,16 +47,16 @@ export default function AnaHaberSlider({ haberler }) {
 
         <button onClick={() => setAktif(p => (p - 1 + haberler.length) % haberler.length)}
           aria-label="Önceki haber"
-          style={{position:'absolute', left:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
+          style={{position:'absolute', left:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex: 3}}>
           ‹
         </button>
         <button onClick={() => setAktif(p => (p + 1) % haberler.length)}
           aria-label="Sonraki haber"
-          style={{position:'absolute', right:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center'}}>
+          style={{position:'absolute', right:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex: 3}}>
           ›
         </button>
 
-        <div style={{position:'absolute', bottom:'10px', left:'50%', transform:'translateX(-50%)', display:'flex', gap:'6px'}}>
+        <div style={{position:'absolute', bottom:'10px', left:'50%', transform:'translateX(-50%)', display:'flex', gap:'6px', zIndex: 3}}>
           {haberler.map((_, i) => (
             <button key={i} onClick={() => setAktif(i)}
               aria-label={`Slide ${i+1}`}
