@@ -113,8 +113,8 @@ export default async function HaberDetay({ params }) {
 
   if (!haber) {
     return (
-      <div style={{background: '#ffffff', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
-        <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
+      <div className="sayfa-wrapper" style={{minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
+        <main className="sayfa-icerik" style={{width: '100%', maxWidth: '1200px', boxShadow: '0 0 40px rgba(0,0,0,0.15)'}}>
           <header className="bg-white border-b border-gray-100">
             <div className="px-6 py-4">
               <Link href="/">
@@ -135,8 +135,8 @@ export default async function HaberDetay({ params }) {
   }
 
   return (
-    <div style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center', overflowX: 'hidden'}}>
-      <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 30px rgba(0,0,0,0.08)', overflowX: 'hidden'}}>
+    <div className="sayfa-wrapper" style={{minHeight: '100vh', display: 'flex', justifyContent: 'center', overflowX: 'hidden'}}>
+      <main className="sayfa-icerik" style={{width: '100%', maxWidth: '1200px', boxShadow: '0 0 30px rgba(0,0,0,0.08)', overflowX: 'hidden'}}>
 
         {schemaData && (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />

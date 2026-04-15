@@ -146,4 +146,24 @@ html.dark body,
 html.dark #__next,
 html.dark #__next > div {
   background-color: #0d0d0d !important;
+}/* Sayfa arka plan wrapper'ı - karanlık moda duyarlı */
+.sayfa-wrapper {
+  background: #f8f8f8;
+  min-height: 100vh;
+}
+
+html.dark .sayfa-wrapper {
+  background: #1a1a1a;
+}
+.sayfa-wrapper {
+  background: #f8f8f8;
+}
+html.dark .sayfa-wrapper {
+  background: #0d0d0d;
+}
+.sayfa-icerik {
+  background: #ffffff;
+}
+html.dark .sayfa-icerik {
+  background: #1a1a1a;
 }
