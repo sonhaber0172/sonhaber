@@ -67,6 +67,17 @@ input {
   background-color: #0d0d0d !important;
   color: #ffffff !important;
 }
+
+.dark div[style*="background: #f8f8f8"],
+.dark div[style*="background:#f8f8f8"] {
+  background: #0d0d0d !important;
+}
+
+.dark div[style*="background: #ffffff"],
+.dark div[style*="background:#ffffff"] {
+  background: #1a1a1a !important;
+}
+
 .dark main {
   background-color: #1a1a1a !important;
   box-shadow: 0 0 40px rgba(0,0,0,0.8) !important;

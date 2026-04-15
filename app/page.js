@@ -192,7 +192,7 @@ export default async function HomePage({ searchParams }) {
   )
 
   return (
-    <div style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
+    <div className="dark:bg-[#0d0d0d]" style={{background: '#f8f8f8', minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main style={{width: '100%', maxWidth: '1200px', background: '#ffffff', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
 
         <script
