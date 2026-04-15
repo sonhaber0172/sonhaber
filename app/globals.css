@@ -159,11 +159,44 @@ html.dark .sayfa-wrapper {
   background: #f8f8f8;
 }
 html.dark .sayfa-wrapper {
-  background: #0d0d0d;
+  background: #1a1a1a;
 }
 .sayfa-icerik {
   background: #ffffff;
 }
 html.dark .sayfa-icerik {
   background: #1a1a1a;
+}
+
+/* Karanlık modda içerideki bg-white elementlerini de koyu yap */
+html.dark .sayfa-icerik header,
+html.dark .sayfa-icerik .bg-white {
+  background: #1a1a1a !important;
+}
+
+html.dark .sayfa-icerik .bg-gray-50 {
+  background: #222 !important;
+}
+
+html.dark .sayfa-icerik .bg-gray-100 {
+  background: #2a2a2a !important;
+}
+
+/* Yazı renklerini karanlık modda açık yap */
+html.dark .sayfa-icerik .text-gray-900,
+html.dark .sayfa-icerik .text-gray-700,
+html.dark .sayfa-icerik .text-gray-600 {
+  color: #e5e5e5 !important;
+}
+
+html.dark .sayfa-icerik .text-gray-500,
+html.dark .sayfa-icerik .text-gray-400 {
+  color: #a0a0a0 !important;
+}
+
+/* Border renklerini düzelt */
+html.dark .sayfa-icerik .border-gray-100,
+html.dark .sayfa-icerik .border-gray-50,
+html.dark .sayfa-icerik .border-gray-200 {
+  border-color: #2a2a2a !important;
 }
