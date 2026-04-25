@@ -136,11 +136,10 @@ export default async function HomePage({ searchParams }) {
     )
   }
 
-  const KucukGrid = ({ haberler }) => {
+const KucukGrid = ({ haberler }) => {
     if (!haberler || haberler.length === 0) return null
-    const cols = haberler.length >= 4 ? 4 : haberler.length
     return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${cols} gap-5 mb-8`}>
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
       {haberler.map((news, index) => (
         <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
           <div className="group cursor-pointer">
@@ -317,11 +316,11 @@ export default async function HomePage({ searchParams }) {
           <h2 className="text-base font-bold text-gray-500 uppercase tracking-widest mb-6 pb-2 border-b border-gray-100">
             {sayfaNo === 1 ? 'Diğer Haberler' : `Haberler - Sayfa ${sayfaNo}`}
           </h2>
-          <KucukGrid haberler={gosterilecekHaberler.slice(0, 7)} />
-          <BuyukHaberVeYan buyukIndex={7} yanIndex1={8} yanIndex2={9} />
-          <KucukGrid haberler={gosterilecekHaberler.slice(10, 17)} />
-          <BuyukHaberVeYan buyukIndex={17} yanIndex1={18} yanIndex2={19} />
-          <KucukGrid haberler={gosterilecekHaberler.slice(20, 30)} />
+          <KucukGrid haberler={gosterilecekHaberler.slice(0, 8)} />
+<BuyukHaberVeYan buyukIndex={8} yanIndex1={9} yanIndex2={10} />
+<KucukGrid haberler={gosterilecekHaberler.slice(11, 15)} />
+<BuyukHaberVeYan buyukIndex={15} yanIndex1={16} yanIndex2={17} />
+<KucukGrid haberler={gosterilecekHaberler.slice(18, 22)} />
         </div>
 
         <Sayfalama />
