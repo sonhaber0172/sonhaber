@@ -58,13 +58,13 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
       </div>
 
       {/* Mobil */}
-      <div className="flex md:hidden items-center justify-center gap-2">
+      <div className="flex md:hidden items-center justify-center gap-3">
         {oncekiSayfa ? (
-          <Link href={oncekiSayfa} className="px-4 py-2.5 rounded-lg border border-gray-200 text-gray-600 font-semibold text-sm bg-white dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800">
+          <Link href={oncekiSayfa} className="px-5 py-3 rounded-xl border border-gray-200 text-gray-600 font-bold text-base bg-white dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800">
             ← Önceki
           </Link>
         ) : (
-          <span className="px-4 py-2.5 rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed font-semibold text-sm bg-white dark:border-gray-700 dark:text-gray-600 dark:bg-gray-800">
+          <span className="px-5 py-3 rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed font-bold text-base bg-white dark:border-gray-700 dark:text-gray-600 dark:bg-gray-800">
             ← Önceki
           </span>
         )}
@@ -72,21 +72,21 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
         <select
           value={sayfaNo}
           onChange={(e) => router.push(`/?sayfa=${e.target.value}${kategoriParam}`)}
-          className="px-4 py-2.5 rounded-lg border border-gray-800 text-sm font-semibold text-white bg-gray-800 cursor-pointer dark:border-gray-600"
+          className="px-5 py-3 rounded-xl border border-gray-800 text-base font-bold text-white bg-gray-800 cursor-pointer dark:border-gray-600"
         >
           {Array.from({ length: toplamSayfa }, (_, i) => i + 1).map(s => (
             <option key={s} value={s}>Sayfa {s}</option>
           ))}
         </select>
 
-        <span className="text-gray-500 text-sm font-medium">/ {toplamSayfa} sayfa</span>
+        <span className="text-gray-500 text-base font-semibold">/ {toplamSayfa} sayfa</span>
 
         {sonrakiSayfa ? (
-          <Link href={sonrakiSayfa} className="px-4 py-2.5 rounded-lg border border-gray-200 text-red-600 font-semibold text-sm bg-white dark:border-gray-600 dark:bg-gray-800">
+          <Link href={sonrakiSayfa} className="px-5 py-3 rounded-xl border border-gray-200 text-red-600 font-bold text-base bg-white dark:border-gray-600 dark:bg-gray-800">
             Sonraki →
           </Link>
         ) : (
-          <span className="px-4 py-2.5 rounded-lg border border-gray-200 text-gray-300 cursor-not-allowed font-semibold text-sm bg-white dark:border-gray-700 dark:bg-gray-800">
+          <span className="px-5 py-3 rounded-xl border border-gray-200 text-gray-300 cursor-not-allowed font-bold text-base bg-white dark:border-gray-700 dark:bg-gray-800">
             Sonraki →
           </span>
         )}
