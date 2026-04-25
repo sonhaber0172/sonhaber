@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { fetchRSSNews } from '../lib/rss'
 import { supabase } from '../lib/supabase'
 import Arama from './components/Arama'
 import SosyalMediaBar from './components/SosyalMediaBar'
@@ -53,7 +52,6 @@ export default async function HomePage({ searchParams }) {
   const { kategori, sayfa } = await searchParams
   const sayfaNo = parseInt(sayfa) || 1
 
-  const rssNews = await fetchRSSNews()
   
   const { data: customNews } = await supabase
     .from('articles')
@@ -61,7 +59,7 @@ export default async function HomePage({ searchParams }) {
     .eq('is_custom', true)
     .order('priority_score', { ascending: false })
 
-  let allNews = [...(customNews || []), ...rssNews]
+  let allNews = customNews || []
   
   if (kategori && kategori !== 'Tümü') {
     allNews = allNews.filter(n => n.category === kategori)

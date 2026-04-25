@@ -1,5 +1,4 @@
 import { supabase } from '../../../lib/supabase'
-import { fetchRSSNews } from '../../../lib/rss'
 import Link from 'next/link'
 import OkumaCubugu from '../../components/OkumaCubugu'
 
@@ -9,7 +8,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const id = decodeURIComponent(slug)
 
-  const { data: customHaber } = await supabase
+  const { data: haber } = await supabase
     .from('articles')
     .select('title, content, image_url, category')
     .eq('id', id)
@@ -19,18 +18,10 @@ export async function generateMetadata({ params }) {
   let description = 'Türkiye ve dünyadan son dakika haberleri HaberSon\'de.'
   let image = null
 
-  if (customHaber) {
-    title = `${customHaber.title} | HaberSon`
-    description = customHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
-    image = customHaber.image_url || null
-  } else {
-    const rssNews = await fetchRSSNews()
-    const rssHaber = rssNews.find(h => h.id === id)
-    if (rssHaber) {
-      title = `${rssHaber.title} | HaberSon`
-      description = rssHaber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
-      image = rssHaber.image_url || null
-    }
+  if (haber) {
+    title = `${haber.title} | HaberSon`
+    description = haber.content?.replace(/<[^>]*>/g, '').substring(0, 155) || description
+    image = haber.image_url || null
   }
 
   return {
@@ -60,20 +51,13 @@ export default async function HaberDetay({ params }) {
   const { slug } = await params
   const id = decodeURIComponent(slug)
 
-  const [rssNews, customHaberResult, customNewsResult] = await Promise.all([
-    fetchRSSNews(),
+  const [customHaberResult, customNewsResult] = await Promise.all([
     supabase.from('articles').select('*').eq('id', id).single(),
     supabase.from('articles').select('*').eq('is_custom', true).order('priority_score', { ascending: false }).limit(20)
   ])
 
-  let haber = null
-  if (customHaberResult.data) {
-    haber = customHaberResult.data
-  } else {
-    haber = rssNews.find(h => h.id === id)
-  }
-
-  const tumHaberler = [...(customNewsResult.data || []), ...rssNews]
+  const haber = customHaberResult.data || null
+  const tumHaberler = customNewsResult.data || []
   const ayniKategori = tumHaberler.filter(h => h.id !== id && h.category === haber?.category)
   const digerKategori = tumHaberler.filter(h => h.id !== id && h.category !== haber?.category)
   const siraliHaberler = [...ayniKategori, ...digerKategori].slice(0, 16)
@@ -229,11 +213,6 @@ export default async function HaberDetay({ params }) {
               <Link href="/" className="text-red-600 hover:text-red-700 font-medium text-sm">
                 ← Ana sayfaya dön
               </Link>
-              {haber.source_url && !haber.is_custom && (
-                <a href={haber.source_url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-600 text-sm">
-                  Kaynak habere git
-                </a>
-              )}
             </div>
 
             <div className="mt-6 border-t border-gray-100 pt-4">
