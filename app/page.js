@@ -1,3 +1,4 @@
+import Sayfalama from './components/Sayfalama'
 import Link from 'next/link'
 import Image from 'next/image'
 import { supabase } from '../lib/supabase'
@@ -229,10 +230,20 @@ const KucukGrid = ({ haberler }) => {
             </span>
           )}
 
-          <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold dark:border-gray-600">
-            <span className="text-gray-700 dark:text-gray-300">Sayfa {sayfaNo}</span>
-            <span className="text-gray-400 dark:text-gray-500">/ {toplamSayfa} sayfa</span>
+          <div className="relative flex items-center">
+            <select
+              defaultValue={sayfaNo}
+              onChange={(e) => { window.location.href = `/?sayfa=${e.target.value}${kategoriParam}` }}
+              className="appearance-none px-4 py-2.5 pr-8 rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 bg-white cursor-pointer dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+            >
+              {Array.from({ length: toplamSayfa }, (_, i) => i + 1).map(s => (
+                <option key={s} value={s}>Sayfa {s}</option>
+              ))}
+            </select>
+            <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs dark:text-gray-500">▼</span>
           </div>
+
+          <span className="text-gray-400 text-sm font-semibold dark:text-gray-500">/ {toplamSayfa} sayfa</span>
 
           {sonrakiSayfa ? (
             <Link href={sonrakiSayfa} className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-200 text-red-600 font-semibold text-sm dark:border-gray-600">
@@ -380,7 +391,7 @@ const KucukGrid = ({ haberler }) => {
 <KucukGrid haberler={gosterilecekHaberler.slice(18, 22)} />
         </div>
 
-        <Sayfalama />
+        <Sayfalama sayfaNo={sayfaNo} toplamSayfa={toplamSayfa} oncekiSayfa={oncekiSayfa} sonrakiSayfa={sonrakiSayfa} kategoriParam={kategoriParam} />
       </div>
 
       {/* FOOTER */}
