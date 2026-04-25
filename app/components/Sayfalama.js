@@ -57,13 +57,14 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
         )}
       </div>
 
-      <div className="flex md:hidden items-center gap-2">
+    {/* Mobil */}
+      <div className="flex md:hidden items-center justify-center gap-3">
         {oncekiSayfa ? (
-          <Link href={oncekiSayfa} className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 font-semibold text-sm dark:border-gray-600 dark:text-gray-300">
+          <Link href={oncekiSayfa} className="flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm bg-white dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800">
             ← Önceki
           </Link>
         ) : (
-          <span className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
+          <span className="flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm bg-white dark:border-gray-700 dark:text-gray-600 dark:bg-gray-800">
             ← Önceki
           </span>
         )}
@@ -72,24 +73,24 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
           <select
             value={sayfaNo}
             onChange={(e) => router.push(`/?sayfa=${e.target.value}${kategoriParam}`)}
-            className="appearance-none px-4 py-2.5 pr-8 rounded-lg border border-gray-200 text-sm font-semibold text-gray-700 bg-white cursor-pointer dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
+            className="appearance-none px-5 py-3 pr-10 rounded-xl border border-gray-200 text-sm font-semibold text-gray-700 bg-white cursor-pointer dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300"
           >
             {Array.from({ length: toplamSayfa }, (_, i) => i + 1).map(s => (
               <option key={s} value={s}>Sayfa {s}</option>
             ))}
           </select>
-          <span className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs dark:text-gray-500">▼</span>
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none dark:text-gray-500">∨</span>
         </div>
 
-        <span className="text-gray-400 text-sm font-semibold dark:text-gray-500">/ {toplamSayfa} sayfa</span>
+        <span className="text-gray-400 text-sm font-medium dark:text-gray-500">/ {toplamSayfa} sayfa</span>
 
         {sonrakiSayfa ? (
-          <Link href={sonrakiSayfa} className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-200 text-red-600 font-semibold text-sm dark:border-gray-600">
-            Sonraki →
+          <Link href={sonrakiSayfa} className="flex items-center gap-1 px-5 py-3 rounded-xl border border-gray-200 text-red-600 font-semibold text-sm bg-white dark:border-gray-600 dark:bg-gray-800">
+            Sonraki <span className="text-red-600">›</span>
           </Link>
         ) : (
-          <span className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
-            Sonraki →
+          <span className="flex items-center gap-1 px-5 py-3 rounded-xl border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm bg-white dark:border-gray-700 dark:text-gray-600 dark:bg-gray-800">
+            Sonraki <span>›</span>
           </span>
         )}
       </div>
