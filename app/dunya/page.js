@@ -1,4 +1,3 @@
-import { fetchRSSNews } from '../../lib/rss'
 import { supabase } from '../../lib/supabase'
 import KategoriSayfasi from '../components/KategoriSayfasi'
 
@@ -8,7 +7,7 @@ export async function generateMetadata() {
   return {
     title: 'Dünya Haberleri | HaberSon - Son Dakika Dünya',
     description: 'Son dakika dünya haberleri HaberSon\'de. Dünyadan en güncel gelişmeler.',
-    alternates: { canonical: 'https://HaberSon-rouge.vercel.app/dunya' }
+    alternates: { canonical: 'https://sonhaber-rouge.vercel.app/dunya' }
   }
 }
 
@@ -16,9 +15,8 @@ export default async function DunyaPage({ searchParams }) {
   const { sayfa } = await searchParams
   const sayfaNo = parseInt(sayfa) || 1
   const SAYFA_BASI = 28
-  const rssNews = await fetchRSSNews()
   const { data: customNews } = await supabase.from('articles').select('*').eq('is_custom', true).order('priority_score', { ascending: false })
-  const tumHaberler = [...(customNews || []), ...rssNews].filter(n => n.category === 'Dünya')
+  const tumHaberler = (customNews || []).filter(n => n.category === 'Dünya')
   const toplamSayfa = Math.ceil(tumHaberler.length / SAYFA_BASI)
   const baslangic = (sayfaNo - 1) * SAYFA_BASI
   const haberler = tumHaberler.slice(baslangic, baslangic + SAYFA_BASI)
