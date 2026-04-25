@@ -57,7 +57,7 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
         )}
       </div>
 
-   {/* Mobil */}
+      {/* Mobil */}
       <div className="flex md:hidden items-center justify-center gap-2">
         {oncekiSayfa ? (
           <Link href={oncekiSayfa} className="px-4 py-2.5 rounded-lg border border-gray-200 text-gray-600 font-semibold text-sm bg-white dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800">
@@ -91,18 +91,6 @@ export default function Sayfalama({ sayfaNo, toplamSayfa, oncekiSayfa, sonrakiSa
           </span>
         )}
       </div>
-
-        <span className="text-gray-400 text-sm font-medium dark:text-gray-500">/ {toplamSayfa} sayfa</span>
-
-        {sonrakiSayfa ? (
-          <Link href={sonrakiSayfa} className="flex items-center gap-1 px-5 py-3 rounded-xl border border-gray-200 text-red-600 font-semibold text-sm bg-white dark:border-gray-600 dark:bg-gray-800">
-            Sonraki <span className="text-red-600">›</span>
-          </Link>
-        ) : (
-          <span className="flex items-center gap-1 px-5 py-3 rounded-xl border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm bg-white dark:border-gray-700 dark:text-gray-600 dark:bg-gray-800">
-            Sonraki <span>›</span>
-          </span>
-        )}
-      </div>
+    </div>
   )
 }
