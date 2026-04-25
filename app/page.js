@@ -162,34 +162,91 @@ const KucukGrid = ({ haberler }) => {
     )
   }
 
-  const Sayfalama = () => (
-    <div className="flex items-center justify-center gap-6 py-12 border-t-4 border-red-600 mt-8 bg-gray-50 rounded-xl">
-      {oncekiSayfa ? (
-        <Link href={oncekiSayfa} className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl transition-colors text-lg shadow-lg">
-          ← Önceki
-        </Link>
-      ) : (
-        <span className="flex items-center gap-3 bg-gray-200 text-gray-400 font-black px-8 py-4 rounded-xl cursor-not-allowed text-lg">
-          ← Önceki
-        </span>
-      )}
-      <div className="flex flex-col items-center">
-        <span className="text-red-600 font-black text-3xl">{sayfaNo}</span>
-        <span className="text-gray-400 text-sm font-semibold">/ {toplamSayfa} sayfa</span>
-      </div>
-      {sonrakiSayfa ? (
-        <Link href={sonrakiSayfa} className="flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl transition-colors text-lg shadow-lg">
-          Sonraki →
-        </Link>
-      ) : (
-        <span className="flex items-center gap-3 bg-gray-200 text-gray-400 font-black px-8 py-4 rounded-xl cursor-not-allowed text-lg">
-          Sonraki →
-        </span>
-      )}
-    </div>
-  )
+ const Sayfalama = () => {
+    const sayfalar = []
+    
+    if (toplamSayfa <= 7) {
+      for (let i = 1; i <= toplamSayfa; i++) sayfalar.push(i)
+    } else {
+      sayfalar.push(1)
+      if (sayfaNo > 3) sayfalar.push('...')
+      for (let i = Math.max(2, sayfaNo - 1); i <= Math.min(toplamSayfa - 1, sayfaNo + 1); i++) {
+        sayfalar.push(i)
+      }
+      if (sayfaNo < toplamSayfa - 2) sayfalar.push('...')
+      sayfalar.push(toplamSayfa)
+    }
 
-  return (
+    return (
+      <div className="flex flex-col items-center gap-4 py-8 mt-8">
+        {/* Masaüstü */}
+        <div className="hidden md:flex items-center gap-2">
+          {oncekiSayfa ? (
+            <Link href={oncekiSayfa} className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-200 text-gray-700 hover:border-red-600 hover:text-red-600 transition-colors font-semibold text-sm dark:border-gray-600 dark:text-gray-300 dark:hover:border-red-500 dark:hover:text-red-500">
+              ← Önceki
+            </Link>
+          ) : (
+            <span className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
+              ← Önceki
+            </span>
+          )}
+
+          {sayfalar.map((s, i) =>
+            s === '...' ? (
+              <span key={`dot-${i}`} className="px-3 py-2.5 text-gray-400 dark:text-gray-500">•••</span>
+            ) : (
+              <Link key={s} href={`/?sayfa=${s}${kategoriParam}`}
+                className={`min-w-[40px] h-10 flex items-center justify-center rounded-lg font-bold text-sm transition-colors ${
+                  s === sayfaNo
+                    ? 'bg-red-600 text-white'
+                    : 'border border-gray-200 text-gray-700 hover:border-red-600 hover:text-red-600 dark:border-gray-600 dark:text-gray-300 dark:hover:border-red-500 dark:hover:text-red-500'
+                }`}>
+                {s}
+              </Link>
+            )
+          )}
+
+          {sonrakiSayfa ? (
+            <Link href={sonrakiSayfa} className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-200 text-red-600 hover:bg-red-600 hover:text-white transition-colors font-semibold text-sm dark:border-gray-600 dark:hover:bg-red-600">
+              Sonraki →
+            </Link>
+          ) : (
+            <span className="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
+              Sonraki →
+            </span>
+          )}
+        </div>
+
+        {/* Mobil */}
+        <div className="flex md:hidden items-center gap-2">
+          {oncekiSayfa ? (
+            <Link href={oncekiSayfa} className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 font-semibold text-sm dark:border-gray-600 dark:text-gray-300">
+              ← Önceki
+            </Link>
+          ) : (
+            <span className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
+              ← Önceki
+            </span>
+          )}
+
+          <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold dark:border-gray-600">
+            <span className="text-gray-700 dark:text-gray-300">Sayfa {sayfaNo}</span>
+            <span className="text-gray-400 dark:text-gray-500">/ {toplamSayfa} sayfa</span>
+          </div>
+
+          {sonrakiSayfa ? (
+            <Link href={sonrakiSayfa} className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-200 text-red-600 font-semibold text-sm dark:border-gray-600">
+              Sonraki →
+            </Link>
+          ) : (
+            <span className="flex items-center gap-1 px-4 py-2.5 rounded-lg border border-gray-100 text-gray-300 cursor-not-allowed font-semibold text-sm dark:border-gray-700 dark:text-gray-600">
+              Sonraki →
+            </span>
+          )}
+        </div>
+      </div>
+    )
+  }
     <div className="sayfa-wrapper" style={{minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main className="sayfa-icerik" style={{width: '100%', maxWidth: '1200px', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
 
@@ -397,5 +454,5 @@ const KucukGrid = ({ haberler }) => {
       </footer>
       </main>
     </div>
-  )
+  
 }
