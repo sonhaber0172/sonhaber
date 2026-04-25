@@ -247,6 +247,8 @@ const KucukGrid = ({ haberler }) => {
       </div>
     )
   }
+
+  return (
     <div className="sayfa-wrapper" style={{minHeight: '100vh', display: 'flex', justifyContent: 'center'}}>
       <main className="sayfa-icerik" style={{width: '100%', maxWidth: '1200px', boxShadow: '0 0 30px rgba(0,0,0,0.08)'}}>
 
