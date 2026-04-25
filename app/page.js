@@ -456,5 +456,5 @@ const KucukGrid = ({ haberler }) => {
       </footer>
       </main>
     </div>
-  
+  )
 }
