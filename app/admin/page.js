@@ -15,6 +15,9 @@ export default function AdminPage() {
   const [duzenleId, setDuzenleId] = useState(null)
   const [arama, setArama] = useState('')
   const [istatistik, setIstatistik] = useState({})
+  const [resimYukleniyor, setResimYukleniyor] = useState(false)
+  const [resimSecimi, setResimSecimi] = useState('url')
+
   const handleGiris = () => {
     if (sifre === 'HaberSon2025') setGiris(true)
     else alert('Hatalı şifre!')
@@ -32,15 +35,45 @@ export default function AdminPage() {
   useEffect(() => {
     if (giris) haberleriGetir()
   }, [giris])
-useEffect(() => {
-  const stats = {}
-  kategoriler.forEach(k => { stats[k] = haberler.filter(h => h.category === k).length })
-  setIstatistik(stats)
-}, [haberler])
+
+  useEffect(() => {
+    const stats = {}
+    kategoriler.forEach(k => { stats[k] = haberler.filter(h => h.category === k).length })
+    setIstatistik(stats)
+  }, [haberler])
+
   const filtreliHaberler = haberler.filter(h =>
     h.title?.toLowerCase().includes(arama.toLowerCase()) ||
     h.category?.toLowerCase().includes(arama.toLowerCase())
   )
+
+  const handleResimYukle = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    setResimYukleniyor(true)
+    setMesaj('')
+
+    const dosyaAdi = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.]/g, '_')}`
+
+    const { data, error } = await supabase.storage
+      .from('images')
+      .upload(dosyaAdi, file, { cacheControl: '31536000', upsert: false })
+
+    if (error) {
+      setMesaj('Resim yükleme hatası: ' + error.message)
+      setResimYukleniyor(false)
+      return
+    }
+
+    const { data: urlData } = supabase.storage
+      .from('images')
+      .getPublicUrl(dosyaAdi)
+
+    setForm({ ...form, image_url: urlData.publicUrl })
+    setResimYukleniyor(false)
+    setMesaj('Resim başarıyla yüklendi!')
+  }
 
   const handleEkle = async () => {
     if (!form.title || !form.content) {
@@ -51,12 +84,12 @@ useEffect(() => {
     if (duzenleId) {
       const { error } = await supabase
         .from('articles')
-        .update({ 
-          title: form.title, 
-          content: form.content, 
-          image_url: form.image_url, 
-          category: form.category, 
-          priority_score: form.priority_score 
+        .update({
+          title: form.title,
+          content: form.content,
+          image_url: form.image_url,
+          category: form.category,
+          priority_score: form.priority_score
         })
         .eq('id', duzenleId)
       if (error) setMesaj('Hata: ' + error.message)
@@ -70,7 +103,7 @@ useEffect(() => {
     } else {
       const { error } = await supabase.from('articles').insert([{ ...form, is_custom: true }])
       if (error) setMesaj('Hata: ' + error.message)
-      else { 
+      else {
         setMesaj('Haber başarıyla eklendi!')
         setForm({ title: '', content: '', image_url: '', category: 'Gündem', priority_score: 0 })
         haberleriGetir()
@@ -131,13 +164,14 @@ useEffect(() => {
 
         <div className="p-6 md:p-8">
           <div className="grid grid-cols-4 gap-3 mb-6">
-  {kategoriler.map(k => (
-    <div key={k} className="bg-white rounded-xl shadow p-4 text-center">
-      <p className="text-2xl font-black text-red-600">{istatistik[k] || 0}</p>
-      <p className="text-xs text-gray-500 font-semibold mt-1">{k}</p>
-    </div>
-  ))}
-</div>
+            {kategoriler.map(k => (
+              <div key={k} className="bg-white rounded-xl shadow p-4 text-center">
+                <p className="text-2xl font-black text-red-600">{istatistik[k] || 0}</p>
+                <p className="text-xs text-gray-500 font-semibold mt-1">{k}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="flex gap-2 mb-6">
             <button onClick={() => { setAktifSekme('ekle'); handleIptal() }}
               className={`px-6 py-2 rounded-lg font-bold text-sm transition-colors ${aktifSekme === 'ekle' ? 'bg-red-600 text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}>
@@ -183,11 +217,49 @@ useEffect(() => {
                 </div>
 
                 <div>
-                  <label className="text-sm font-semibold text-gray-700 mb-1 block">Resim URL</label>
-                  <input placeholder="https://ornek.com/resim.jpg" value={form.image_url} onChange={e => setForm({...form, image_url: e.target.value})}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500" />
+                  <label className="text-sm font-semibold text-gray-700 mb-2 block">Haber Görseli</label>
+                  <div className="flex gap-2 mb-3">
+                    <button onClick={() => setResimSecimi('url')}
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${resimSecimi === 'url' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                      🔗 URL ile Ekle
+                    </button>
+                    <button onClick={() => setResimSecimi('dosya')}
+                      className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${resimSecimi === 'dosya' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                      📁 Dosyadan Yükle
+                    </button>
+                  </div>
+
+                  {resimSecimi === 'url' ? (
+                    <input placeholder="https://ornek.com/resim.jpg" value={form.image_url} onChange={e => setForm({...form, image_url: e.target.value})}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500" />
+                  ) : (
+                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-red-400 transition-colors">
+                      <input type="file" accept="image/*" onChange={handleResimYukle} id="resimInput" className="hidden" />
+                      <label htmlFor="resimInput" className="cursor-pointer">
+                        {resimYukleniyor ? (
+                          <div className="text-red-600 font-semibold">
+                            <span className="animate-spin inline-block mr-2">⏳</span>
+                            Yükleniyor...
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="text-4xl mb-2">📷</p>
+                            <p className="text-gray-600 font-semibold">Resim seçmek için tıklayın</p>
+                            <p className="text-gray-400 text-xs mt-1">JPG, PNG, WebP desteklenir</p>
+                          </div>
+                        )}
+                      </label>
+                    </div>
+                  )}
+
                   {form.image_url && (
-                    <img src={form.image_url} alt="onizleme" className="mt-2 w-full h-48 object-cover rounded-lg" onError={e => e.target.style.display='none'} />
+                    <div className="mt-3 relative">
+                      <img src={form.image_url} alt="onizleme" className="w-full h-48 object-cover rounded-lg" onError={e => e.target.style.display='none'} />
+                      <button onClick={() => setForm({...form, image_url: ''})}
+                        className="absolute top-2 right-2 bg-red-600 text-white w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold hover:bg-red-700">
+                        ✕
+                      </button>
+                    </div>
                   )}
                 </div>
 
@@ -201,7 +273,7 @@ useEffect(() => {
                   </div>
                   <div>
                     <label className="text-sm font-semibold text-gray-700 mb-1 block">Öne Çıkarma (0-100)</label>
-                    <input type="number" min="0" max="100" placeholder="0" value={form.priority_score} 
+                    <input type="number" min="0" max="100" placeholder="0" value={form.priority_score}
                       onChange={e => setForm({...form, priority_score: parseInt(e.target.value) || 0})}
                       className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500" />
                   </div>
@@ -219,7 +291,7 @@ useEffect(() => {
                     <div className="border border-gray-300 rounded-lg p-4 min-h-48 prose max-w-none"
                       dangerouslySetInnerHTML={{__html: form.content}} />
                   ) : (
-                    <textarea placeholder="Haberin detaylı içeriğini buraya yazın." 
+                    <textarea placeholder="Haberin detaylı içeriğini buraya yazın."
                       value={form.content} onChange={e => setForm({...form, content: e.target.value})}
                       rows={14} className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 text-base leading-relaxed" />
                   )}
@@ -242,7 +314,6 @@ useEffect(() => {
 
           {aktifSekme === 'haberler' && (
             <div className="space-y-4">
-              {/* ARAMA ÇUBUĞU */}
               <div className="bg-white rounded-xl shadow p-4">
                 <input
                   type="text"
