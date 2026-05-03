@@ -91,7 +91,7 @@ export default async function HomePage({ searchParams }) {
             <div className="group cursor-pointer">
               <div className="overflow-hidden rounded-lg relative" style={{height: '256px'}}>
                 {buyuk.image_url ? (
-                  <img src={buyuk.image_url} alt={buyuk.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <Image src={buyuk.image_url} alt={buyuk.title} fill sizes="(max-width: 768px) 100vw, 60vw" loading="lazy" quality={60} style={{objectFit: 'cover'}} className="group-hover:scale-105 transition-transform duration-300" />
                 ) : (
                   <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded-lg">
                     <span className="text-gray-300 text-4xl font-black">SH</span>
@@ -112,9 +112,9 @@ export default async function HomePage({ searchParams }) {
             {yanlar.map((news, i) => (
               <Link key={i} href={`/haber/${encodeURIComponent(news.id)}`}>
                 <div className="group cursor-pointer">
-                  <div className="overflow-hidden rounded-lg mb-2" style={{height: '160px'}}>
+                  <div className="overflow-hidden rounded-lg mb-2 relative" style={{height: '160px'}}>
                     {news.image_url ? (
-                      <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <Image src={news.image_url} alt={news.title} fill sizes="(max-width: 768px) 100vw, 40vw" loading="lazy" quality={60} style={{objectFit: 'cover'}} className="group-hover:scale-105 transition-transform duration-300" />
                     ) : (
                       <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                         <span className="text-gray-300 font-black">SH</span>
@@ -142,9 +142,9 @@ const KucukGrid = ({ haberler }) => {
       {haberler.map((news, index) => (
         <Link key={index} href={`/haber/${encodeURIComponent(news.id)}`}>
           <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded-lg" style={{height: '144px'}}>
+            <div className="overflow-hidden rounded-lg relative" style={{height: '144px'}}>
               {news.image_url ? (
-                <img src={news.image_url} alt={news.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <Image src={news.image_url} alt={news.title} fill sizes="(max-width: 768px) 50vw, 25vw" loading="lazy" quality={60} style={{objectFit: 'cover'}} className="group-hover:scale-105 transition-transform duration-300" />
               ) : (
                 <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                   <span className="text-gray-300 font-black text-xl">SH</span>
