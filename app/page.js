@@ -56,9 +56,10 @@ export default async function HomePage({ searchParams }) {
   
   const { data: customNews } = await supabase
     .from('articles')
-    .select('*')
+    .select('id, title, content, image_url, category, created_at, priority_score, is_custom')
     .eq('is_custom', true)
     .order('priority_score', { ascending: false })
+    .limit(100)
 
   let allNews = customNews || []
   
@@ -252,6 +253,15 @@ const KucukGrid = ({ haberler }) => {
 
         {sayfaNo === 1 && (
           <>
+            {/* LCP Preload */}
+            {allNews[0]?.image_url && (
+              <link
+                rel="preload"
+                as="image"
+                href={`/_next/image?url=${encodeURIComponent(allNews[0].image_url)}&w=828&q=70`}
+                fetchPriority="high"
+              />
+            )}
             {/* Ana haber slider + sağ liste - sadece 1. sayfada */}
             <div className="flex flex-col lg:flex-row gap-6 mb-10 pb-8 border-b border-gray-100">
               <div className="lg:w-3/5">

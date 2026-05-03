@@ -37,6 +37,7 @@ export default function AnaHaberSlider({ haberler }) {
           sizes="(max-width: 768px) 100vw, 720px"
           priority={i === 0}
           loading={i === 0 ? "eager" : "lazy"}
+          fetchPriority={i === 0 ? "high" : "auto"}
           quality={70}
           style={{objectFit:'cover'}}
         />
