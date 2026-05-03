@@ -5,13 +5,39 @@ import Image from 'next/image'
 
 export default function AnaHaberSlider({ haberler }) {
   const [aktif, setAktif] = useState(0)
+  const [yuklendi, setYuklendi] = useState([0])
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setAktif(prev => (prev + 1) % haberler.length)
+      setAktif(prev => {
+        const sonraki = (prev + 1) % haberler.length
+        setYuklendi(y => y.includes(sonraki) ? y : [...y, sonraki])
+        return sonraki
+      })
     }, 5000)
     return () => clearInterval(timer)
   }, [haberler.length])
+
+  const oncekiGit = () => {
+    setAktif(prev => {
+      const onceki = (prev - 1 + haberler.length) % haberler.length
+      setYuklendi(y => y.includes(onceki) ? y : [...y, onceki])
+      return onceki
+    })
+  }
+
+  const sonrakiGit = () => {
+    setAktif(prev => {
+      const sonraki = (prev + 1) % haberler.length
+      setYuklendi(y => y.includes(sonraki) ? y : [...y, sonraki])
+      return sonraki
+    })
+  }
+
+  const slideGit = (i) => {
+    setYuklendi(y => y.includes(i) ? y : [...y, i])
+    setAktif(i)
+  }
 
   if (!haberler.length) return null
   const haber = haberler[aktif]
@@ -19,41 +45,39 @@ export default function AnaHaberSlider({ haberler }) {
   return (
     <div style={{borderRadius:'12px', overflow:'hidden', border:'1px solid #f0f0f0'}}>
       <div style={{position:'relative', width:'100%', aspectRatio:'16/10', overflow:'hidden', background:'#f1f1f1'}}>
-       {haberler.map((h, i) => {
-  const yuklenmeli = i === 0 || Math.abs(i - aktif) <= 1 || (aktif === 0 && i === haberler.length - 1) || (aktif === haberler.length - 1 && i === 0)
-  return (
-    <div key={i} style={{
-      position:'absolute', inset:0,
-      opacity: i === aktif ? 1 : 0,
-      transition:'opacity 0.6s ease',
-      willChange: 'opacity',
-      zIndex: i === aktif ? 2 : 1
-    }}>
-      {h.image_url && yuklenmeli ? (
-        <Image
-          src={h.image_url}
-          alt={h.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 720px"
-          priority={i === 0}
-          loading={i === 0 ? "eager" : "lazy"}
-          fetchPriority={i === 0 ? "high" : "auto"}
-          quality={70}
-          style={{objectFit:'cover'}}
-        />
-      ) : (
-        <div style={{width:'100%', height:'100%', background:'#e5e5e5'}} />
-      )}
-    </div>
-  )
-})}
+        {haberler.map((h, i) => (
+          <div key={i} style={{
+            position:'absolute', inset:0,
+            opacity: i === aktif ? 1 : 0,
+            transition:'opacity 0.6s ease',
+            willChange: 'opacity',
+            zIndex: i === aktif ? 2 : 1,
+            pointerEvents: i === aktif ? 'auto' : 'none'
+          }}>
+            {h.image_url && yuklendi.includes(i) ? (
+              <Image
+                src={h.image_url}
+                alt={h.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 720px"
+                priority={i === 0}
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
+                quality={70}
+                style={{objectFit:'cover'}}
+              />
+            ) : (
+              <div style={{width:'100%', height:'100%', background:'#e5e5e5'}} />
+            )}
+          </div>
+        ))}
 
-        <button onClick={() => setAktif(p => (p - 1 + haberler.length) % haberler.length)}
+        <button onClick={oncekiGit}
           aria-label="Önceki haber"
           style={{position:'absolute', left:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex: 3}}>
           ‹
         </button>
-        <button onClick={() => setAktif(p => (p + 1) % haberler.length)}
+        <button onClick={sonrakiGit}
           aria-label="Sonraki haber"
           style={{position:'absolute', right:'10px', top:'50%', transform:'translateY(-50%)', background:'rgba(0,0,0,0.5)', color:'white', border:'none', width:'36px', height:'36px', borderRadius:'50%', fontSize:'20px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', zIndex: 3}}>
           ›
@@ -61,7 +85,7 @@ export default function AnaHaberSlider({ haberler }) {
 
         <div style={{position:'absolute', bottom:'10px', left:'50%', transform:'translateX(-50%)', display:'flex', gap:'6px', zIndex: 3}}>
           {haberler.map((_, i) => (
-            <button key={i} onClick={() => setAktif(i)}
+            <button key={i} onClick={() => slideGit(i)}
               aria-label={`Slide ${i+1}`}
               style={{width: i === aktif ? '24px' : '8px', height:'8px', borderRadius:'4px', border:'none', cursor:'pointer', background: i === aktif ? '#c0392b' : 'rgba(255,255,255,0.8)', transition:'all 0.3s'}} />
           ))}
