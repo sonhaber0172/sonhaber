@@ -145,7 +145,7 @@ const KucukGrid = ({ haberler }) => {
           <div className="group cursor-pointer">
             <div className="overflow-hidden rounded-lg relative" style={{height: '144px'}}>
               {news.image_url ? (
-                <Image src={news.image_url} alt={news.title} fill sizes="(max-width: 768px) 50vw, 25vw" loading="lazy" quality={60} style={{objectFit: 'cover'}} className="group-hover:scale-105 transition-transform duration-300" />
+                <Image src={news.image_url} alt={news.title} fill sizes="(max-width: 768px) 50vw, 25vw" loading="lazy" fetchPriority="low" quality={50} style={{objectFit: 'cover'}} className="group-hover:scale-105 transition-transform duration-300" />
               ) : (
                 <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                   <span className="text-gray-300 font-black text-xl">SH</span>
@@ -273,7 +273,7 @@ const KucukGrid = ({ haberler }) => {
                     <div className="group cursor-pointer flex gap-3 pb-4 border-b border-gray-50 last:border-0">
                       <div className="overflow-hidden rounded-lg shrink-0" style={{width: '80px', height: '64px'}}>
                         {news.image_url ? (
-                         <Image src={news.image_url} alt={news.title} width={80} height={64} loading="lazy" quality={60} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                         <Image src={news.image_url} alt={news.title} width={80} height={64} loading={index < 3 ? "eager" : "lazy"} fetchPriority={index < 3 ? "low" : "auto"} quality={50} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center">
                             <span className="text-gray-300 font-black text-sm">SH</span>
