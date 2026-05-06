@@ -40,7 +40,21 @@ export const metadata = {
     canonical: "https://sonhaber-rouge.vercel.app",
   },
 };
+import Head from 'next/head'
 
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>Haber Siten</title>
+        <meta name="google-site-verification" content="efH-LelN_3dOidrnJHf2yJQQBHxkSKcWVFfGPnPZVSc" />
+      </Head>
+      <main>
+        {/* Site içeriği */}
+      </main>
+    </>
+  )
+}
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="h-full">
@@ -58,12 +72,14 @@ export default function RootLayout({ children }) {
           })();
         `}} />
         {/* Haber kaynaklarına önceden bağlan - LCP için kritik */}
+        {/* Resim kaynaklarına preconnect - LCP için kritik */}
+        <link rel="preconnect" href="https://sonhaber-rouge.vercel.app" />
+        <link rel="preconnect" href="https://gnoqenkksfxejqgmwpvs.supabase.co" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://trthaberstatic.cdn.wp.trt.com.tr" crossOrigin="anonymous" />
-<link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
-<link rel="dns-prefetch" href="https://api.rss2json.com" />
-        <link rel="dns-prefetch" href="https://gnoqenkksfxejqgmwpvs.supabase.co" />
+        <link rel="preconnect" href="https://im.haberturk.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://image.dha.com.tr" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://i.ytimg.com" />
       </head>
       <body className="min-h-full flex flex-col">
         {children}
