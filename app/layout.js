@@ -40,26 +40,12 @@ export const metadata = {
     canonical: "https://sonhaber-rouge.vercel.app",
   },
 };
-import Head from 'next/head'
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>Haber Siten</title>
-        <meta name="google-site-verification" content="efH-LelN_3dOidrnJHf2yJQQBHxkSKcWVFfGPnPZVSc" />
-      </Head>
-      <main>
-        {/* Site içeriği */}
-      </main>
-    </>
-  )
-}
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="h-full">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta name="google-site-verification" content="efH-LelN_3dOidrnJHf2yJQQBHxkSKcWVFfGPnPZVSc" />
         <meta name="theme-color" content="#b91c1c" />
         <script dangerouslySetInnerHTML={{__html: `
           (function() {
